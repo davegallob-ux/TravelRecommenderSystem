@@ -61,15 +61,17 @@ function App() {
       const normTransport = (hotel.publicTransport - 1) / 9;
 
       // Calculate weighted score
-      // Total weight sum to normalize the final score to a percentage
-      const totalWeight = weights.price + weights.location + weights.stars + weights.rating + weights.publicTransport || 1; // avoid div by 0
+      // NOTE: Using fixed weights (50% each) for now as requested
+      const fixedWeights = { price: 50, location: 50, stars: 50, rating: 50, publicTransport: 50 };
+      
+      const totalWeight = fixedWeights.price + fixedWeights.location + fixedWeights.stars + fixedWeights.rating + fixedWeights.publicTransport || 1; 
       
       const rawScore = 
-        (weights.price * normPrice) + 
-        (weights.location * normLoc) + 
-        (weights.stars * normStars) + 
-        (weights.rating * normRating) +
-        (weights.publicTransport * normTransport);
+        (fixedWeights.price * normPrice) + 
+        (fixedWeights.location * normLoc) + 
+        (fixedWeights.stars * normStars) + 
+        (fixedWeights.rating * normRating) +
+        (fixedWeights.publicTransport * normTransport);
         
       const percentageScore = (rawScore / totalWeight) * 100;
 
@@ -97,6 +99,8 @@ function App() {
           <p>Welcome to the travel recommender system, where you decide what's important for you! Choose your destination and adjust the sliders to match your priorities. We'll find the perfect hotel for your needs.</p>
         </header>
 
+{/* Transparency panel hidden for now */}
+{/* 
         <div className="glass-panel" style={{ background: 'rgba(238, 242, 255, 0.8)', border: '1px solid #c7d2fe' }}>
           <h3>🔍 Transparency: How is your score calculated?</h3>
           <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#4338ca' }}>
@@ -109,6 +113,7 @@ function App() {
             <li><strong>Result:</strong> This outputs a final "Percentage Match" that directly reflects your stated priorities, allowing you total control over the recommendation algorithm!</li>
           </ul>
         </div>
+*/}
 
         <div className="glass-panel">
           <div className="city-selector">
