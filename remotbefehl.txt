@@ -1,0 +1,1 @@
+git remote set-url origin ssh://git@git.home:2222/dave/recommendersystem.git
