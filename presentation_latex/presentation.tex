@@ -1,0 +1,132 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TUM-Vorlage: Praesentation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{./Ressourcen/Praesentation/Praeambel16zu9.tex} % Seitenverhaeltnis 16:9
+\input{./_Einstellungen.tex}
+
+\renewcommand{\PersonVorname}{Group W3}
+\renewcommand{\PersonNachname}{Gallob}
+
+\usepackage{csquotes}
+\usepackage[backend=biber]{biblatex} % Stil nach Wahl
+\usepackage{hyperref}
+\addbibresource{resources.bib} % Hier MIT Dateiendung .bib
+
+\input{./Ressourcen/Praesentation/Anfang.tex}
+
+\renewcommand{\LehrstuhlName}{Chair of Connected Mobility}
+\renewcommand{\FakultaetName}{School of Computation, Information and Technology}
+
+\title{User Control in Tourism Recommender Systems}
+\author{Group W3}
+\institute[]{\UniversitaetName \\ \FakultaetName \\ \LehrstuhlName}
+\date[\today]{Munich, \today}
+\subject{Lab Course: Projects in Recommender Systems}
+\PraesentationMasterStandard
+\PraesentationTitelseite
+
+% Slide 1: Project Overview
+\begin{frame}
+    \frametitle{Project Overview: Group W3}
+    \begin{itemize}
+        \item \textbf{Topic:} User Control and Strategies for Influencing Algorithms.
+        \item \textbf{Core Goal:} Moving away from ``black-box'' systems by giving users direct influence over ranking logic~\cite{schmitt2002maut}.
+        \item \textbf{Motivation:}
+            \begin{itemize}
+                \item Improving user trust through transparency~\cite{BORRAS20147370}.
+                \item Compliance with the \textbf{EU Digital Services Act (DSA)} (Requirement for transparent and explainable algorithms).
+                \item Allowing users to express complex, multi-dimensional preferences~\cite{Sarkar2023}.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 2: Current Status
+\begin{frame}
+    \frametitle{Current Status: Static Prototype Planning}
+    \begin{itemize}
+        \item \textbf{Frontend Plan:} React\footnote{\url{https://react.dev/}} + Vite\footnote{\url{https://vite.dev/}} + CSS.
+        \item \textbf{UI Components Planned:}
+            \begin{itemize}
+                \item \textbf{City Selector:} Support Vienna and Munich.
+                \item \textbf{Preference Sliders:} Five interactive sliders (Price, Location, Stars, Rating, Transport)~\cite{BORRAS20147370}.
+                \item \textbf{Results Grid:} Real-time visualization with Match Percentage badges.
+            \end{itemize}
+    \end{itemize}
+    \begin{center}
+        \includegraphics[height=0.4\textheight,keepaspectratio]{Bildschirmfoto vom 2026-05-10 16-45-18.png}
+    \end{center}
+\end{frame}
+
+% Slide 3: Proposed Algorithms
+\begin{frame}
+    \frametitle{Proposed Algorithms for Comparison}
+    Aim: allow users to choose between two distinct algorithmic approaches~\cite{8308293}:
+    \vspace{0.5em}
+    \begin{block}{Algorithm A: Weighted MAUT}
+        \begin{itemize}
+            \item Linear combination of normalized scores~\cite{schmitt2002maut}.
+            \item 100\% transparent; users see exact contributions.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Algorithm B: Constraint-Based / Critiquing Hybrid}
+        \begin{itemize}
+            \item Hard limits (e.g., ``Max 150\euro{}'') + ``More like this'' critiques~\cite{BORRAS20147370}.
+            \item High transparency through explanation of satisfied constraints.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide: Theoretical Foundation of Algorithm A
+\begin{frame}
+    \frametitle{Algorithms Deep Dive}
+    
+        \textbf{Algorithm A: Multi-Attribute Utility Theory (MAUT)}
+            \begin{itemize}
+                \item quantifies personal utility for an outcome~\cite{schmitt2002maut}.
+                \item Importance weights specify tradeoffs between competing attributes~\cite{schmitt2002maut}.
+                \item Overall utility $U(X)$ is calculated using an additive value function: $U(X) = \sum_{i=1}^{5} w_i \cdot u_i(x_i)$~\cite{schmitt2002maut}.
+            \end{itemize}
+        \textbf{Algorithm B: Constraint-Based \& Critiquing}
+            \begin{itemize}
+                \item Express desired properties of an``ideal result'' via constraints~\cite{schmitt2002maut}.
+                \item Unlike MAUT, can exclude items that do not fit conditions (e.g., price limit)~\cite{schmitt2002maut}.
+                \item returns logically sound results, because of user input (no guessing required)~\cite{BORRAS20147370}.
+                \item Easy explicable and transparent for users~\cite{schmitt2002maut, BORRAS20147370}.
+            \end{itemize}
+    
+\end{frame}
+
+
+% Slide 4: User Choice & Transparency
+\begin{frame}
+    \frametitle{Key Features \& Next Steps}
+    \begin{itemize}
+        \item \textbf{Key Feature:} Selection menu to switch between ``Manual Weighting'' and ``Constraint-Guided'' modes.
+        \item \textbf{Transparency Panel:} Detailed view of mathematical calculations to improve transparency~\cite{Sarkar2023}.
+    \end{itemize}
+    \begin{enumerate}
+        \item \textbf{Algorithm Implementation:} Implement the algorithms and the respective choice fields.
+        \item \textbf{Algorithm Selector UI:} Add the toggle to the main dashboard.
+        \item \textbf{Explanation:} Implement detailed explanation of the calculations as per DSA requirements.
+    \end{enumerate}
+\end{frame}
+
+
+
+% Final Slide
+\PraesentationMasterWeissBlau
+\begin{frame}
+    \begin{center}
+        \huge Thank you for your attention! \\
+        \vspace{1em}
+        \large Questions?
+    \end{center}
+\end{frame}
+
+\PraesentationMasterStandard
+\begin{frame}[allowframebreaks]
+    \frametitle{References}
+    \printbibliography
+\end{frame}
+
+\end{document}
