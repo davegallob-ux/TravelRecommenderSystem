@@ -178,6 +178,55 @@ p {
   font-size: 0.875rem;
 }
 
+.input-with-unit {
+  display: flex;
+  align-items: center;
+  background: #e0f2fe;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.input-with-unit:focus-within {
+  background: #bae6fd;
+  border-color: var(--primary);
+}
+
+.control-input {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary);
+  width: 32px;
+  padding: 0;
+  text-align: center;
+  outline: none;
+}
+
+.control-input[min="30"] {
+  width: 45px;
+}
+
+.unit {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Remove arrows from number input */
+.control-input::-webkit-outer-spin-button,
+.control-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.control-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 /* Range Slider */
 input[type=range] {
   -webkit-appearance: none;
@@ -296,6 +345,15 @@ input[type=range]::-moz-range-progress {
   justify-content: center;
 }
 
+/* Algorithm Selector */
+.algorithm-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+
 /* Results Grid */
 .results-grid {
   display: grid;
@@ -378,3 +436,35 @@ input[type=range]::-moz-range-progress {
   font-weight: 600;
   color: var(--text-main);
 }
+
+/* Math Breakdown Panel */
+.math-breakdown {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+}
+
+.math-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+
+.math-row strong {
+  color: var(--text-main);
+}
+
+.math-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
