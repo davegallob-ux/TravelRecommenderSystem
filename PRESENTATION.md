@@ -1,66 +1,66 @@
-# Presentation: User Control in Tourism Recommender Systems
+# Milestone Presentation: User Control in Tourism Recommender Systems
 **Lab Course: Projects in Recommender Systems (SS 2026)**
-**Group W3**
 
 ---
 
-## 1. Project Overview: Group W3
-* **Topic:** User Control and Strategies for Influencing Algorithms.
-* **Core Goal:** Moving away from "black-box" systems by giving users direct influence over ranking logic.
-* **Motivation:**
-    * Improving user trust through transparency.
-    * Compliance with the **EU Digital Services Act (DSA)** (Requirement for transparent and explainable algorithms).
-    * Allowing users to express complex, multi-dimensional preferences (e.g., "I want a luxury hotel, but it MUST be near a metro station").
+## 1. Project Overview & Motivation
+* **The Goal:** Build a recommender system that isn't a "black box", giving users direct control over how hotels are ranked.
+* **Why it matters:**
+    * Users trust recommendations more when they understand them.
+    * Compliance with the **EU Digital Services Act (DSA)**, which requires platforms to explain their main parameters and offer choices that don't rely on profiling.
+    * Real-world preferences are complicated (e.g. "I want a cheap place near a metro station, and I don't care about stars"). Sliders let users express this easily.
 
 ---
 
-## 2. Current Status: Static Prototype
-* **Frontend Stack:** React + Vite + CSS (Modern Glassmorphism UI).
-* **UI Components Developed:**
-    * **City Selector:** Currently supports Vienna and Munich.
-    * **Preference Sliders:** Five interactive sliders for:
-        1. **Price Importance** (Lower is better)
-        2. **Location Importance** (Closer to center is better)
-        3. **Hotel Stars** (Higher is better)
-        4. **User Rating** (Higher is better)
-        5. **Public Transport Access** (Higher is better)
-    * **Results Grid:** Real-time visualization of hotel cards with "Match Score" badges.
-* **"Static" Note:** The current logic uses a placeholder Weighted Sum, but the UI is fully functional for demonstration.
+## 2. The Frontend UI
+A responsive web app was built using **React + Vite + CSS**. Instead of hiding things, the UI puts control and math transparency front and center.
+
+* **Working UI Features:**
+    * **City Selector:** Toggle between Vienna and Munich.
+    * **Preference Sliders:** Five sliders to set custom weights for:
+        1. **Price Importance** (lower is better)
+        2. **Distance to Center** (closer is better)
+        3. **Hotel Stars** (higher is better)
+        4. **User Rating** (higher is better)
+        5. **Public Transport Access** (higher is better)
+    * **Results Grid:** Real-time updates of hotel cards with "Match Score" badges.
+    * **Transparency Panel:** Each hotel card has a "Show Mathematical Breakdown" button that explains exactly how its score was calculated.
 
 ---
 
-## 3. Proposed Algorithms for Comparison
-
-We aim to allow users to choose between two distinct algorithmic approaches to see which provides better "perceived control."
+## 3. The Algorithms (Behind the Scenes)
+The project compares two different ways of letting users guide recommendations to see which feels better and gives them more perceived control.
 
 ### Algorithm A: Weighted Multi-Attribute Utility Theory (MAUT)
-* **Mechanism:** Linear combination of normalized scores.
-* **Transparency:** 100% transparent. Users see exactly how much each slider contributes to the final percentage.
-* **Use Case:** "Expert" users who want precise control over every trade-off.
+* **How it works:** Normalize hotel attributes (like price or distance) between 0 and 1, multiply them by the user's slider weights, and sum them up.
+* **Transparency:** High. Users see the exact math behind the percentage.
+* **Current Status: Implemented but buggy!**
+    * *Warning:* It's not fully stable yet.
+    * *Crashes:* Sometimes it crashes (e.g., if you drag all sliders to 0, which triggers a division-by-zero error).
+    * *Weird scores:* Sometimes it calculates match scores over 100% due to normalization edge cases. This math needs to be fixed next.
 
-### Algorithm B: Constraint-Based / Critiquing Hybrid
-* **Mechanism:** 
-    * **Filters:** Users set hard limits (e.g., "Max 150€").
-    * **Critiquing:** "More like this, but closer to the center."
-* **Transparency:** High. Recommendations are explained via satisfied vs. unsatisfied constraints.
-* **Use Case:** Users who prefer natural-language-like intent rather than adjusting 5-10 numerical weights.
+### Algorithm B: Constraint-Based Filtering
+* **How it works:** Hard limits. Instead of a percentage, users set thresholds (e.g. "Price must be under $150").
+* **Transparency:** Very clear. Hotels are either in or out based on binary logic.
+* **Current Status:** Fully implemented, stable, and working perfectly.
 
 ---
 
-## 4. User Choice: Switching Between Algorithms
-* **Key Feature:** A toggle or selection menu to switch between "Manual Weighting" and "Constraint-Guided" modes.
-* **Research Question:** Does the ability to *choose* the algorithm itself increase user satisfaction and trust?
-* **Transparency Panel:** (Planned) A detailed view showing the mathematical breakdown of the current score calculation.
+## 4. User Interaction & Explainability
+* **The Algorithm Toggle:** Users can switch between "Weighted Ranking" (MAUT) and "Constraint Filtering" using a simple selector.
+* **DSA Compliance:** 
+    * The **Global Explanation Banner** at the top explains the selected algorithm.
+    * The **On-Demand Breakdown** shows the raw values, normalized values, and active weights.
 
 ---
 
 ## 5. Next Steps
-1. **Algorithm Implementation:** Finalize the normalization logic and implement the second (Constraint-based) algorithm.
-2. **Algorithm Selector UI:** Add the toggle to the main dashboard.
-3. **Data Expansion:** Add more cities and potentially crawl more detailed "Transport Access" data.
-4. **Evaluation:** Small user study comparing the two modes.
+1. **Fix the MAUT bugs:** Stop the app from crashing on zero weights and correct the normalization logic so scores never exceed 100%.
+2. **Smooth out the Toggle UI:** Make the transition between modes cleaner.
+3. **Expand Dataset:** Add more hotels and get real transit data.
+4. **User Study:** Do a quick evaluation with real users to see which algorithm gives them a better sense of control.
 
 ---
 
-# Q&A
-*How can we further simplify user control without losing transparency?*
+# Questions & Discussion
+*How can user control be simplified further without losing transparency?*

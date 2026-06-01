@@ -733,11 +733,8 @@ INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
-INPUT ./screens/Sliders.png
-INPUT ./screens/Sliders.png
+INPUT ./screens/review.png
+INPUT ./screens/review.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
@@ -747,6 +744,11 @@ INPUT ./screens/AlgoInfo.png
 INPUT ./screens/AlgoInfo.png
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
+INPUT ./screens/Sliders.png
+INPUT ./screens/Sliders.png
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./screens/AlgoInfo.png
@@ -756,7 +758,6 @@ INPUT ./screens/Calculations.png
 INPUT ./screens/Calculations.png
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
-INPUT ./screens/Sliders.png
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf
 INPUT ./Ressourcen/_Bilder/Universitaet_Logo_RGB.pdf

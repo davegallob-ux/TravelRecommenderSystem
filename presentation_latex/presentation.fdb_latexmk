@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber presentation"] 1780298293.90238 "presentation.bcf" "presentation.bbl" "presentation" 1780300804.49867 0
-  "presentation.bcf" 1780300804.28353 108229 24dd79bc0ed545ca7bbd7cbb3148a4e6 "lualatex"
+["biber presentation"] 1780320899.09619 "presentation.bcf" "presentation.bbl" "presentation" 1780324806.60298 0
+  "presentation.bcf" 1780324806.16822 108229 24dd79bc0ed545ca7bbd7cbb3148a4e6 "lualatex"
   "resources.bib" 1780297546.37007 4454 1da6f6674402e3a7688f21990605d215 ""
   (generated)
   "presentation.bbl"
   "presentation.blg"
   (rewritten before read)
-["lualatex"] 1780300801.10199 "presentation.tex" "presentation.pdf" "presentation" 1780300804.49905 0
+["lualatex"] 1780324802.34155 "presentation.tex" "presentation.pdf" "presentation" 1780324806.60332 0
   "/home/dgiws/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1750949553.20953 127309 677951b359b90ddbfa3eb54f696122f6 ""
   "/home/dgiws/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmsans10-regular.luc" 1750949553.58956 127628 0e00f3d8ee37a075ce8b5477c9ef1b8a ""
   "/home/dgiws/.texlive2023/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1749998582.04254 402181 ce8ceb3bb402f28f249fa4e0f96542fa ""
@@ -430,14 +430,15 @@
   "Ressourcen/_Bilder/Universitaet_Logo_weiss.pdf" 1778253383.24376 16571 bcd21c95387bec2eb3e35ffff8213f68 ""
   "Ressourcen/_Informationen.tex" 1778426593.43015 545 efaf3ecbb8208fcb89bafebb3ecfa2ad ""
   "_Einstellungen.tex" 1778424221.03022 1414 bdac495352a341e933b8c2c0339ad037 ""
-  "presentation.aux" 1780300804.27407 3501 8ef0a890cbfda424c1e1b5b21a69dc60 "lualatex"
-  "presentation.bbl" 1780298294.62534 11433 b74b52764e05c82645f7d3f08b450b3e "biber presentation"
-  "presentation.nav" 1780300804.28543 1447 b27f589c183d4017c398625810ae48ce "lualatex"
-  "presentation.run.xml" 1780300804.28543 2425 236822d909e4fd5ef039cc1e381958ee "lualatex"
-  "presentation.tex" 1780300795.05097 11827 f4efc977ef1c28822479cce3bb871b1f ""
+  "presentation.aux" 1780324806.15822 3501 d1e2da74c5ae1584a97a0b3395c072cd "lualatex"
+  "presentation.bbl" 1780320899.80857 11433 b74b52764e05c82645f7d3f08b450b3e "biber presentation"
+  "presentation.nav" 1780324806.17039 1447 b27f589c183d4017c398625810ae48ce "lualatex"
+  "presentation.run.xml" 1780324806.17039 2425 236822d909e4fd5ef039cc1e381958ee "lualatex"
+  "presentation.tex" 1780324799.57011 10808 ae417748ab5a1a6cfc5d8a5ce4be7bb7 ""
   "screens/AlgoInfo.png" 1780297973.96565 73460 63cf82158d00a4cb495fade4c1f26c2c ""
-  "screens/Calculations.png" 1780299505.0518 83934 e0247232404d515469a64d192ba93a9a ""
+  "screens/Calculations.png" 1780324504.04916 37652 305346095c2e8877d149fceb7737870f ""
   "screens/Sliders.png" 1780299598.08036 57356 e9c8aa068390de0b1e5c0407d6cf65cb ""
+  "screens/review.png" 1780324690.31768 230214 5d3af77dcee993a2395e8fbe42015fac ""
   (generated)
   "presentation.aux"
   "presentation.bcf"

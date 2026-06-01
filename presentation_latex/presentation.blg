@@ -1,17 +1,17 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'presentation.blg'
-[61] biber:340> INFO - === Mo Jun  1, 2026, 09:18:14
-[73] Biber.pm:419> INFO - Reading 'presentation.bcf'
-[123] Biber.pm:979> INFO - Found 5 citekeys in bib section 0
-[133] Biber.pm:4419> INFO - Processing section 0
-[141] Biber.pm:4610> INFO - Looking for bibtex file 'resources.bib' for section 0
-[143] bibtex.pm:1713> INFO - LaTeX decoding ...
-[149] bibtex.pm:1519> INFO - Found BibTeX data source 'resources.bib'
-[202] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[202] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[202] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'de-DE'
-[202] Biber.pm:4245> INFO - No sort tailoring available for locale 'de-DE'
-[211] bbl.pm:660> INFO - Writing 'presentation.bbl' with encoding 'UTF-8'
-[213] bbl.pm:763> INFO - Output to presentation.bbl
-[214] Biber.pm:131> WARN - legacy month field 'Mar' in entry 'Sarkar2023' is not an integer - this will probably not sort properly.
-[214] Biber.pm:133> INFO - WARNINGS: 1
+[60] biber:340> INFO - === Mo Jun  1, 2026, 15:34:59
+[71] Biber.pm:419> INFO - Reading 'presentation.bcf'
+[119] Biber.pm:979> INFO - Found 5 citekeys in bib section 0
+[129] Biber.pm:4419> INFO - Processing section 0
+[137] Biber.pm:4610> INFO - Looking for bibtex file 'resources.bib' for section 0
+[138] bibtex.pm:1713> INFO - LaTeX decoding ...
+[143] bibtex.pm:1519> INFO - Found BibTeX data source 'resources.bib'
+[199] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[199] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[199] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'de-DE'
+[199] Biber.pm:4245> INFO - No sort tailoring available for locale 'de-DE'
+[209] bbl.pm:660> INFO - Writing 'presentation.bbl' with encoding 'UTF-8'
+[211] bbl.pm:763> INFO - Output to presentation.bbl
+[211] Biber.pm:131> WARN - legacy month field 'Mar' in entry 'Sarkar2023' is not an integer - this will probably not sort properly.
+[211] Biber.pm:133> INFO - WARNINGS: 1
