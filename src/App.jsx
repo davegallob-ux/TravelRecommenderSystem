@@ -52,17 +52,6 @@ function App() {
     setWeights(prev => ({ ...prev, [key]: Number(value) }));
   };
 
-  const setAutomatically = () => {
-    // high on price, location, and transport, low on stars and rating
-    setWeights({
-      price: 100,
-      location: 100,
-      stars: 10,
-      rating: 10,
-      publicTransport: 100,
-    });
-  };
-
   // Filter hotels by city and calculate score
   const recommendedHotels = useMemo(() => {
     const cityHotels = hotels.filter(h => h.city === city);
@@ -160,12 +149,29 @@ function App() {
               In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. Here is the mathematical foundation of your recommendations:
             </p>
             <div style={{ background: '#e0e7ff', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'center' }}>
-              <MathFormula formula="U(X) = \sum_{i=1}^{5} w_i \cdot u_i(x_i)" displayMode={true} />
+              <MathFormula formula="U(X) = \frac{\sum_{i=1}^{5} w_i \cdot u_i(x_i)}{\sum_{i=1}^{5} w_i}" displayMode={true} />
             </div>
             <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
               <li><strong>Normalization (<MathFormula formula="u_i" />):</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
               <li><strong>Weighting (<MathFormula formula="w_i" />):</strong> The sliders represent your custom weights.</li>
               <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
+            </ul>
+          </div>
+        )}
+
+        {algorithmMode === 'filter' && (
+          <div className="glass-panel" style={{ background: 'rgba(240, 253, 244, 0.8)', border: '1px solid #bbf7d0' }}>
+            <h3>🎯 Transparency: Constraint-Guided Filtering</h3>
+            <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#15803d' }}>
+              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. Here is the logical foundation of your recommendations:
+            </p>
+            <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
+              <MathFormula formula="x_{\text{price}} \le P_{\text{max}} \ \land \ x_{\text{dist}} \le D_{\text{max}} \ \land \ x_{\text{stars}} \ge S_{\text{min}} \ \land \ x_{\text{rating}} \ge R_{\text{min}} \ \land \ x_{\text{trans}} \ge T_{\text{min}}" displayMode={true} />
+            </div>
+            <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
+              <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
+              <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>
+              <li><strong>Complete Predictability:</strong> There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
             </ul>
           </div>
         )}
@@ -286,18 +292,9 @@ function App() {
                       <span className="unit">%</span>
                     </div>
                   </div>
-                  <input type="range" min="0" max="100" value={weights.publicTransport} onChange={(e) => handleWeightChange('publicTransport', e.target.value)} />
-                  <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means better transit access is important.</p>
+                   <input type="range" min="0" max="100" value={weights.publicTransport} onChange={(e) => handleWeightChange('publicTransport', e.target.value)} />
+                   <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means better transit access is important.</p>
                 </div>
-              </div>
-
-              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                <button className="btn btn-primary" onClick={setAutomatically}>
-                  ✨ Set Recommendations Automatically
-                </button>
-                <p style={{ fontSize: '0.8rem', marginTop: '0.5rem', marginBottom: 0 }}>
-                  (Prioritizes Price, Location & Transport)
-                </p>
               </div>
             </>
           ) : (

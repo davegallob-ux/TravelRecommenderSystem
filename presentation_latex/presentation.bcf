@@ -2361,22 +2361,14 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">resources.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">BORRAS20147370</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">Sarkar2023</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">BORRAS20147370</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">8308293</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">BORRAS20147370</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">BORRAS20147370</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">Sarkar2023</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">eudsa2022</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">eudsa2022</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">Sarkar2023</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">8308293</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">schmitt2002maut</bcf:citekey>
     <bcf:citekey order="8" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">BORRAS20147370</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">schmitt2002maut</bcf:citekey>
-    <bcf:citekey order="14" intorder="2">BORRAS20147370</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">Sarkar2023</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

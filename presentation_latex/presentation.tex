@@ -18,6 +18,7 @@
 \renewcommand{\FakultaetName}{School of Computation, Information and Technology}
 
 \title{User Control in Tourism Recommender Systems}
+\subtitle{Final Project Milestone \& Implementation}
 \author{Group W3}
 \institute[]{\UniversitaetName \\ \FakultaetName \\ \LehrstuhlName}
 \date[\today]{Munich, \today}
@@ -25,93 +26,216 @@
 \PraesentationMasterStandard
 \PraesentationTitelseite
 
-% Slide 1: Project Overview
+% Slide 1: Project Overview & Motivation
 \begin{frame}
-    \frametitle{Project Overview: Group W3}
+    \frametitle{Project Overview \& Motivation}
     \begin{itemize}
-        \item \textbf{Topic:} User Control and Strategies for Influencing Algorithms.
-        \item \textbf{Core Goal:} Moving away from ``black-box'' systems by giving users direct influence over ranking logic~\cite{schmitt2002maut}.
-        \item \textbf{Motivation:}
+        \item \textbf{The Recommender ``Black-Box'' Problem:} Traditional recommender systems hide their logic, leading users left unknown.~\cite{BORRAS20147370}.
+        \item \textbf{Core Goal:} Give users information and control over the ranking logic and filtering mechanisms~\cite{Sarkar2023}.
+        \item \textbf{Regulatory Motivation: EU Digital Services Act (DSA):}
             \begin{itemize}
-                \item Improving user trust through transparency~\cite{BORRAS20147370}.
-                \item Compliance with the \textbf{EU Digital Services Act (DSA)} (Requirement for transparent and explainable algorithms).
-                \item Allowing users to express complex, multi-dimensional preferences~\cite{Sarkar2023}.
+                \item \textit{Article 27 (Recommender System Transparency):} Online platforms must explain the main parameters used in recommender systems and provide user-adjustable options~\cite{eudsa2022}.
+                \item \textit{Article 38 (Profiling Options):} Users must be offered at least one option that is not based on profiling~\cite{eudsa2022}.
             \end{itemize}
     \end{itemize}
 \end{frame}
 
-% Slide 2: Current Status
+% Slide 2: Realized System Architecture & Tech Stack
 \begin{frame}
-    \frametitle{Current Status: Static Prototype Planning}
-    \begin{itemize}
-        \item \textbf{Frontend Plan:} React\footnote{\url{https://react.dev/}} + Vite\footnote{\url{https://vite.dev/}} + CSS.
-        \item \textbf{UI Components Planned:}
-            \begin{itemize}
-                \item \textbf{City Selector:} Support Vienna and Munich.
-                \item \textbf{Preference Sliders:} Five interactive sliders (Price, Location, Stars, Rating, Transport)~\cite{BORRAS20147370}.
-                \item \textbf{Results Grid:} Real-time visualization with Match Percentage badges.
-            \end{itemize}
-    \end{itemize}
-    \begin{center}
-        \includegraphics[height=0.4\textheight,keepaspectratio]{Bildschirmfoto vom 2026-05-10 16-45-18.png}
-    \end{center}
-\end{frame}
-
-% Slide 3: Proposed Algorithms
-\begin{frame}
-    \frametitle{Proposed Algorithms for Comparison}
-    Aim: allow users to choose between two distinct algorithmic approaches~\cite{8308293}:
+    \frametitle{System Architecture \& Tech Stack}
+    Fully implemented a working responsive web application:
     \vspace{0.5em}
-    \begin{block}{Algorithm A: Weighted MAUT}
-        \begin{itemize}
-            \item Linear combination of normalized scores~\cite{schmitt2002maut}.
-            \item 100\% transparent; users see exact contributions.
-        \end{itemize}
-    \end{block}
-    \begin{block}{Algorithm B: Constraint-Based / Critiquing Hybrid}
-        \begin{itemize}
-            \item Hard limits (e.g., ``Max 150\euro{}'') + ``More like this'' critiques~\cite{BORRAS20147370}.
-            \item High transparency through explanation of satisfied constraints.
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-% Slide: Theoretical Foundation of Algorithm A
-\begin{frame}
-    \frametitle{Algorithms Deep Dive}
-    
-        \textbf{Algorithm A: Multi-Attribute Utility Theory (MAUT)}
-            \begin{itemize}
-                \item quantifies personal utility for an outcome~\cite{schmitt2002maut}.
-                \item Importance weights specify tradeoffs between competing attributes~\cite{schmitt2002maut}.
-                \item Overall utility $U(X)$ is calculated using an additive value function: $U(X) = \sum_{i=1}^{5} w_i \cdot u_i(x_i)$~\cite{schmitt2002maut}.
-            \end{itemize}
-        \textbf{Algorithm B: Constraint-Based \& Critiquing}
-            \begin{itemize}
-                \item Express desired properties of an``ideal result'' via constraints~\cite{schmitt2002maut}.
-                \item Unlike MAUT, can exclude items that do not fit conditions (e.g., price limit)~\cite{schmitt2002maut}.
-                \item returns logically sound results, because of user input (no guessing required)~\cite{BORRAS20147370}.
-                \item Easy explicable and transparent for users~\cite{schmitt2002maut, BORRAS20147370}.
-            \end{itemize}
-    
-\end{frame}
-
-
-% Slide 4: User Choice & Transparency
-\begin{frame}
-    \frametitle{Key Features \& Next Steps}
     \begin{itemize}
-        \item \textbf{Key Feature:} Selection menu to switch between ``Manual Weighting'' and ``Constraint-Guided'' modes.
-        \item \textbf{Transparency Panel:} Detailed view of mathematical calculations to improve transparency~\cite{Sarkar2023}.
+        \item \textbf{Frontend Framework:} React 18\footnote{\url{https://react.dev/}} + Vite\footnote{\url{https://vite.dev/}} for rapid, lightweight development.
+        \item \textbf{Mathematical Formula Rendering:} Uses KaTeX \footnote{\url{https://katex.org/}} to render equations directly in browser.
+        \item \textbf{Dataset:} Mock database of 20 hotels (10 in Vienna, 10 in Munich) with attributes~\cite{Sarkar2023}:
+            \begin{itemize}
+                \item \textit{Price per night (USD)}, \textit{Distance from city center (km)}, \textit{Stars rating (1--5)}, \textit{Guest review rating (1--10)}, and \textit{Public transport accessibility score (1--10)}.
+            \end{itemize}
     \end{itemize}
-    \begin{enumerate}
-        \item \textbf{Algorithm Implementation:} Implement the algorithms and the respective choice fields.
-        \item \textbf{Algorithm Selector UI:} Add the toggle to the main dashboard.
-        \item \textbf{Explanation:} Implement detailed explanation of the calculations as per DSA requirements.
-    \end{enumerate}
+\end{frame}
+
+% Slide 3: Implemented Algorithms
+\begin{frame}
+    \frametitle{Dual-Algorithm System}
+    The system implements two algorithmic modes that users can toggle~\cite{8308293}:
+    \vspace{0.5em}
+    \begin{columns}
+        \begin{column}{0.55\textwidth}
+            \begin{block}{Algorithm A: Weighted MAUT}
+                \begin{itemize}
+                    \item \textbf{Approach:} Multi-Attribute Utility Theory (Additive)~\cite{schmitt2002maut}.
+                    \item \textbf{User Control:} Interactive sliders to define weights ($w_i$).
+                    \item \textbf{Output:} 0--100\% match score and full ranking of all hotels.
+                \end{itemize}
+            \end{block}
+            \begin{block}{Algorithm B: Constraint-Guided Filtering}
+                \begin{itemize}
+                    \item \textbf{Approach:} Hard filtering using user-defined bounds.
+                    \item \textbf{User Control:} Sliders for absolute limit thresholds.
+                    \item \textbf{Output:} Exact hotels satisfying all limits.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.42\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth,keepaspectratio]{screens/Sliders.png}
+                \begin{figure}
+                    \tiny\caption{Implemented Sliders for Control}
+                \end{figure}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 4: Deep Dive: Weighted MAUT
+\begin{frame}
+    \frametitle{Deep Dive: Weighted MAUT Implementation}
+    \vspace{0.8em}
+    \begin{columns}
+        \begin{column}{0.52\textwidth}
+            Calculates utility $U(X)$ for each hotel $X$~\cite{schmitt2002maut}:
+            \begin{equation*}
+                U(X) = \frac{\sum_{i=1}^{5} w_i \cdot u_i(x_i)}{\sum_{i=1}^{5} w_i} \times 100\%
+            \end{equation*}
+            \textbf{Walkthrough:}
+            \begin{itemize}
+                  \item Attribute Utility ($u_i(x_i)$): hotel's raw values (like a price or distance) are normalized between $0$ (worst option) and $1$ (best option).
+                  \item Weighting ($w_i$): normalized value is multiplied by slider weight (from $0$ to $100$) and summed up for all weights and utilities.
+                  \item Division ($\sum w_i$): Finally, we divide by the sum of all weights.
+
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth,keepaspectratio]{screens/AlgoInfo.png}
+                \begin{figure}
+                    \tiny\caption{Transparency Banner in UI}
+                \end{figure}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 5: Deep Dive: Constraint-Guided Filtering
+\begin{frame}
+    \frametitle{Deep Dive: Constraint-Guided Filtering}
+    \vspace{0.8em}
+    A hard-limit filtering approach, showing exactly the fitting hotels
+    \vspace{0.5em}
+    \begin{itemize}
+        \item \textbf{Pure Logic Over Complex Math:} Instead of calculating utility scores, system checks each hotel against user-defined limits.
+        \item \textbf{Inequality Criteria Checked:}
+            \begin{align*}
+                \text{Price} &\le \text{Max Price} & \text{Distance} &\le \text{Max Distance} \\
+                \text{Stars} &\ge \text{Min Stars} & \text{Rating} &\ge \text{Min Rating} \\
+                \text{Public Transport} &\ge \text{Min Transport}
+            \end{align*}
+        \item \textbf{Highly Predictable Outcome:} Clear binary classification (a hotel is either included or excluded --- no ``black-box'' scores).
+        \item \textbf{Actionable Feedback:} When no hotels match the constraints, the system prompts user to ease their thresholds.
+    \end{itemize}
 \end{frame}
 
 
+% Slide 7: DSA Compliance \& Transparency Panel
+\begin{frame}
+    \frametitle{User Interface \& DSA Compliance}
+    Transparency is  integrated into the user interface:
+    \vspace{0.5em}
+    \begin{columns}
+        \begin{column}{0.55\textwidth}
+            \begin{itemize}
+                \item \textbf{Global Explanation Banner:} Informative card at the top of the dashboard explaining the MAUT logic.
+                \item \textbf{Interactive Calculations (Local Panel):}
+                    \begin{itemize}
+                        \item Users can expand a \textbf{``Show Mathematical Breakdown''} panel on each hotel card.
+                        \item Displays the step-by-step normalized values, weights, points, and final calculation.
+                    \end{itemize}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.42\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth,keepaspectratio]{screens/AlgoInfo.png}
+                \begin{figure}
+                    \tiny\caption{Global Transparency Banner in UI}
+                \end{figure}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 8: Detailed Mathematical Breakdown
+\begin{frame}
+    \frametitle{Detailed Score Breakdown (Full Transparency)}
+    \vspace{0.8em}
+    To comply with DSA explainability standards, users can inspect the exact calculations on-demand:
+    \vspace{0.5em}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Dynamic Calculation Steps}
+                \begin{enumerate}
+                    \item \textbf{Feature Normalization:} Converts raw hotel attributes (e.g. \$180 price) to a normalized value $u_i \in [0, 1]$ relative to the current city.
+                    \item \textbf{Scaling by Weights:} Multiplies each $u_i$ by the user's custom weight $w_i \in [0, 100]$.
+                    \item \textbf{Aggregation:} Sums the individual weighted scores: $\sum w_i \cdot u_i(x_i)$.
+                    \item \textbf{Final Division:} Divides the sum by the total active weights ($\sum w_i$) to yield the clean $0-100\%$ match score.
+                \end{enumerate}
+            \end{block}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth,keepaspectratio]{screens/Calculations.png}
+                \begin{figure}
+                    \tiny\caption{On-Demand Mathematical Breakdown Panel}
+                \end{figure}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 9: Realized Interface & Screenshot
+\begin{frame}
+    \frametitle{Realized UI Dashboard}
+    \vspace{0.8em}
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+            \textbf{Key UI Elements:}
+            \begin{itemize}
+                \item Clean, premium glassmorphism container design.
+                \item Switchable cities: Munich and Vienna.
+                \item Seamless sliders and dynamic input sync.
+                \item Highlighted match badges with fluid transitions.
+                \item Fully accessible and responsive across mobile and desktop.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth,keepaspectratio]{screens/Sliders.png}
+                \begin{figure}
+                    \tiny\caption{Implemented Web Application Interface}
+                \end{figure}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 9: Project Evaluation & Conclusion
+\begin{frame}
+    \frametitle{Evaluation \& Future Directions}
+    \begin{itemize}
+        \item \textbf{Summary of Achievements:}
+            \begin{itemize}
+                \item Successfully bridged the gap between complex recommendation logic and EU DSA transparency requirements.
+                \item Implemented high-performance, real-time UI rendering of mathematical equations and data filtering.
+                \item Received positive feedback on the click-to-expand mathematical explanation tool.
+            \end{itemize}
+        \item \textbf{Future Work \& Scaling:}
+            \begin{itemize}
+                \item \textbf{Hybrid Recommendation:} Combining filtering with MAUT (e.g. filter out $>300$ and then weight remaining).
+                \item \textbf{Critiquing Cycles:} Adding critique steps (``Find similar but cheaper'') using utility distance metrics.
+                \item \textbf{Dynamic API Integration:} Fetching real-time hotel price and location data.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
 
 % Final Slide
 \PraesentationMasterWeissBlau

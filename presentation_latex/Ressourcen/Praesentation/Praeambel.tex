@@ -19,7 +19,11 @@
 
 % Euro-Symbol:
 \usepackage[gen]{eurosym}
-\DeclareUnicodeCharacter{20AC}{\euro{}}
+\makeatletter
+\@ifundefined{DeclareUnicodeCharacter}{}{%
+  \DeclareUnicodeCharacter{20AC}{\euro{}}%
+}
+\makeatother
 
 % Schriftart Helvetica:
 \usepackage[scaled]{helvet}

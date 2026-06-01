@@ -67,6 +67,31 @@
       \endverb
       \keyw{Recommender systems,Tourism,Ontologies,Planning,Clustering}
     \endentry
+    \entry{eudsa2022}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d0baa957acb6522d22e3251a428fe067}{%
+           family={{European Parliament and Council of the European Union}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{fullhash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{bibnamehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authorbibnamehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authornamehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authorfullhash}{d0baa957acb6522d22e3251a428fe067}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Regulation (EU) 2022/2065 of the European Parliament and of the Council of 19 October 2022 on a Single Market For Digital Services and amending Directive 2000/31/EC (Digital Services Act)}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb http://data.europa.eu/eli/reg/2022/2065/oj
+      \endverb
+      \verb{url}
+      \verb http://data.europa.eu/eli/reg/2022/2065/oj
+      \endverb
+    \endentry
     \entry{8308293}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=2773d17fb101fb5fc67e47c477d4989d}{%
