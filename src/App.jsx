@@ -12,7 +12,7 @@ const MathFormula = ({ formula, displayMode = false }) => {
           displayMode,
           throwOnError: false
         });
-      } catch (err) {
+      } catch {
         containerRef.current.textContent = formula;
       }
     }
@@ -25,6 +25,7 @@ function App() {
   const [city, setCity] = useState('vienna');
   const [algorithmMode, setAlgorithmMode] = useState('maut'); // 'maut' or 'filter'
   const [expandedHotel, setExpandedHotel] = useState(null);
+  const [showFormulas, setShowFormulas] = useState(false);
   
   // Weights (0 to 100)
   const [weights, setWeights] = useState({
@@ -146,14 +147,30 @@ function App() {
           <div className="glass-panel" style={{ background: 'rgba(238, 242, 255, 0.8)', border: '1px solid #c7d2fe' }}>
             <h3>🔍 Transparency: Multi-Attribute Utility Theory (MAUT)</h3>
             <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#4338ca' }}>
-              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. Here is the mathematical foundation of your recommendations:
+              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. {showFormulas ? 'Here is the mathematical foundation of your recommendations:' : 'Here is a simple explanation of how your recommendations are calculated:'}
             </p>
-            <div style={{ background: '#e0e7ff', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'center' }}>
-              <MathFormula formula="U(X) = \frac{\sum_{i=1}^{5} w_i \cdot u_i(x_i)}{\sum_{i=1}^{5} w_i}" displayMode={true} />
-            </div>
+            <button 
+              onClick={() => setShowFormulas(!showFormulas)}
+              className="math-toggle-btn math-toggle-btn-maut"
+            >
+              {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
+            </button>
+            {showFormulas && (
+              <div style={{ background: '#e0e7ff', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'center' }}>
+                <MathFormula formula="U(X) = \frac{\sum_{i=1}^{5} w_i \cdot u_i(x_i)}{\sum_{i=1}^{5} w_i}" displayMode={true} />
+              </div>
+            )}
             <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
-              <li><strong>Normalization (<MathFormula formula="u_i" />):</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
-              <li><strong>Weighting (<MathFormula formula="w_i" />):</strong> The sliders represent your custom weights.</li>
+              {showFormulas ? (
+                <li><strong>Normalization (<MathFormula formula="u_i" />):</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
+              ) : (
+                <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
+              )}
+              {showFormulas ? (
+                <li><strong>Weighting (<MathFormula formula="w_i" />):</strong> The sliders represent your custom weights.</li>
+              ) : (
+                <li><strong>Weighting:</strong> The sliders represent your custom weights.</li>
+              )}
               <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
             </ul>
           </div>
@@ -163,11 +180,19 @@ function App() {
           <div className="glass-panel" style={{ background: 'rgba(240, 253, 244, 0.8)', border: '1px solid #bbf7d0' }}>
             <h3>🎯 Transparency: Constraint-Guided Filtering</h3>
             <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#15803d' }}>
-              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. Here is the logical foundation of your recommendations:
+              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. {showFormulas ? 'Here is the logical foundation of your recommendations:' : 'Here is a simple explanation of how your recommendations are filtered:'}
             </p>
-            <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
-              <MathFormula formula="x_{\text{price}} \le P_{\text{max}} \ \land \ x_{\text{dist}} \le D_{\text{max}} \ \land \ x_{\text{stars}} \ge S_{\text{min}} \ \land \ x_{\text{rating}} \ge R_{\text{min}} \ \land \ x_{\text{trans}} \ge T_{\text{min}}" displayMode={true} />
-            </div>
+            <button 
+              onClick={() => setShowFormulas(!showFormulas)}
+              className="math-toggle-btn math-toggle-btn-filter"
+            >
+              {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
+            </button>
+            {showFormulas && (
+              <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
+                <MathFormula formula="x_{\text{price}} \le P_{\text{max}} \ \land \ x_{\text{dist}} \le D_{\text{max}} \ \land \ x_{\text{stars}} \ge S_{\text{min}} \ \land \ x_{\text{rating}} \ge R_{\text{min}} \ \land \ x_{\text{trans}} \ge T_{\text{min}}" displayMode={true} />
+              </div>
+            )}
             <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
               <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
               <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>

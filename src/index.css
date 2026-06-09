@@ -469,3 +469,34 @@ input[type=range]::-moz-range-progress {
   color: var(--text-main);
 }
 
+.math-toggle-btn {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
+  font-family: 'Outfit', sans-serif;
+}
+
+.math-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.math-toggle-btn-maut {
+  border: 1px solid #c7d2fe;
+  color: #4338ca;
+}
+
+.math-toggle-btn-filter {
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
