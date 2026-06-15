@@ -8,6 +8,8 @@
   \providecommand\BibTeX{{%
     Bib\TeX}}}
 
+\usepackage{graphicx}
+
 %% Rights management information.
 \setcopyright{none}
 \settopmatter{printacmref=false} % Removes ACM Reference Format
@@ -35,7 +37,7 @@
 \renewcommand{\shortauthors}{Gallob}
 
 \begin{abstract}
-Those recommender systems people encounter in daily life are very often "black boxes", which means that users rarely know how their recommendations are generated and they have no control over which items are recommended. In tourism, this leads to a lack of trust and user satisfaction, as users can never be sure if their recommendation is really optimal or influenced by profit maximization goals of the platform. The EU has therefore introduced the Digital Services Act (DSA), a framework which requires platforms to explain their algorithms in an understandable way and offer users a profiling-free alternative. In this paper a web-based prototype for hotel recommendations which addresses these issues by implementing two algorithms is presented. The web-app offers detailed explanations of the underlying decision algorithms and shows for each result, how the recommendation was computed. The two algorithms which come to use are Weighted Multi-Attribute Utility Theory (MAUT), which lets users set weights on the different attributes (e.g. stars, distance to center, price) and Constraint Filtering, where the user sets hard limits to the attributes (e.g. price must be below 100 \euro{} per night). This paper details the system architecture as well as the mathemical foundations of the used algorithms along with the UI features explaining the algorithms to the user
+The recommender systems people encounter in daily life are very often "black boxes", which means that users rarely know how their recommendations are generated and they have no control over which items are recommended. In tourism, this leads to a lack of trust and user satisfaction, as users can never be sure if their recommendation is really optimal or influenced by profit maximization goals of the platform. The EU has therefore introduced the Digital Services Act (DSA), a framework which requires platforms to explain their algorithms in an understandable way and offer users a profiling-free alternative. In this paper a web-based prototype for hotel recommendations which addresses these issues by implementing two algorithms is presented. The web-app offers detailed explanations of the underlying decision algorithms and shows for each result, how the recommendation was computed. The two algorithms which come to use are Weighted Multi-Attribute Utility Theory (MAUT), which lets users set weights on the different attributes (e.g. stars, distance to center, price) and Constraint Filtering, where the user sets hard limits to the attributes (e.g. price must be below 100 Euro per night). This paper details the system architecture as well as the mathemical foundations of the used algorithms along with the UI features explaining the algorithms to the user
 \end{abstract}
 
 \keywords{Recommender Systems, User Control, Multi-Attribute Utility Theory, Constraint Filtering, Digital Services Act, Explainable AI, E-Tourism}
@@ -43,25 +45,27 @@ Those recommender systems people encounter in daily life are very often "black b
 \maketitle
 
 \section{Introduction}
-In the day-to-day life, recommender systems (RS) are ubiquitous from online shopping and video streaming to hotel and flight recommendation plaftorms~\cite{adomavicius2005toward}. Many prominent RS do not let users know how their recommendations are generated and offer no direct means of influencing the outcome~\cite{BORRAS20147370}. Those systems are often built on complex algorithms.
-%end on text
-Recommendation systems (RS) have become ubiquitous in the digital economy, guiding user decisions in domains ranging from e-commerce and entertainment to travel and hospitality~\cite{adomavicius2005toward}. Despite their success, modern recommender systems are frequently critiqued for operating as "black boxes"~\cite{BORRAS20147370}. Complex algorithms, such as deep neural networks or collaborative filtering engines, process massive volumes of user data to generate suggestions, yet they rarely explain the underlying rationale to the end user. This lack of transparency can hinder trust, increase cognitive overhead, and lead to user frustration, particularly in high-involvement domains like tourism, where travel planning represents significant financial expenditure and emotional investment~\cite{ricci2011travel}. 
+In the day-to-day life, recommender systems (RS) are ubiquitous from online shopping and video streaming to hotel and flight recommendation plaftorms~\cite{adomavicius2005toward}. Many prominent RS do not let users know how their recommendations are generated and offer no direct means of influencing the outcome~\cite{BORRAS20147370}. Those systems are often built on complex algorithms (mainly neural networks) which process enormous amounts of user to generate suggestions. They rarely explain users their underlying logic. This lack of transparency can hinder trust and user satisfaction and leads to frustration and cognitive overhead. The tourism domain where a high financial expenditure and the emotional investment is generally high is particularly affected by this issue~\cite{ricci2011travel}.
 
-To address these shortcomings, research in Human-Computer Interaction (HCI) and recommender systems has increasingly focused on user control and explainability~\cite{knijnenburg2012explaining, tintarev2012evaluating}. Rather than relying solely on automated profiling, interactive recommender systems allow users to explicitly guide the recommendation process. By adjusting preference weights or setting hard boundaries, users can align the system's output with their immediate constraints, such as budget, location, or quality preferences.
+The Human-Computer Interaction (HCI) field has focused their research on user influence and transparency (explainability) to address these shortcomings~\cite{knijnenburg2012explaining, tintarev2012evaluating}. Instead of using automated profiling, interactive recommender systems give users the ability to influence the recommendation process by adjusting sliders which represent their importance or setting hard constraints for the attributes (e.g., price or distance).
 
-In addition to user-centered design motivations, the demand for algorithmic transparency is increasingly driven by regulatory mandates. The European Union's Digital Services Act (DSA), which entered full force recently, represents a landmark regulatory effort to govern online intermediaries~\cite{eudsa2022}. Under Article 27 of the DSA ("Recommender system transparency"), online platforms must set out in their terms and conditions, in a clear and plain language, the main parameters used in their recommender systems, as well as any options for the recipients of the service to modify or influence those main parameters. Furthermore, Article 38 ("Profiling options") mandates that very large online platforms must provide at least one option for their recommender systems that is not based on user profiling. These regulations represent a paradigm shift, legally requiring developers to move away from pure black-box profiling and toward transparent, user-controlled algorithmic frameworks.
+The demand for transparency is further fueled by the European Union's Digital Services Act (DSA), which governs online platforms and aims to protect user's rights. The DSA mandates that online platforms must provide users with transparent information about the main parameters of their recommender systems in an understandable language in plain text and offer options to influence them (Aritcle 27)~\cite{eudsa2022}. Article 38 further obliges very large online platforms (VLOPs) to provide users with at least one option for their recommender systems that is not based on profiling. These articles require developers to shift from black-box profiling towards transparant and user controlled platforms.
 
-This paper presents the design, implementation, and evaluation of an interactive, DSA-compliant tourism recommender system prototype designed for hotel recommendations in Vienna and Munich. The system addresses the dual goals of transparency and user control by implementing two distinct algorithmic paradigms:
+In this paper the design decisions, architecture and implementation of a web-application tourism recommender system prototype which is compliant with the DSA is detailed. It adresses the transparency as well as the user influence goals by implementing two algorithms:
 \begin{enumerate}
-    \item \textbf{Algorithm A: Weighted Multi-Attribute Utility Theory (MAUT)}: A compensatory utility model where users utilize interactive sliders to assign weights to different hotel attributes (price, location, star rating, customer rating, and public transit access). The system normalizes these attributes, computes a weighted utility score, and ranks hotels accordingly, presenting a real-time percentage match score.
-    \item \textbf{Algorithm B: Constraint-Based Filtering}: A non-compensatory filtering model where users define hard threshold limits for each attribute (e.g., maximum price or minimum rating). The system screens the database and displays only the subset of hotels that satisfy all constraints simultaneously, offering a profiling-free alternative.
+    \item \textbf{Algorithm A: Weighted Multi-Attribute Utility Theory (MAUT)}:
+    This algorithm uses sliders to determine weights for hotel attributes (price, location, star rating, customer rating, and public transit access). The algorithm performs a normalization of the attributes and computes a weighted utility score for each hotel. Finally the hotels are ranked according to their utility score (percentage match).
+    \item \textbf{Algorithm B: Constraint-Based Filtering}: 
+    In Constraint-Based Filtering the user defines hard limits for each attribute (e.g. maximum price or minimum rating). All hotels which do not meet the contraints are filtered out. This allows users to specify their preferences in a clear and understandable way without the need for complex mathematical calculations.
 \end{enumerate}
 
-To fulfill the explainability requirements of the DSA, the prototype features a global explanation banner detailing the active algorithm and an on-demand, collapsible "Mathematical Breakdown" panel on each hotel recommendation card. Using KaTeX, the interface renders the exact mathematical formulas and normalization equations used in the calculations, allowing users to trace how their inputs directly translate into the presented results.
+The prototype features a banner at the top of the landing page explaining the chosen algorithm in clear words and offers a button which on-click shows the mathematical formula of the chosen algorithm for enhanced transparency. The calculated results also offer a collapsible mathematical breakdown (only when activated to not overwhelm not interested users) showing a step-by-step calculation how the result's score was computed. This allows users to understand how the results are generated and how their inputs influence the outcome. The calculation breakdown is generated using KaTeX and renders the exact mathematical formulas and normalization equations used in the calculations, allowing users to trace how their inputs directly translate into the presented results.
 
-The remainder of this paper is structured as follows. Section 2 reviews related work in tourism recommenders, multi-attribute utility theory, and explanation interfaces. Section 3 describes the system architecture and the dataset. Section 4 presents the mathematical formulations of the two algorithmic approaches. Section 5 details the user interface design and DSA compliance features. Section 6 analyzes critical mathematical edge cases and implementation bugs discovered during development, outlining their resolutions. Section 7 proposes a protocol for a future user study and outlines extensions, and Section 8 concludes the paper. The Appendix contains the complete database used in the study, followed by the author contribution table and GenAI disclosures.
 
-\section{Related Work}
+The remainder holds the following structure: In \autoref{sec:related_work} 
+the related work in current tourism recommender systems, MAUT and explaination interfaces is identified. \autoref{sec:system_architecture_and_implementation} details the system's architecture and the mock dataset. \autoref{sec:algorithmic_framework} shows the mathematical foundations of the two used algorithms. \autoref{sec:user_interface_design_and_explainability} details the UI design and transparency features. \autoref{sec:future_work} proposes a protocol for a future user study and extensions, and \autoref{sec:conclusion} concludes the paper. In the Appendix the complete mock database used in the project, followed by the author contribution table and GenAI disclosures are attached.
+%cont here
+\section{Related Work}\label{sec:related_work}
 The development of recommender systems in tourism is characterized by unique challenges that distinguish it from other application domains, such as movie or music recommendation~\cite{BORRAS20147370}. Tourism decisions are high-involvement, occasional, and multi-attribute in nature~\cite{ricci2011travel}. Unlike low-cost consumer goods, booking a hotel or planning a vacation involves substantial financial risk, time commitment, and emotional expectation. Consequently, users are rarely satisfied with simple "top-N" recommendations; they require extensive information, comparison tools, and the ability to express specific, situational constraints.
 
 Traditional tourism recommender systems (TRSs) are often categorized into collaborative filtering, content-based filtering, and hybrid approaches~\cite{Sarkar2023, 8308293}. While collaborative filtering leverages the historical ratings of similar users, it suffers from severe cold-start problems, as new hotels lack reviews, and occasional travelers lack historical profiles. Content-based systems match hotel features with user preference profiles, but they frequently struggle with explainability and cannot easily adapt to sudden shifts in user needs (e.g., a business traveler requiring a central location vs. a family seeking budget accommodations).
@@ -72,7 +76,7 @@ In contrast, constraint-based recommendation represents a non-compensatory appro
 
 Prior research emphasizes that the success of interactive recommender systems depends heavily on their user interfaces~\cite{mcnee2006being, swearingen2001beyond}. Providing explanation interfaces not only improves user understanding but also increases their trust and perceived control over the system~\cite{tintarev2012evaluating}. Knijnenburg et al.~\cite{knijnenburg2012explaining} proposed a comprehensive framework showing that user control, when paired with high explainability, leads to higher satisfaction and system adoption. The integration of real-time sliders and mathematical breakdowns investigated in this work directly builds on these findings, operationalizing regulatory requirements into specific user interface patterns.
 
-\section{System Architecture and Implementation}
+\section{System Architecture and Implementation}\label{sec:system_architecture_and_implementation}
 The prototype is designed as a client-side, responsive single-page application (SPA). The technical stack consists of React 18, Vite for the build system, and vanilla CSS for layout and styling. Client-side math rendering is powered by KaTeX, a fast LaTeX math rendering library, integrated via a custom React wrapper.
 
 The system architecture is structured to support real-time user interaction. Figure~\ref{fig:architecture} illustrates the flow of data through the system.
@@ -120,7 +124,7 @@ The dataset, stored in a static module (`data.js`), comprises 20 hotels (10 in V
 
 By using `useMemo`, the application recalculates recommendations in real time whenever the user modifies a slider or toggles a control. Because the calculations are performed client-side on a bounded dataset, updates occur instantly ($<16$ ms), providing immediate visual feedback.
 
-\section{Algorithmic Framework}
+\section{Algorithmic Framework}\label{sec:algorithmic_framework}
 To support the user-controlled interaction model, we formalize the mathematical models behind the two algorithmic recommendation modes.
 
 \subsection{Algorithm A: Weighted Multi-Attribute Utility Theory (MAUT)}
@@ -221,7 +225,8 @@ The two models represent fundamentally different decision-making styles, as summ
   \end{tabular}
 \end{table}
 
-\section{User Interface Design and Explainability}
+\section{User Interface Design and Explainability}\label{sec:user_interface_design_and_explainability}
+
 The prototype interface was designed with a glassmorphism aesthetic (utilizing translucent backdrops, vibrant background gradients, and smooth animations) to create a premium, modern user experience. More importantly, the interface was structured to maximize explainability and user control.
 
 \subsection{DSA-Compliant Explanation Interfaces}
@@ -258,7 +263,7 @@ For example, if a user selects Vienna and sets all weights to 50, and inspects t
 \end{itemize}
 This feature provides absolute transparency, eliminating the perception of the recommender system as a black box. The user can see exactly why a hotel is ranked first or second, and can directly trace the mathematical impact of adjusting a slider.
 
-\section{Implementation Challenges \& Mathematical Edge Cases}
+\section{Implementation Challenges \& Mathematical Edge Cases}\label{sec:implementation_challenges_mathematical_edge_cases}
 During the development of the prototype, several critical mathematical bugs were identified, particularly within the MAUT calculation engine. These bugs are characteristic of interactive multi-attribute systems that rely on dynamic user inputs. This section details these challenges and their mathematical resolutions.
 
 \subsection{The Division-by-Zero Singularity on Zero Weights}
@@ -328,7 +333,7 @@ const percentageScore = Math.min(100, Math.max(0, Math.round((rawScore / totalWe
 ```
 This ensures that the output is always an integer between $0\%$ and $100\%$, preventing any visual anomalies in the user interface.
 
-\section{Future Work}
+\section{Future Work}\label{sec:future_work}
 While the current prototype demonstrates the feasibility of user-controlled, transparent tourism recommenders, several research and development paths remain open.
 
 \subsection{The Hybrid Algorithmic Approach}
@@ -371,7 +376,7 @@ The ordering of conditions will be counterbalanced to prevent learning effects. 
 \end{itemize}
 The results of this study will guide the refinement of the UI, helping to strike a balance between complete mathematical transparency and user cognitive ease.
 
-\section{Conclusion}
+\section{Conclusion}\label{sec:conclusion}
 The era of black-box recommender systems is facing both user-experience and regulatory challenges. This paper presented an interactive, transparent tourism recommender system prototype designed to address the compliance requirements of the EU Digital Services Act (DSA). By implementing both a compensatory Weighted Multi-Attribute Utility Theory (MAUT) model and a non-compensatory Constraint-Based Filtering model, the prototype provides users with direct, profiling-free control over recommendation logic. We integrated tiered explainability features, combining simple plain-language summaries with on-demand, KaTeX-rendered mathematical breakdowns. Finally, we analyzed and resolved mathematical edge cases, including division-by-zero singularities and score overshooting, ensuring a stable and robust system. This architecture serves as a blueprint for developers seeking to combine rich user control, modern web aesthetics, and strict regulatory compliance in recommender system design.
 
 \begin{acks}
