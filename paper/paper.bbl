@@ -38,86 +38,60 @@
 
 \bibitem[Adomavicius and Tuzhilin(2005)]%
         {adomavicius2005toward}
-\bibfield{author}{\bibinfo{person}{Gediminas Adomavicius} {and}
-  \bibinfo{person}{Alexander Tuzhilin}.} \bibinfo{year}{2005}\natexlab{}.
-\newblock \showarticletitle{Toward the next generation of recommender systems:
-  A survey of the state-of-the-art and possible extensions}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Knowledge and Data
-  Engineering}} \bibinfo{volume}{17}, \bibinfo{number}{6}
-  (\bibinfo{year}{2005}), \bibinfo{pages}{734--749}.
+\bibfield{author}{\bibinfo{person}{Gediminas Adomavicius} {and} \bibinfo{person}{Alexander Tuzhilin}.} \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{Toward the next generation of recommender systems: A survey of the state-of-the-art and possible extensions}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Knowledge and Data Engineering}} \bibinfo{volume}{17}, \bibinfo{number}{6} (\bibinfo{year}{2005}), \bibinfo{pages}{734--749}.
 \newblock
 \href{https://doi.org/10.1109/TKDE.2005.99}{doi:\nolinkurl{10.1109/TKDE.2005.99}}
 
 
 \bibitem[Borras et~al\mbox{.}(2014)]%
         {BORRAS20147370}
-\bibfield{author}{\bibinfo{person}{Joan Borras}, \bibinfo{person}{Antonio
-  Moreno}, {and} \bibinfo{person}{Aida Valls}.}
-  \bibinfo{year}{2014}\natexlab{}.
+\bibfield{author}{\bibinfo{person}{Joan Borras}, \bibinfo{person}{Antonio Moreno}, {and} \bibinfo{person}{Aida Valls}.} \bibinfo{year}{2014}\natexlab{}.
 \newblock \showarticletitle{Intelligent tourism recommender systems: A survey}.
-\newblock \bibinfo{journal}{\emph{Expert Systems with Applications}}
-  \bibinfo{volume}{41}, \bibinfo{number}{16} (\bibinfo{year}{2014}),
-  \bibinfo{pages}{7370--7389}.
+\newblock \bibinfo{journal}{\emph{Expert Systems with Applications}} \bibinfo{volume}{41}, \bibinfo{number}{16} (\bibinfo{year}{2014}), \bibinfo{pages}{7370--7389}.
 \newblock
 \href{https://doi.org/10.1016/j.eswa.2014.06.007}{doi:\nolinkurl{10.1016/j.eswa.2014.06.007}}
 
 
 \bibitem[{European Parliament and Council of the European Union}(2022)]%
         {eudsa2022}
-\bibfield{author}{\bibinfo{person}{{European Parliament and Council of the
-  European Union}}.} \bibinfo{year}{2022}\natexlab{}.
-\newblock \bibinfo{title}{Regulation (EU) 2022/2065 of the European Parliament
-  and of the Council of 19 October 2022 on a Single Market For Digital Services
-  and amending Directive 2000/31/EC (Digital Services Act)}.
-\newblock
-  \bibinfo{howpublished}{\url{http://data.europa.eu/eli/reg/2022/2065/oj}}.
+\bibfield{author}{\bibinfo{person}{{European Parliament and Council of the European Union}}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \bibinfo{title}{Regulation (EU) 2022/2065 of the European Parliament and of the Council of 19 October 2022 on a Single Market For Digital Services and amending Directive 2000/31/EC (Digital Services Act)}.
+\newblock \bibinfo{howpublished}{\url{http://data.europa.eu/eli/reg/2022/2065/oj}}.
 \newblock
 
 
 \bibitem[Kbaier et~al\mbox{.}(2017)]%
         {8308293}
-\bibfield{author}{\bibinfo{person}{Mohamed Elyes Ben~Haj Kbaier},
-  \bibinfo{person}{Hela Masri}, {and} \bibinfo{person}{Saoussen Krichen}.}
-  \bibinfo{year}{2017}\natexlab{}.
-\newblock \showarticletitle{A Personalized Hybrid Tourism Recommender System}.
-  In \bibinfo{booktitle}{\emph{2017 IEEE/ACS 14th International Conference on
-  Computer Systems and Applications (AICCSA)}}. \bibinfo{pages}{244--250}.
+\bibfield{author}{\bibinfo{person}{Mohamed Elyes Ben~Haj Kbaier}, \bibinfo{person}{Hela Masri}, {and} \bibinfo{person}{Saoussen Krichen}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{A Personalized Hybrid Tourism Recommender System}. In \bibinfo{booktitle}{\emph{2017 IEEE/ACS 14th International Conference on Computer Systems and Applications (AICCSA)}}. \bibinfo{pages}{244--250}.
 \newblock
 \href{https://doi.org/10.1109/AICCSA.2017.12}{doi:\nolinkurl{10.1109/AICCSA.2017.12}}
 
 
-\bibitem[Keeney and Raiffa(1993)]%
+\bibitem[Keeney et~al\mbox{.}(1979)]%
         {keeney1993decisions}
-\bibfield{author}{\bibinfo{person}{Ralph~L. Keeney} {and}
-  \bibinfo{person}{Howard Raiffa}.} \bibinfo{year}{1993}\natexlab{}.
-\newblock \bibinfo{booktitle}{\emph{Decisions with Multiple Objectives:
-  Preferences and Value Trade-Offs}}.
-\newblock \bibinfo{publisher}{Cambridge University Press},
-  \bibinfo{address}{Cambridge, UK}.
+\bibfield{author}{\bibinfo{person}{Ralph Keeney}, \bibinfo{person}{Howard Raiffa}, {and} \bibinfo{person}{David Rajala}.} \bibinfo{year}{1979}\natexlab{}.
+\newblock \showarticletitle{Decisions with Multiple Objectives: Preferences and Value Trade-Offs}.
+\newblock \bibinfo{journal}{\emph{Systems, Man and Cybernetics, IEEE Transactions on}}  \bibinfo{volume}{9} (\bibinfo{date}{08} \bibinfo{year}{1979}), \bibinfo{pages}{403 -- 403}.
 \newblock
+\href{https://doi.org/10.1109/TSMC.1979.4310245}{doi:\nolinkurl{10.1109/TSMC.1979.4310245}}
 
 
 \bibitem[Knijnenburg et~al\mbox{.}(2012)]%
         {knijnenburg2012explaining}
-\bibfield{author}{\bibinfo{person}{Bart~P. Knijnenburg}, \bibinfo{person}{M.~C.
-  Willemsen}, \bibinfo{person}{Z. Gantner}, \bibinfo{person}{H. Soncu}, {and}
-  \bibinfo{person}{C. Newell}.} \bibinfo{year}{2012}\natexlab{}.
-\newblock \showarticletitle{Explaining the user experience of recommender
-  systems}.
-\newblock \bibinfo{journal}{\emph{User Modeling and User-Adapted Interaction}}
-  \bibinfo{volume}{22}, \bibinfo{number}{4-5} (\bibinfo{year}{2012}),
-  \bibinfo{pages}{441--504}.
+\bibfield{author}{\bibinfo{person}{Bart~P. Knijnenburg}, \bibinfo{person}{M.~C. Willemsen}, \bibinfo{person}{Z. Gantner}, \bibinfo{person}{H. Soncu}, {and} \bibinfo{person}{C. Newell}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Explaining the user experience of recommender systems}.
+\newblock \bibinfo{journal}{\emph{User Modeling and User-Adapted Interaction}} \bibinfo{volume}{22}, \bibinfo{number}{4-5} (\bibinfo{year}{2012}), \bibinfo{pages}{441--504}.
 \newblock
 \href{https://doi.org/10.1007/s11257-011-9118-4}{doi:\nolinkurl{10.1007/s11257-011-9118-4}}
 
 
 \bibitem[McNee et~al\mbox{.}(2006)]%
         {mcnee2006being}
-\bibfield{author}{\bibinfo{person}{Sean~M. McNee}, \bibinfo{person}{John
-  Riedl}, {and} \bibinfo{person}{Joseph~A. Konstan}.}
-  \bibinfo{year}{2006}\natexlab{}.
-\newblock \showarticletitle{Being accurate is not enough: How accuracy metrics
-  have hurt recommender systems}.
+\bibfield{author}{\bibinfo{person}{Sean~M. McNee}, \bibinfo{person}{John Riedl}, {and} \bibinfo{person}{Joseph~A. Konstan}.} \bibinfo{year}{2006}\natexlab{}.
+\newblock \showarticletitle{Being accurate is not enough: How accuracy metrics have hurt recommender systems}.
 \newblock  (\bibinfo{year}{2006}), \bibinfo{pages}{1097--1101}.
 \newblock
 \href{https://doi.org/10.1145/1125451.1125659}{doi:\nolinkurl{10.1145/1125451.1125659}}
@@ -125,61 +99,45 @@
 
 \bibitem[Ricci(2011)]%
         {ricci2011travel}
-\bibfield{author}{\bibinfo{person}{Francesco Ricci}.}
-  \bibinfo{year}{2011}\natexlab{}.
+\bibfield{author}{\bibinfo{person}{Francesco Ricci}.} \bibinfo{year}{2011}\natexlab{}.
 \newblock \showarticletitle{Travel recommender systems}.
-\newblock In \bibinfo{booktitle}{\emph{Recommender Systems Handbook}}.
-  \bibinfo{publisher}{Springer}, \bibinfo{pages}{527--556}.
+\newblock In \bibinfo{booktitle}{\emph{Recommender Systems Handbook}}. \bibinfo{publisher}{Springer}, \bibinfo{pages}{527--556}.
 \newblock
 \href{https://doi.org/10.1007/978-0-387-85820-3_17}{doi:\nolinkurl{10.1007/978-0-387-85820-3_17}}
 
 
 \bibitem[Sarkar et~al\mbox{.}(2023)]%
         {Sarkar2023}
-\bibfield{author}{\bibinfo{person}{Joy~Lal Sarkar}, \bibinfo{person}{Abhishek
-  Majumder}, \bibinfo{person}{Chhabi~Rani Panigrahi}, \bibinfo{person}{Sudipta
-  Roy}, {and} \bibinfo{person}{Bibudhendu Pati}.}
-  \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{Tourism recommendation system: a survey and future
-  research directions}.
-\newblock \bibinfo{journal}{\emph{Multimedia Tools and Applications}}
-  \bibinfo{volume}{82}, \bibinfo{number}{6} (\bibinfo{year}{2023}),
-  \bibinfo{pages}{8983--9027}.
+\bibfield{author}{\bibinfo{person}{Joy~Lal Sarkar}, \bibinfo{person}{Abhishek Majumder}, \bibinfo{person}{Chhabi~Rani Panigrahi}, \bibinfo{person}{Sudipta Roy}, {and} \bibinfo{person}{Bibudhendu Pati}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Tourism recommendation system: a survey and future research directions}.
+\newblock \bibinfo{journal}{\emph{Multimedia Tools and Applications}} \bibinfo{volume}{82}, \bibinfo{number}{6} (\bibinfo{year}{2023}), \bibinfo{pages}{8983--9027}.
 \newblock
 \href{https://doi.org/10.1007/s11042-022-12167-w}{doi:\nolinkurl{10.1007/s11042-022-12167-w}}
 
 
 \bibitem[Schmitt et~al\mbox{.}(2002)]%
         {schmitt2002maut}
-\bibfield{author}{\bibinfo{person}{Christian Schmitt}, \bibinfo{person}{Dietmar
-  Dengler}, \bibinfo{person}{Michael Bauer}, {et~al\mbox{.}}}
-  \bibinfo{year}{2002}\natexlab{}.
-\newblock \showarticletitle{The MAUT-Machine: An Adaptive Recommender System}.
-  In \bibinfo{booktitle}{\emph{Proceedings of the ABIS Workshop}} (Hannover,
-  Germany).
+\bibfield{author}{\bibinfo{person}{Christian Schmitt}, \bibinfo{person}{Dietmar Dengler}, \bibinfo{person}{Michael Bauer}, {et~al\mbox{.}}} \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{The MAUT-Machine: An Adaptive Recommender System}. In \bibinfo{booktitle}{\emph{Proceedings of the ABIS Workshop}} (Hannover, Germany).
 \newblock
 
 
-\bibitem[Swearingen and Sinha(2001)]%
+\bibitem[Sinha et~al\mbox{.}(2001)]%
         {swearingen2001beyond}
-\bibfield{author}{\bibinfo{person}{Kirsten Swearingen} {and}
-  \bibinfo{person}{Rashmi Sinha}.} \bibinfo{year}{2001}\natexlab{}.
-\newblock \showarticletitle{Beyond algorithms: An HCI perspective on
-  recommender systems}.
-\newblock  (\bibinfo{year}{2001}).
+\bibfield{author}{\bibinfo{person}{Swearingen Sinha}, \bibinfo{person}{Kirsten Medhurst}, {and} \bibinfo{person}{Rashmi Sinha}.} \bibinfo{year}{2001}\natexlab{}.
+\newblock \showarticletitle{Beyond Algorithms: An HCI Perspective on Recommender Systems}.
+\newblock  (\bibinfo{date}{09} \bibinfo{year}{2001}).
 \newblock
 
 
-\bibitem[Tintarev and Masthoff(2012)]%
+\bibitem[Tintarev and Masthoff(2007)]%
         {tintarev2012evaluating}
-\bibfield{author}{\bibinfo{person}{Nava Tintarev} {and} \bibinfo{person}{Judith
-  Masthoff}.} \bibinfo{year}{2012}\natexlab{}.
-\newblock \showarticletitle{Evaluating recommendation explanations: A survey}.
-\newblock \bibinfo{journal}{\emph{User Modeling and User-Adapted Interaction}}
-  \bibinfo{volume}{22}, \bibinfo{number}{4-5} (\bibinfo{year}{2012}),
-  \bibinfo{pages}{399--439}.
+\bibfield{author}{\bibinfo{person}{Nava Tintarev} {and} \bibinfo{person}{Judith Masthoff}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{A Survey of Explanations in Recommender Systems}.
+\newblock \bibinfo{journal}{\emph{IEEE 23rd International Conference on Data Engineering Workshop}}, \bibinfo{pages}{801--810}.
 \newblock
-\href{https://doi.org/10.1007/s11257-011-9106-8}{doi:\nolinkurl{10.1007/s11257-011-9106-8}}
+\showISBNx{978-1-4244-0832-0}
+\href{https://doi.org/10.1109/ICDEW.2007.4401070}{doi:\nolinkurl{10.1109/ICDEW.2007.4401070}}
 
 
 \end{thebibliography}

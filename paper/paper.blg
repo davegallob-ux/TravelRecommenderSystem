@@ -22,46 +22,47 @@ Warning--empty address in schmitt2002maut
 Warning--page numbers missing in both pages and numpages fields in schmitt2002maut
 Warning--no journal in swearingen2001beyond
 Warning--no number and no volume in swearingen2001beyond
-Warning--page numbers missing in both pages and numpages fields in swearingen2001beyond
+Warning--empty booktitle in tintarev2012evaluating
+Warning--no number and no volume in tintarev2012evaluating
 You've used 12 entries,
             6273 wiz_defined-function locations,
-            1600 strings with 20651 characters,
-and the built_in function-call counts, 13457 in all, are:
-= -- 1798
+            1606 strings with 20789 characters,
+and the built_in function-call counts, 13980 in all, are:
+= -- 1932
 > -- 384
 < -- 0
 + -- 131
-- -- 139
-* -- 925
-:= -- 1283
-add.period$ -- 61
+- -- 129
+* -- 954
+:= -- 1284
+add.period$ -- 60
 call.type$ -- 12
-change.case$ -- 80
+change.case$ -- 82
 chr.to.int$ -- 12
-cite$ -- 23
-duplicate$ -- 1185
-empty$ -- 833
-format.name$ -- 179
-if$ -- 3287
+cite$ -- 24
+duplicate$ -- 1226
+empty$ -- 860
+format.name$ -- 169
+if$ -- 3484
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 41
-newline$ -- 141
+missing$ -- 44
+newline$ -- 143
 num.names$ -- 84
-pop$ -- 425
+pop$ -- 435
 preamble$ -- 1
-purify$ -- 176
+purify$ -- 178
 quote$ -- 0
-skip$ -- 433
+skip$ -- 451
 stack$ -- 0
-substring$ -- 1085
-swap$ -- 123
+substring$ -- 1144
+swap$ -- 130
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 247
-warning$ -- 11
-while$ -- 84
+type$ -- 263
+warning$ -- 12
+while$ -- 77
 width$ -- 0
-write$ -- 271
-(There were 11 warnings)
+write$ -- 272
+(There were 12 warnings)
