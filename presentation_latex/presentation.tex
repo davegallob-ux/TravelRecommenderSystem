@@ -28,193 +28,77 @@
 
 % Slide 1: Project Overview & Motivation
 \begin{frame}
-    \frametitle{Project Overview \& Motivation}
+    \frametitle{Last Milestone's Issues}
     \begin{itemize}
-        \item \textbf{Standard Recommenders are Black Boxes:} Users rarely know why items are recommended, causing a lack of trust~\cite{BORRAS20147370}.
-        \item \textbf{Goal:} Give users direct control and clear info on how things are ranked~\cite{Sarkar2023}.
-        \item \textbf{Complying with the EU Digital Services Act (DSA):}
-            \begin{itemize}
-                \item \textit{Article 27 (Transparency):} Platforms must explain major parameters and let users adjust them~\cite{eudsa2022}.
-                \item \textit{Article 38 (Profiling Options):} Must offer at least one choice that is profiling-free~\cite{eudsa2022}.
-            \end{itemize}
+        \item Issues with calculations (occasional crashes)
+        \item overloaded transparency board
+        \item transparency correct only for MAUT (1st Algorithm)
     \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth, keepaspectratio] {screens/AlgoInfo.png}
+        \begin{figure}
+            \tiny\caption{Overloaded Transparency Panel}
+        \end{figure}
+    \end{center}
 \end{frame}
 
-% Slide 2: Realized System Architecture & Tech Stack
 \begin{frame}
-    \frametitle{Technical Details \& Mock Data}
-    Built a web application with help of Gemini 3.5 Flash\footnote{\url{https://deepmind.google/models/gemini/flash/}} using:
-    \vspace{0.5em}
-    \begin{itemize}
-        \item \textbf{Frontend Framework:} React 18\footnote{\url{https://react.dev/}} + Vite\footnote{\url{https://vite.dev/}}.
-        \item \textbf{Math Rendering:} KaTeX\footnote{\url{https://katex.org/}} to display mathematical equations on screen.
-        \item \textbf{Mock Database:} 20 hotels (10 in Vienna, 10 in Munich) with custom attributes~\cite{Sarkar2023}:
-            \begin{itemize}
-                \item Attributes: price per night, distance to city center, star rating, guest reviews, and public transit score.
-            \end{itemize}
-    \end{itemize}
-\end{frame}
-
-% Slide 3: Realized UI Dashboard (Moved up, simplified)
-\begin{frame}
-    \frametitle{What the App Looks Like}
+    \frametitle{What The Finished App Looks Like}
     \vspace{0.8em}
     \begin{columns}
         \begin{column}{0.48\textwidth}
             \textbf{Interface Features:}
             \begin{itemize}
-                \item Toggle between Munich and Vienna.
-                \item Sliders that update results immediately.
-                \item Results shown with match percentage.
+                \item Correct Transparency panels for MAUT and Constraint-Filtering.
+                \item New Button shows Mathematical Info only on user-intent.
+                \item Transparency panels uses simple language to explain the underlying logic.
             \end{itemize}
         \end{column}
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \includegraphics[width=\textwidth,keepaspectratio]{screens/review.png}
+                \includegraphics[width=\textwidth,keepaspectratio]{screens/newmaut.png}
                 \begin{figure}
-                    \tiny\caption{Web App Dashboard}
+                    \tiny\caption{Transparency Board MAUT}
+                \end{figure}
+                \includegraphics [width=\textwidth, keepaspectratio] {screens/Constraint.png}
+                \begin{figure}
+                    \tiny\caption{Transparency Board Constraint Filtering}
                 \end{figure}
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-% Slide 4: User Interface & DSA Compliance (Moved up, simplified)
 \begin{frame}
-    \frametitle{Transparency in the UI}
-    Transparency info is integrated directly into the user interface:
-    \vspace{0.5em}
-    \begin{columns}
-        \begin{column}{0.55\textwidth}
-            \begin{itemize}
-                \item \textbf{Global Explanation Card:} A banner at the top explaining how the current mode ranks hotels.
-                \item \textbf{On-Demand Math Panels:}
-                    \begin{itemize}
-                        \item A button on each card to see the math breakdown.
-                        \item Shows how weights and normalized scores combine to produce the final score.
-                    \end{itemize}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.42\textwidth}
-            \begin{center}
-                \includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio]{screens/AlgoInfo.png}
-                \begin{figure}
-                    \tiny\caption{Global Transparency Banner}
-                \end{figure}
-            \end{center}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% Slide 5: Implemented Algorithms
-\begin{frame}
-    \frametitle{Two Algorithmic Modes}
-    Users can toggle between two distinct modes~\cite{8308293}:
-    \vspace{0.5em}
-    \begin{columns}
-        \begin{column}{0.55\textwidth}
+    \frametitle{Explanations in simple language}
+    \vspace{1em}
             \begin{block}{Algorithm A: Weighted MAUT}
                 \begin{itemize}
-                    \item \textbf{Approach:} Multi-Attribute Utility Theory (additive utility)~\cite{schmitt2002maut}.
-                    \item \textbf{User Control:} Interactive sliders for custom weights ($w_i$).
-                    \item \textbf{Output:} 0--100\% match score.
+                    \item \textbf{Normalization:} We map the worst option to 0 and the best option to 1.
+                    \item \textbf{Weighting:} The sliders represent your custom weights.
+                    \item \textbf{Calculation:} We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".
                 \end{itemize}
             \end{block}
             \begin{block}{Algorithm B: Constraint Filtering}
                 \begin{itemize}
-                    \item \textbf{Approach:} Hard limits filter.
-                    \item \textbf{User Control:} Sliders set absolute bounds (e.g. max price).
-                    \item \textbf{Output:} Only shows hotels that pass all filters.
+                    \item \textbf{Non-Compensatory Logic:} A hotel must satisfy all active limits simultaneously. Scoring highly in one category cannot compensate for failing another.
+                    \item \textbf{Set Reduction:} We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.
+                    \item \textbf{Complete Predictability:} There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.
                 \end{itemize}
             \end{block}
-        \end{column}
-        \begin{column}{0.42\textwidth}
-            \begin{center}
-                \includegraphics[width=\textwidth,keepaspectratio]{screens/Sliders.png}
-                \begin{figure}
-                    \tiny\caption{Sliders for Setting Bounds or Weights}
-                \end{figure}
-            \end{center}
-        \end{column}
-    \end{columns}
 \end{frame}
 
-% Slide 6: Deep Dive: Weighted MAUT
+% Slide 4: User Interface & DSA Compliance (Moved up, simplified)
+\PraesentationMasterWeissBlau
 \begin{frame}
-    \frametitle{Deep Dive: Weighted MAUT}
-    \vspace{0.8em}
-    \begin{columns}
-        \begin{column}{0.52\textwidth}
-            Calculates utility $U(X)$ for each hotel $X$~\cite{schmitt2002maut}:
-            \begin{equation*}
-                U(X) = \frac{\sum_{i=1}^{5} w_i \cdot u_i(x_i)}{\sum_{i=1}^{5} w_i} \times 100\%
-            \end{equation*}
-            
-            \textbf{Current Status: Implemented, but delivers wrong results}
-            \begin{itemize}
-                \item Algorithm delivers wrong results in a few cases
-                \item Bugs and crashes in the implementation.
-                \item Normalization calculations occasionally overshoot (e.g. $105\%$)
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.45\textwidth}
-            \begin{center}
-                \includegraphics[width=\textwidth,keepaspectratio]{screens/AlgoInfo.png}
-                \begin{figure}
-                    \tiny\caption{Explaining MAUT in the UI}
-                \end{figure}
-            \end{center}
-        \end{column}
-    \end{columns}
+    \begin{center}
+        \huge Demonstration
+    \end{center}
 \end{frame}
 
-% Slide 7: Detailed Score Breakdown
-\begin{frame}
-    \frametitle{Step-by-Step Score Breakdown}
-    \vspace{0.8em}
-    To satisfy DSA explainability, the UI shows exact steps:
-    \vspace{0.5em}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \begin{block}{How the scores are calculated}
-                \begin{enumerate}
-                    \item \textbf{Normalization:} Map raw values (like \$180 price) to a score $u_i \in [0, 1]$ based on best/worst options in that city.
-                    \item \textbf{Scaling:} Multiply $u_i$ by the user's slider weight $w_i \in [0, 100]$.
-                    \item \textbf{Summing up:} Sum them up: $\sum w_i \cdot u_i(x_i)$.
-                    \item \textbf{Final division:} Divide by sum of weights ($\sum w_i$).
-                \end{enumerate}
-            \end{block}
-            \vspace{0.2em}
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio]{screens/Calculations.png}
-                \begin{figure}
-                    \tiny\caption{Collapsible Breakdown Panel}
-                \end{figure}
-            \end{center}
-        \end{column}
-    \end{columns}
-\end{frame}
+\PraesentationMasterStandard
 
-% Slide 8: Deep Dive: Constraint-Guided Filtering
-\begin{frame}
-    \frametitle{Deep Dive: Constraint Filtering}
-    \vspace{0.8em}
-    A hard-limit filtering approach that just shows matching hotels:
-    \vspace{0.5em}
-    \begin{itemize}
-        \item \textbf{Simple logic, no complex math:} check each hotel against the user's limits.
-        \item \textbf{Filters applied:}
-            \begin{align*}
-                \text{Price} &\le \text{Max Price} & \text{Distance} &\le \text{Max Distance} \\
-                \text{Stars} &\ge \text{Min Stars} & \text{Rating} &\ge \text{Min Rating} \\
-                \text{Public Transport} &\ge \text{Min Transport}
-            \end{align*}
-        \item \textbf{Totally predictable outcome:} A hotel must match user's needs --- no useless suggestions for the user.
-        \item \textbf{Useful feedback:} If nothing matches, the app suggests loosening the limits.
-    \end{itemize}
-\end{frame}
+% Slide 5: Implemented Algorithms
 
 % Slide 9: Current Progress & Next Steps
 \begin{frame}
@@ -225,12 +109,13 @@
                 \item Built a UI showing real-time updates.
                 \item Implemented transparency abilities to comply with DSA (collapsible breakdown panels, math display).
                 \item Implemented both MAUT and hard constraint filtering modes.
+                \item Fixed all issues (hopefully)
             \end{itemize}
-        \item \textbf{Next steps:}
+        \item \textbf{Next step \& Possble Extensions:}
             \begin{itemize}
-                \item \textbf{Fix MAUT math bugs:} Resolve crashes on zero slider weights and correct percentage overflow issues.
-                \item \textbf{Hybrid mode:} Idea: Combine both modes (filter out expensive hotels, then rank the rest using MAUT).
-                \item \textbf{Expand mock database:} Add more hotels to the mock database.
+                \item \textbf{Finish project documentation}.
+                \item \textbf{Hybrid mode:} 3rd mode, i.e. Combine both modes (filter out expensive hotels, then rank the rest using MAUT)?
+                \item \textbf{Expand mock database:} Add more hotels to the mock database (i.e. 20 each) ?
             \end{itemize}
     \end{itemize}
 \end{frame}

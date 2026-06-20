@@ -8,21 +8,20 @@
 %%% NOTE TO THE USER: you can override these defaults by providing
 %%% customized versions of any of these macros before the \bibliography
 %%% command.  Each of them MUST provide its own final punctuation,
-%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% except for \shownote{} and \showURL{}.  The latter two
 %%% do not use final punctuation, in order to avoid confusing it with
 %%% the Web address.
 %%%
 %%% To suppress output of a particular field, define its macro to expand
 %%% to an empty string, or better, \unskip, like this:
 %%%
-%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax
 %%%
-%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%% \def \showURL #1{\unskip}           % plain TeX syntax
 %%%
 %%% ====================================================================
 
 \ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
-\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
 \ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
 \ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
 \ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
@@ -47,9 +46,7 @@
   Engineering}} \bibinfo{volume}{17}, \bibinfo{number}{6}
   (\bibinfo{year}{2005}), \bibinfo{pages}{734--749}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TKDE.2005.99}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1109/TKDE.2005.99}{doi:\nolinkurl{10.1109/TKDE.2005.99}}
 
 
 \bibitem[Borras et~al\mbox{.}(2014)]%
@@ -62,9 +59,7 @@
   \bibinfo{volume}{41}, \bibinfo{number}{16} (\bibinfo{year}{2014}),
   \bibinfo{pages}{7370--7389}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1016/j.eswa.2014.06.007}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1016/j.eswa.2014.06.007}{doi:\nolinkurl{10.1016/j.eswa.2014.06.007}}
 
 
 \bibitem[{European Parliament and Council of the European Union}(2022)]%
@@ -88,9 +83,7 @@
   In \bibinfo{booktitle}{\emph{2017 IEEE/ACS 14th International Conference on
   Computer Systems and Applications (AICCSA)}}. \bibinfo{pages}{244--250}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1109/AICCSA.2017.12}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1109/AICCSA.2017.12}{doi:\nolinkurl{10.1109/AICCSA.2017.12}}
 
 
 \bibitem[Keeney and Raiffa(1993)]%
@@ -115,9 +108,7 @@
   \bibinfo{volume}{22}, \bibinfo{number}{4-5} (\bibinfo{year}{2012}),
   \bibinfo{pages}{441--504}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1007/s11257-011-9118-4}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1007/s11257-011-9118-4}{doi:\nolinkurl{10.1007/s11257-011-9118-4}}
 
 
 \bibitem[McNee et~al\mbox{.}(2006)]%
@@ -129,9 +120,7 @@
   have hurt recommender systems}.
 \newblock  (\bibinfo{year}{2006}), \bibinfo{pages}{1097--1101}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1145/1125451.1125659}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1145/1125451.1125659}{doi:\nolinkurl{10.1145/1125451.1125659}}
 
 
 \bibitem[Ricci(2011)]%
@@ -142,9 +131,7 @@
 \newblock In \bibinfo{booktitle}{\emph{Recommender Systems Handbook}}.
   \bibinfo{publisher}{Springer}, \bibinfo{pages}{527--556}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1007/978-0-387-85820-3_17}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1007/978-0-387-85820-3_17}{doi:\nolinkurl{10.1007/978-0-387-85820-3_17}}
 
 
 \bibitem[Sarkar et~al\mbox{.}(2023)]%
@@ -159,9 +146,7 @@
   \bibinfo{volume}{82}, \bibinfo{number}{6} (\bibinfo{year}{2023}),
   \bibinfo{pages}{8983--9027}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1007/s11042-022-12167-w}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1007/s11042-022-12167-w}{doi:\nolinkurl{10.1007/s11042-022-12167-w}}
 
 
 \bibitem[Schmitt et~al\mbox{.}(2002)]%
@@ -194,9 +179,7 @@
   \bibinfo{volume}{22}, \bibinfo{number}{4-5} (\bibinfo{year}{2012}),
   \bibinfo{pages}{399--439}.
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1007/s11257-011-9106-8}
-\showDOI{\tempurl}
+\href{https://doi.org/10.1007/s11257-011-9106-8}{doi:\nolinkurl{10.1007/s11257-011-9106-8}}
 
 
 \end{thebibliography}
