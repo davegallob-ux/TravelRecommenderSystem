@@ -16,5 +16,435 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{eudsa2022}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=d0baa957acb6522d22e3251a428fe067}{%
+           family={{European Parliament and Council of the European Union}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{fullhash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{fullhashraw}{d0baa957acb6522d22e3251a428fe067}
+      \strng{bibnamehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authorbibnamehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authornamehash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authorfullhash}{d0baa957acb6522d22e3251a428fe067}
+      \strng{authorfullhashraw}{d0baa957acb6522d22e3251a428fe067}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{http://data.europa.eu/eli/reg/2022/2065/oj}}
+      \field{title}{Regulation (EU) 2022/2065 of the European Parliament and of the Council of 19 October 2022 on a Single Market For Digital Services and amending Directive 2000/31/EC (Digital Services Act)}
+      \field{year}{2022}
+    \endentry
+    \entry{ricci2011travel}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{hash=5abb1d77d80f46918651a5bbc5ee8371}{%
+           family={Ricci},
+           familyi={R\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{fullhash}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{fullhashraw}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{bibnamehash}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{authorbibnamehash}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{authornamehash}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{authorfullhash}{5abb1d77d80f46918651a5bbc5ee8371}
+      \strng{authorfullhashraw}{5abb1d77d80f46918651a5bbc5ee8371}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Recommender Systems Handbook}
+      \field{title}{Travel recommender systems}
+      \field{year}{2011}
+      \field{pages}{527\bibrangedash 556}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1007/978-0-387-85820-3_17
+      \endverb
+    \endentry
+    \entry{BORRAS20147370}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=d76bca17ab7471832a4f8e40f23d022c}{%
+           family={Borras},
+           familyi={B\bibinitperiod},
+           given={Joan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c88e0adc23b9dfc10676e56495478bd1}{%
+           family={Moreno},
+           familyi={M\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+        {{hash=beddce303f177fe7ee5a8378c6b5db53}{%
+           family={Valls},
+           familyi={V\bibinitperiod},
+           given={Aida},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{528a50b33d729f6014aa312ad0f40640}
+      \strng{fullhash}{528a50b33d729f6014aa312ad0f40640}
+      \strng{fullhashraw}{528a50b33d729f6014aa312ad0f40640}
+      \strng{bibnamehash}{528a50b33d729f6014aa312ad0f40640}
+      \strng{authorbibnamehash}{528a50b33d729f6014aa312ad0f40640}
+      \strng{authornamehash}{528a50b33d729f6014aa312ad0f40640}
+      \strng{authorfullhash}{528a50b33d729f6014aa312ad0f40640}
+      \strng{authorfullhashraw}{528a50b33d729f6014aa312ad0f40640}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Expert Systems with Applications}
+      \field{number}{16}
+      \field{title}{Intelligent tourism recommender systems: A survey}
+      \field{volume}{41}
+      \field{year}{2014}
+      \field{pages}{7370\bibrangedash 7389}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1016/j.eswa.2014.06.007
+      \endverb
+    \endentry
+    \entry{8308293}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=2773d17fb101fb5fc67e47c477d4989d}{%
+           family={Kbaier},
+           familyi={K\bibinitperiod},
+           given={Mohamed\bibnamedelimb Elyes\bibnamedelimb Ben\bibnamedelima Haj},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=23c42cfc472c56e98ba079df8ded5ead}{%
+           family={Masri},
+           familyi={M\bibinitperiod},
+           given={Hela},
+           giveni={H\bibinitperiod}}}%
+        {{hash=aa543de5c69a05eee00eab9f6bfc8faf}{%
+           family={Krichen},
+           familyi={K\bibinitperiod},
+           given={Saoussen},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c5da46258657f1328374823790f0265}
+      \strng{fullhash}{7c5da46258657f1328374823790f0265}
+      \strng{fullhashraw}{7c5da46258657f1328374823790f0265}
+      \strng{bibnamehash}{7c5da46258657f1328374823790f0265}
+      \strng{authorbibnamehash}{7c5da46258657f1328374823790f0265}
+      \strng{authornamehash}{7c5da46258657f1328374823790f0265}
+      \strng{authorfullhash}{7c5da46258657f1328374823790f0265}
+      \strng{authorfullhashraw}{7c5da46258657f1328374823790f0265}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2017 IEEE/ACS 14th International Conference on Computer Systems and Applications (AICCSA)}
+      \field{title}{A Personalized Hybrid Tourism Recommender System}
+      \field{year}{2017}
+      \field{pages}{244\bibrangedash 250}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/AICCSA.2017.12
+      \endverb
+    \endentry
+    \entry{Sarkar2023}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=4b39c056ae6b6818158017589c21cd92}{%
+           family={Sarkar},
+           familyi={S\bibinitperiod},
+           given={Joy\bibnamedelima Lal},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=96434ef7a5bf30a341cef7e35e3678d7}{%
+           family={Majumder},
+           familyi={M\bibinitperiod},
+           given={Abhishek},
+           giveni={A\bibinitperiod}}}%
+        {{hash=96164a375ea7a47d71e4e07acaaef772}{%
+           family={Panigrahi},
+           familyi={P\bibinitperiod},
+           given={Chhabi\bibnamedelima Rani},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=e18c2c997aab1cd7e48d553bcd5afc4f}{%
+           family={Roy},
+           familyi={R\bibinitperiod},
+           given={Sudipta},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0ca762c8421560843827eb52f9bda96a}{%
+           family={Pati},
+           familyi={P\bibinitperiod},
+           given={Bibudhendu},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{420cfc9999bd3d32f8bab223524de195}
+      \strng{fullhash}{bfe917be2cb2184c194808180513e288}
+      \strng{fullhashraw}{bfe917be2cb2184c194808180513e288}
+      \strng{bibnamehash}{420cfc9999bd3d32f8bab223524de195}
+      \strng{authorbibnamehash}{420cfc9999bd3d32f8bab223524de195}
+      \strng{authornamehash}{420cfc9999bd3d32f8bab223524de195}
+      \strng{authorfullhash}{bfe917be2cb2184c194808180513e288}
+      \strng{authorfullhashraw}{bfe917be2cb2184c194808180513e288}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Multimedia Tools and Applications}
+      \field{number}{6}
+      \field{title}{Tourism recommendation system: a survey and future research directions}
+      \field{volume}{82}
+      \field{year}{2023}
+      \field{pages}{8983\bibrangedash 9027}
+      \range{pages}{45}
+      \verb{doi}
+      \verb 10.1007/s11042-022-12167-w
+      \endverb
+    \endentry
+    \entry{mcnee2006being}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=717fe79c6e213f5c8d636b6e8638ed35}{%
+           family={McNee},
+           familyi={M\bibinitperiod},
+           given={Sean\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=05e2f63cd94159cec34470131ca35297}{%
+           family={Riedl},
+           familyi={R\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4d9331f432435b9538e5760a6e33696c}{%
+           family={Konstan},
+           familyi={K\bibinitperiod},
+           given={Joseph\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6351f5ce97f089f050ad336731d621e9}
+      \strng{fullhash}{6351f5ce97f089f050ad336731d621e9}
+      \strng{fullhashraw}{6351f5ce97f089f050ad336731d621e9}
+      \strng{bibnamehash}{6351f5ce97f089f050ad336731d621e9}
+      \strng{authorbibnamehash}{6351f5ce97f089f050ad336731d621e9}
+      \strng{authornamehash}{6351f5ce97f089f050ad336731d621e9}
+      \strng{authorfullhash}{6351f5ce97f089f050ad336731d621e9}
+      \strng{authorfullhashraw}{6351f5ce97f089f050ad336731d621e9}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{CHI '06 Extended Abstracts on Human Factors in Computing Systems}
+      \field{title}{Being accurate is not enough: How accuracy metrics have hurt recommender systems}
+      \field{year}{2006}
+      \field{pages}{1097\bibrangedash 1101}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1145/1125451.1125659
+      \endverb
+    \endentry
+    \entry{swearingen2001beyond}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=fd7da541897cf0183f02c5a85a4207d3}{%
+           family={Sinha},
+           familyi={S\bibinitperiod},
+           given={Swearingen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7ce17d92e5ad6d2b5b5d55a97786fb70}{%
+           family={Medhurst},
+           familyi={M\bibinitperiod},
+           given={Kirsten},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b6effe725a3daf2ef392d93e3bef503f}{%
+           family={Sinha},
+           familyi={S\bibinitperiod},
+           given={Rashmi},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{fullhash}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{fullhashraw}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{bibnamehash}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{authorbibnamehash}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{authornamehash}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{authorfullhash}{6121dd6c212fc474ff6d98a2dac0599f}
+      \strng{authorfullhashraw}{6121dd6c212fc474ff6d98a2dac0599f}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{09}
+      \field{title}{Beyond Algorithms: An HCI Perspective on Recommender Systems}
+      \field{year}{2001}
+    \endentry
+    \entry{knijnenburg2012explaining}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=0c9c9adbaf89225e6d9a2b34282bf515}{%
+           family={Knijnenburg},
+           familyi={K\bibinitperiod},
+           given={Bart\bibnamedelima P.},
+           giveni={B\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=b528176580445450f4f9bea097824061}{%
+           family={Willemsen},
+           familyi={W\bibinitperiod},
+           given={M.\bibnamedelimi C.},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=3c59453ecc9b4e9222cd4553babcd4e7}{%
+           family={Gantner},
+           familyi={G\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=eab7d5f897cccc35ef8b047cbd0c930a}{%
+           family={Soncu},
+           familyi={S\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c4085c04a2bbdc63a8b86f349c77b992}{%
+           family={Newell},
+           familyi={N\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{284354eed731e2cad7e50209dbcd5ee1}
+      \strng{fullhash}{8b0595396da497daa0b5f202967b80a0}
+      \strng{fullhashraw}{8b0595396da497daa0b5f202967b80a0}
+      \strng{bibnamehash}{284354eed731e2cad7e50209dbcd5ee1}
+      \strng{authorbibnamehash}{284354eed731e2cad7e50209dbcd5ee1}
+      \strng{authornamehash}{284354eed731e2cad7e50209dbcd5ee1}
+      \strng{authorfullhash}{8b0595396da497daa0b5f202967b80a0}
+      \strng{authorfullhashraw}{8b0595396da497daa0b5f202967b80a0}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{User Modeling and User-Adapted Interaction}
+      \field{number}{4-5}
+      \field{title}{Explaining the user experience of recommender systems}
+      \field{volume}{22}
+      \field{year}{2012}
+      \field{pages}{441\bibrangedash 504}
+      \range{pages}{64}
+      \verb{doi}
+      \verb 10.1007/s11257-011-9118-4
+      \endverb
+    \endentry
+    \entry{schmitt2002maut}{inproceedings}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{3}{}{%
+        {{hash=e44f082730d1cb78c6c490f9c5bcfd1c}{%
+           family={Schmitt},
+           familyi={S\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=986aa745b0e0a2579096dc181b0999c1}{%
+           family={Dengler},
+           familyi={D\bibinitperiod},
+           given={Dietmar},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e3aaf99037fdbf7a9ce99497cd543989}{%
+           family={Bauer},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hannover, Germany}%
+      }
+      \strng{namehash}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{fullhash}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{fullhashraw}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{bibnamehash}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{authorbibnamehash}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{authornamehash}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{authorfullhash}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \strng{authorfullhashraw}{7deb85ce567864ecd7ae03c32e0d26c2}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the ABIS Workshop}
+      \field{title}{The MAUT-Machine: An Adaptive Recommender System}
+      \field{year}{2002}
+    \endentry
+    \entry{keeney1993decisions}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=0c66156ca05b707f6359d236f30be790}{%
+           family={Keeney},
+           familyi={K\bibinitperiod},
+           given={Ralph},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e8f68770a8e3721b1b66f492a5dd88ff}{%
+           family={Raiffa},
+           familyi={R\bibinitperiod},
+           given={Howard},
+           giveni={H\bibinitperiod}}}%
+        {{hash=fd59cc03741cc253387b70bfb19ab5fb}{%
+           family={Rajala},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{177322c62e8063ddcb89b46902782370}
+      \strng{fullhash}{177322c62e8063ddcb89b46902782370}
+      \strng{fullhashraw}{177322c62e8063ddcb89b46902782370}
+      \strng{bibnamehash}{177322c62e8063ddcb89b46902782370}
+      \strng{authorbibnamehash}{177322c62e8063ddcb89b46902782370}
+      \strng{authornamehash}{177322c62e8063ddcb89b46902782370}
+      \strng{authorfullhash}{177322c62e8063ddcb89b46902782370}
+      \strng{authorfullhashraw}{177322c62e8063ddcb89b46902782370}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Systems, Man and Cybernetics, IEEE Transactions on}
+      \field{month}{08}
+      \field{title}{Decisions with Multiple Objectives: Preferences and Value Trade-Offs}
+      \field{volume}{9}
+      \field{year}{1979}
+      \field{pages}{403\bibrangedash 403}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1109/TSMC.1979.4310245
+      \endverb
+    \endentry
+    \entry{tintarev2012evaluating}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=fd1da5f4948a65253c4bcc65b2f6af82}{%
+           family={Tintarev},
+           familyi={T\bibinitperiod},
+           given={Nava},
+           giveni={N\bibinitperiod}}}%
+        {{hash=7099698e2b4dbb7b840f3c00766d8ca5}{%
+           family={Masthoff},
+           familyi={M\bibinitperiod},
+           given={Judith},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{fullhash}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{fullhashraw}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{bibnamehash}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{authorbibnamehash}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{authornamehash}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{authorfullhash}{535cc4645a1d0427cc505560cb38c31b}
+      \strng{authorfullhashraw}{535cc4645a1d0427cc505560cb38c31b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-4244-0832-0}
+      \field{journaltitle}{IEEE 23rd International Conference on Data Engineering Workshop}
+      \field{month}{05}
+      \field{title}{A Survey of Explanations in Recommender Systems}
+      \field{year}{2007}
+      \field{pages}{801\bibrangedash 810}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/ICDEW.2007.4401070
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

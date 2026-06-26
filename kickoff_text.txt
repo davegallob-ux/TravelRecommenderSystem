@@ -1,0 +1,336 @@
+--- Page 1 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+1
+Lab Course:
+Projects in Recommender Systems
+Kick-off Presentation Summer 2026
+Chair of Connected Mobility
+Munich, April 20, 2026
+
+
+--- Page 2 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+2
+Lab Course Overview
+● Practical course module IN0012 or IN2106
+○ Conducted online via Teams (no in-person meetings, no recordings)
+● 2 groups (different advisors) with teams of 2 students each
+○ Team assignment completed, not possible to fulfill all preferences
+○ All topics are somewhat flexible in terms of what exactly to do,
+and which technology to use etc
+● Schedule
+○ Three milestone meetings (~1.5 hours), each group separately
+○ Mon 06.07.2026 (tentative), 14:00 (3+ hours): Final presentations (all 
+students, both groups) -> can we start earlier ?
+○ Fri 17.07.2026: Deadline to complete and submit final documentation
+
+
+--- Page 3 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+3
+Projects: [A1] RAG for Tourism Recommender 
+Systems
+Proposed Work
+1. Improving Existing Systems
+○ Enhance the RAG model from our "RecSoGood" paper (referenced below) by 
+addressing bottlenecks in retrieval and generation components.
+○ Integrate domain-specific knowledge for better recommendations.
+2. Synthetic Data Generation
+○ Develop synthetic datasets simulating user preferences and diverse travel contexts.
+○ Improve model generalization and robustness through tailored data
+Feel free to suggest more options, ideas in this direction.
+Required (Primary) Skills
+Python, understanding of LLMs, data analysis, machine learning or similar
+
+
+--- Page 4 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+4
+Projects: [A2] Gamification in Sustainable TRS
+Proposed Work
+1. Develop an application that uses gamification techniques to encourage users to make 
+sustainable choices while planning city trips.
+2. Application will nudge users towards eco-friendly transportation, accommodation, dining, and 
+activities by integrating game elements such as points, badges, leaderboards, and challenges.
+3. It could also be used to recommend places less visited or during non peak seasons through a 
+gamified app
+Feel free to suggest more options, ideas in this direction.
+Required (Primary) Skills: Full-stack web/mobile dev
+
+--- Page 5 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+5
+Project: [A3] Personalization in Conversational 
+Recommender Systems for Tourism
+Proposed Work
+1. Literature Review
+● Conduct an in-depth review of existing personalization techniques in conversational 
+systems.
+● Identify gaps and opportunities specific to conversational TRS.
+2. Prototype Implementation
+● Develop a small-scale prototype to test and evaluate personalization strategies in a 
+controlled environment.
+● Focus on integrating adaptive dialogue flows and user preference learning.
+3. Synthetic Data Generation (Optional / if need be)
+● Generate synthetic datasets simulating real-world conversational interactions in tourism 
+contexts.
+● Use these datasets to train and benchmark personalization techniques effectively.
+● Improve on our SIGIR paper (https://arxiv.org/pdf/2504.09277)
+Required (Primary) Skills: Python, understanding of LLMs, data analysis, machine learning or similar
+
+--- Page 6 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+6
+Project: [A4] Accommodation Recommendations 
+using Booking.com open data
+Proposed Work
+1. Literature Review
+● improve accommodation recommendation systems by conducting a thorough analysis of 
+the available datasets
+2. Prototype Implementation
+● formulating a novel problem statement & implementation 
+● feel free to combine different (relevant) datasets
+Required (Primary) Skills: Python, understanding of LLMs, data analysis, machine learning or similar, 
+creativity
+
+--- Page 7 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+7
+Project Expectations A1-A3
+● Has to be a use-case for Tourism Recommender Systems
+● You can use any publicly available datasets or even gather your own data in addition 
+to whatever resources are provided
+○ Encouraged to use a combination of different datasets
+● Build UIs, or come up with great algorithm, solve some of world’s crisis — as long as 
+it’s a Tourism RS use-case, we’re fine
+○ If you’re building an app ➡ you can either deploy it using any open (or free) platforms or 
+submit a .mp4 file with the screen recording of your app.
+○ If you’re focusing on an algorithm, make sure you have some evaluation strategies/metrics to 
+determine how awesome your (recommendation) algo is.
+○ In either case, it would be great to also have some evaluation of your app/algo either through 
+some online/offline evaluation strategies.
+● Projects with promising results will have the possibility to publish papers under the 
+guidance of the Chair!
+● Be creative! We are completely flexible!
+
+--- Page 8 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+8
+Meeting Schedule & Plan A1-A3
+20.04.2026 Kick-off, organisational issues, team formation
+11.05.2026 Milestone 1: Conceptualize - Introduction, motivation, problem statement, EDA
+01.06.2026 Milestone 2:  Experiments & Implementation 1
+22.06.2026 Milestone 3: Experiments & Implementation 2
+Mondays from 14:00 over Teams (Link to be shared)
+● Also, there is a possibility to schedule on-demand optional Teams discussion sessions. You will have to talk 
+to us (drop us an email).
+● Teams will present their updates in about 15 min (plus Q&A)
+● Talks should be given out freely in English and not read out of scripts
+○ Also: discussion, every participant should have comments and questions about other projects as well
+○ Send slides to Ashmi (optionally)
+● Attendance at your own group’s project meetings is mandatory for grading
+○ Attending the other group’s meetings is optional (e.g., Group A must attend all Group A meetings but 
+not Group W’s)
+
+
+--- Page 9 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+9
+Topics W1-W4
+● Rather general topic areas
+● Procedure
+○ Review state-of-the-art (existing solutions) and decide on 
+elements of solution
+■ Including data and technology
+○ Design and implement solution
+○ Evaluation and test
+■ Does not have to be extensive
+■ Can be focussed on core functions
+● Document everything
+● Given references are meant as starting points
+○ Different direction is possible
+
+--- Page 10 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+10
+Project: [W1] Knowledge Graphs for Tourism 
+Recommendations
+● Knowledge Graphs (KGs) important approach to formally represent semantics by describing 
+entities and their relationships
+○ Useful in complex domains such as Tourism Recommender Systems (TRS)
+● Goal of this project is to first construct a tourism KG, maybe based on data from DBpedia or 
+similar sites, or review existing tourism KGs that can be used as foundation for a rec. system
+○ Task is then to implemented a recommender application on this KG, with the focus on 
+functionalities that exploit the semantic and hierarchical structure of the KG
+○ Simple example is to not only suggest restaurants that fit a given type of cuisines, but also 
+consider places that offer similar cuisines, based on the KG information
+○ Recommender system and its features should be briefly tested as part of a 
+proof-of-concept
+Ref.: Hendrik, Hendrik, Sri Suning Kusumawardani, and Adhistya Erna Permanasari. "Exploring the 
+Landscape of Tourism Knowledge Graphs: A Systematic Literature Review." 2024 9th International 
+Conference on Information Technology and Digital Applications (ICITDA). IEEE, 2024.
+
+--- Page 11 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+11
+Project: [W2] Decentralized Point-of-Interest 
+Recommender System
+● Usually, recommender systems are centralized, i.e. user ratings and all other information is 
+stored and managed on centralized servers
+○ Idea of decentralized recommender system has some advantages, especially in mobile 
+scenarios -> separate personalization (i.e. management of user preferences and past 
+behavior) from the actual recommendation
+■ Users would manage their preferences, ratings, and other personal information on 
+mobile devices to improve user control and reduce privacy concerns
+■ Information can then be selectively shared with other users and server-based 
+applications to generate personal recommendations locally on the user device
+● Scenario is tourist exploring city and proactively receiving notifications about interesting 
+points-of-interests in the vicinity
+○ Local user model can then be used to generate personalized recommendations on 
+smartphone, using global item model
+● Goal of this project is to implement prototype application to put this idea into practice, including 
+user interaction (e.g. specify which parts of their profile to share with services)
+Ref.: Cai, Qiqi, et al. "Distributed Recommendation Systems: Survey and Research Directions." ACM 
+Transactions on Information Systems 43.1 (2024): 1-38.
+
+--- Page 12 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+12
+Project: [W3] User Control and Strategies for 
+Influencing Algorithms in Tourism Rec.Sys.
+● Modern recommender systems and other machine learning applications are often black-box 
+systems, users - or the systems themselves - do not really know how the recommendations 
+were generated
+● Desirable to allow users some control and influence over the used algorithms
+○ Also requirement of the EU Digital Services Act (DSA)
+● Examples in tourism: booking sites of hotels, flights or other services provide only simple sorting 
+options to influence rankings and do not explain details
+● Goal of the topic is to investigate how users can better influence ranking and recommendation 
+algorithms in TRS, both from a user’s perspective but also algorithmic approaches 
+○ Users could for example use sliders to change weights of different methods in hybrid 
+recommender system, but additional approaches are necessarily to interact with 
+parameters of complex recommendations algorithms
+Ref.: Bakalov, Fedor, et al. "An approach to controlling user models and personalization effects in 
+recommender systems." Proceedings of the 2013 International Conference on Intelligent User 
+Interfaces. 2013.
+
+--- Page 13 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+13
+● Recommender systems are mostly recommending “new” items, i.e. items that user has not seen 
+before
+○ Personal information management (PIM) deals with finding items that the user already 
+seen, bookmarked or otherwise interact with
+● Goal of this project is to implement prototype application that supports information refinding 
+with recommender system
+○ Scenario could be tourism recommender system, with item space consisting of 
+bookmarks, calendar entries, stored markers on maps, documents such as tickets, …
+■ Specific application scenario is flexible in this project
+○ One aspect is to not only respond to explicit user request, but proactively recommend 
+and show information to user based on current situation (location, time)
+○ Another aspect is to generate and display explanations for the recommended items, 
+because it may not be clear to user why an item is shown in certain situation
+Ref.: Sappelli, Maya, Suzan Verberne, and Wessel Kraaij. "Evaluation of context‐aware 
+recommendation systems for information re‐finding." Journal of the Association for Information 
+Science and Technology 68.4 (2017): 895-910.
+Project: [W4] Re-finding Personal Information in 
+Tourism Recommender Systems
+
+--- Page 14 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+14
+Milestones W1-W4
+● Online milestone presentations on Mondays from 16:00
+○ 1.Milestone 11.05.2026
+■ Focus on what to do in more detail, technology, data etc.
+○ 2.Milestone 01.06.2026
+■ Focus on implementation
+○ 3.Milestone 22.06.2026
+■ Focus on completing prototype and evaluation/test
+● Teams will present their updates in about 15 min (plus Q&A)
+○ Talks should be given out freely in English and not read out of scripts
+○ Also: discussion, every participant should have comments and questions 
+about other projects as well
+○ Send slides to Wolfgang
+● Attendance at your own group’s project meetings is mandatory for 
+grading
+○ Attending the other group’s meetings is optional
+
+--- Page 15 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+15
+Final Presentations 
+Mon 06.07.2026, from 14:00 (tentative): Final presentations (all students, 
+both groups)
+[online via Teams]
+● Duration 30 minutes (25 mins + 5 mins Q&A) per team
+● Talk should be given freely in English - not read out from scripts
+● You should present slides in any electronic format i.e. PDF/.ppt
+● You can use the TUM powerpoint template or your own format for the slides
+○ https://portal.mytum.de/corporatedesign/index_html 
+● Each team member should present their contributions & challenges encountered
+● Fri 17.07.2026, 23:59 CEST: Final deadline to complete and submit documentation
+
+--- Page 16 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+16
+Grading & Evaluation Criteria
+● Requirements for credits & grading
+○ Complete, present and document all parts of the solution for your topic
+○ Attendance in all (online) meetings (attendance and contribution in the milestone 
+meetings of your group is mandatory, you can optionally joining the milestone meetings 
+of the other group as well)
+○ Grading will be based on the quality of the code and solution as presented and 
+documented
+■ Milestone and final presentations
+■ Final documentation
+● Submission (Email to woerndl@in.tum.de, ashmi.banerjee@tum.de)
+○ Code in GitHub repository
+○ Slides of final presentation as pdf
+○ Final paper/document (see next slide)
+○ Application video (.mp4 or similar) if necessary/relevant
+■ Screencast showing everything the UI is capable of
+
+
+--- Page 17 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+17
+Final Documentation
+● One PDF per team with all the information on the project
+○ LaTeX is recommended but not mandatory.
+● Needs to be submitted 17.07.2026 (until 23:59 CET)
+● Guidelines
+○ ACM single column template: 
+https://www.overleaf.com/latex/templates/association-for-computing-machinery-a
+cm-large-1-column-format-template/fsyrjmfzcwyy 
+○ 10-12 pages + appendix (max. 2 pages) + references (unlimited)
+○ Table with your full names (as on TUM transcripts), GitHub handles, and 
+contributions should be present in the end (does not count towards the page limit)
+○ Report should follow the typical structure of: title, abstract, introduction & 
+motivation, methodology, experiments (UI screenshots if necessary), 
+evaluation/results, conclusion & future work
+○ Please add a GenAI disclosure section in the end of the report, detailing the GenAI 
+usage for the project (does not contribute to page limit).
+● Submission through official TUM email. Please include your team# in subject. One 
+submission per team.
+
+--- Page 18 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+18
+Some More Information
+● Moodle
+○ Moodle course to share slides and final documentation
+○ Will be set up soon (also registration in TUM-Online)
+● GitHub Repository
+○ Please include team number in your repository name.
+○ They should also have a documentation (README) file in the repo for reproducibility 
+reasons in future.
+Thank You! Time for Q&A!
+
+
+--- Page 19 ---
+SS 2026 | Lab Course: Projects in  Recommender Systems | April 2026
+19
+Feedback Form
+https://bit.ly/feedback-rs-lab
+

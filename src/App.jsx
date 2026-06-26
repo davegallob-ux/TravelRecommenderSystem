@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { hotels } from './data';
 import './index.css';
+import { calculateMaut, filterConstraints } from './recommenderEngine';
+
 
 const MathFormula = ({ formula, displayMode = false }) => {
   const containerRef = useRef(null);
@@ -23,17 +25,17 @@ const MathFormula = ({ formula, displayMode = false }) => {
 
 function App() {
   const [city, setCity] = useState('vienna');
-  const [algorithmMode, setAlgorithmMode] = useState('maut'); // 'maut' or 'filter'
+  const [algorithmMode, setAlgorithmMode] = useState(null); // null, 'maut', or 'filter'
   const [expandedHotel, setExpandedHotel] = useState(null);
   const [showFormulas, setShowFormulas] = useState(false);
   
-  // Weights (0 to 100)
+  // Weights (0 to 10)
   const [weights, setWeights] = useState({
-    price: 50,
-    location: 50,
-    stars: 50,
-    rating: 50,
-    publicTransport: 50,
+    price: 5,
+    location: 5,
+    stars: 5,
+    rating: 5,
+    publicTransport: 5,
   });
 
   // Constraints for Filtering
@@ -50,7 +52,11 @@ function App() {
   };
 
   const handleWeightChange = (key, value) => {
-    setWeights(prev => ({ ...prev, [key]: Number(value) }));
+    // Clamp weight between 0 and 10
+    let val = Number(value);
+    if (val < 0) val = 0;
+    if (val > 10) val = 10;
+    setWeights(prev => ({ ...prev, [key]: val }));
   };
 
   // Filter hotels by city and calculate score
@@ -58,77 +64,60 @@ function App() {
     const cityHotels = hotels.filter(h => h.city === city);
     
     if (algorithmMode === 'filter') {
-      return cityHotels.filter(hotel => {
-        return hotel.price <= constraints.maxPrice &&
-               hotel.location <= constraints.maxLocation &&
-               hotel.stars >= constraints.minStars &&
-               hotel.rating >= constraints.minRating &&
-               hotel.publicTransport >= constraints.minTransport;
-      });
+      return filterConstraints(cityHotels, constraints);
     }
     
-    // Find max/min for normalization across the current city to make it relative
-    const prices = cityHotels.map(h => h.price);
-    const locations = cityHotels.map(h => h.location);
-    
-    const minPrice = Math.min(...prices);
-    const maxPrice = Math.max(...prices);
-    
-    const minLoc = Math.min(...locations);
-    const maxLoc = Math.max(...locations);
+    if (algorithmMode === 'maut') {
+      return calculateMaut(cityHotels, weights);
+    }
 
-    const scored = cityHotels.map(hotel => {
-      // Normalize features to 0-1 range
-      // Price: lower is better -> 1 is cheapest, 0 is most expensive
-      const normPrice = maxPrice === minPrice ? 1 : (maxPrice - hotel.price) / (maxPrice - minPrice);
-      
-      // Location: lower is better -> 1 is closest, 0 is furthest
-      const normLoc = maxLoc === minLoc ? 1 : (maxLoc - hotel.location) / (maxLoc - minLoc);
-      
-      // Stars: higher is better -> 1 is 5 stars, 0 is 1 star
-      const normStars = (hotel.stars - 1) / 4;
-      
-      // Rating: higher is better -> 1 is 10, 0 is 1
-      const normRating = (hotel.rating - 1) / 9;
-
-      // Transport: higher is better -> 1 is 10, 0 is 1
-      const normTransport = (hotel.publicTransport - 1) / 9;
-
-      // Calculate weighted score using user weights
-      const totalWeight = weights.price + weights.location + weights.stars + weights.rating + weights.publicTransport || 1; 
-      
-      const priceScore = weights.price * normPrice;
-      const locScore = weights.location * normLoc;
-      const starsScore = weights.stars * normStars;
-      const ratingScore = weights.rating * normRating;
-      const transportScore = weights.publicTransport * normTransport;
-      
-      const rawScore = priceScore + locScore + starsScore + ratingScore + transportScore;
-      const percentageScore = (rawScore / totalWeight) * 100;
-
-      return {
-        ...hotel,
-        matchScore: Math.round(percentageScore),
-        breakdown: {
-          normPrice: normPrice.toFixed(2),
-          normLoc: normLoc.toFixed(2),
-          normStars: normStars.toFixed(2),
-          normRating: normRating.toFixed(2),
-          normTransport: normTransport.toFixed(2),
-          pricePts: Math.round(priceScore),
-          locPts: Math.round(locScore),
-          starsPts: Math.round(starsScore),
-          ratingPts: Math.round(ratingScore),
-          transportPts: Math.round(transportScore),
-          totalWeight
-        }
-      };
-    });
-
-    // Sort by match score descending
-    return scored.sort((a, b) => b.matchScore - a.matchScore);
-
+    return [];
   }, [city, weights, constraints, algorithmMode]);
+
+  // If no algorithm selected yet, show selection landing page
+  if (algorithmMode === null) {
+    return (
+      <>
+        {/* Background blobs for premium look */}
+        <div className="bg-gradient"></div>
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+
+        <div className="container">
+          <header className="header glass-panel">
+            <h1>Travel Recommender</h1>
+            <p>Welcome to the travel recommender system! To begin finding the perfect hotel for your needs, please select a recommendation algorithm strategy below.</p>
+          </header>
+
+          <div className="algorithm-choice-grid">
+            <div className="choice-card glass-panel" onClick={() => setAlgorithmMode('maut')}>
+              <div className="choice-icon">📊</div>
+              <h2>Weighted MAUT Strategy</h2>
+              <p style={{ fontWeight: '600', color: 'var(--primary)', margin: '0.5rem 0' }}>Multi-Attribute Utility Theory</p>
+              <p style={{ fontSize: '0.95rem' }}>
+                Rate how important Price, Location, Stars, Ratings, and Transport are on a scale of 0 to 10. The system calculates a weighted percentage match score for each hotel to rank your optimal choices.
+              </p>
+              <button className="btn btn-primary" style={{ width: '100%', marginTop: 'auto' }}>
+                Select Weighted MAUT
+              </button>
+            </div>
+
+            <div className="choice-card glass-panel" onClick={() => setAlgorithmMode('filter')}>
+              <div className="choice-icon">🎯</div>
+              <h2>Constraint-Guided Strategy</h2>
+              <p style={{ fontWeight: '600', color: 'var(--secondary)', margin: '0.5rem 0' }}>Strict Rule Filtering</p>
+              <p style={{ fontSize: '0.95rem' }}>
+                Define absolute requirements (e.g. maximum price, minimum stars, minimum rating). The system eliminates any hotel violating a single rule, showing only those matching all constraints.
+              </p>
+              <button className="btn btn-primary" style={{ width: '100%', marginTop: 'auto', background: 'linear-gradient(135deg, var(--secondary), #d97706)', boxShadow: '0 4px 14px 0 rgba(217, 119, 6, 0.39)' }}>
+                Select Constraint Filtering
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -139,8 +128,29 @@ function App() {
 
       <div className="container">
         <header className="header glass-panel">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+            <button className="btn btn-secondary" onClick={() => setAlgorithmMode(null)} style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>
+              ← Switch Algorithm
+            </button>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button 
+                className={`btn ${algorithmMode === 'maut' ? 'btn-active' : 'btn-secondary'}`}
+                onClick={() => setAlgorithmMode('maut')}
+                style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
+              >
+                📊 MAUT
+              </button>
+              <button 
+                className={`btn ${algorithmMode === 'filter' ? 'btn-active' : 'btn-secondary'}`}
+                onClick={() => setAlgorithmMode('filter')}
+                style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
+              >
+                🎯 Filtering
+              </button>
+            </div>
+          </div>
           <h1>Travel Recommender</h1>
-          <p>Welcome to the travel recommender system, where you decide what's important for you! Choose your destination and adjust the sliders to match your priorities. We'll find the perfect hotel for your needs.</p>
+          <p>Choose your destination and adjust the settings below. The recommendation list updates in real-time.</p>
         </header>
 
         {algorithmMode === 'maut' && (
@@ -167,9 +177,9 @@ function App() {
                 <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
               )}
               {showFormulas ? (
-                <li><strong>Weighting (<MathFormula formula="w_i" />):</strong> The sliders represent your custom weights.</li>
+                <li><strong>Weighting (<MathFormula formula="w_i" />):</strong> The sliders represent your custom weights (from 0 to 10).</li>
               ) : (
-                <li><strong>Weighting:</strong> The sliders represent your custom weights.</li>
+                <li><strong>Weighting:</strong> The sliders represent your custom weights (from 0 to 10).</li>
               )}
               <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
             </ul>
@@ -217,23 +227,17 @@ function App() {
             </button>
           </div>
 
-          <div className="algorithm-selector">
-            <button 
-              className={`btn ${algorithmMode === 'maut' ? 'btn-active' : 'btn-secondary'}`}
-              onClick={() => setAlgorithmMode('maut')}
-            >
-              📊 Weighted MAUT
-            </button>
-            <button 
-              className={`btn ${algorithmMode === 'filter' ? 'btn-active' : 'btn-secondary'}`}
-              onClick={() => setAlgorithmMode('filter')}
-            >
-              🎯 Constraint-Guided
-            </button>
-          </div>
-
           {algorithmMode === 'maut' ? (
             <>
+              <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+                <p style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500', margin: 0 }}>
+                  💡 <strong>Weight Scale (0 to 10):</strong> 0 means completely unimportant/worst weight, 10 means most important/best weight.
+                </p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '0.25rem 0 0 0' }}>
+                  The sliders do not need to sum to 10; they define the relative importance of each category.
+                </p>
+              </div>
+
               <div className="controls-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
                 <div className="control-group">
                   <div className="control-header">
@@ -242,14 +246,14 @@ function App() {
                       <input 
                         type="number" 
                         className="control-input" 
-                        min="0" max="100" 
+                        min="0" max="10" 
                         value={weights.price} 
                         onChange={(e) => handleWeightChange('price', e.target.value)} 
                       />
-                      <span className="unit">%</span>
+                      <span className="unit">/10</span>
                     </div>
                   </div>
-                  <input type="range" min="0" max="100" value={weights.price} onChange={(e) => handleWeightChange('price', e.target.value)} />
+                  <input type="range" min="0" max="10" value={weights.price} onChange={(e) => handleWeightChange('price', e.target.value)} />
                   <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means cheaper price is more important.</p>
                 </div>
                 <div className="control-group">
@@ -259,14 +263,14 @@ function App() {
                       <input 
                         type="number" 
                         className="control-input" 
-                        min="0" max="100" 
+                        min="0" max="10" 
                         value={weights.location} 
                         onChange={(e) => handleWeightChange('location', e.target.value)} 
                       />
-                      <span className="unit">%</span>
+                      <span className="unit">/10</span>
                     </div>
                   </div>
-                  <input type="range" min="0" max="100" value={weights.location} onChange={(e) => handleWeightChange('location', e.target.value)} />
+                  <input type="range" min="0" max="10" value={weights.location} onChange={(e) => handleWeightChange('location', e.target.value)} />
                   <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means closer to center is more important.</p>
                 </div>
                 <div className="control-group">
@@ -276,14 +280,14 @@ function App() {
                       <input 
                         type="number" 
                         className="control-input" 
-                        min="0" max="100" 
+                        min="0" max="10" 
                         value={weights.stars} 
                         onChange={(e) => handleWeightChange('stars', e.target.value)} 
                       />
-                      <span className="unit">%</span>
+                      <span className="unit">/10</span>
                     </div>
                   </div>
-                  <input type="range" min="0" max="100" value={weights.stars} onChange={(e) => handleWeightChange('stars', e.target.value)} />
+                  <input type="range" min="0" max="10" value={weights.stars} onChange={(e) => handleWeightChange('stars', e.target.value)} />
                   <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means more stars (luxury) is important.</p>
                 </div>
                 <div className="control-group">
@@ -293,14 +297,14 @@ function App() {
                       <input 
                         type="number" 
                         className="control-input" 
-                        min="0" max="100" 
+                        min="0" max="10" 
                         value={weights.rating} 
                         onChange={(e) => handleWeightChange('rating', e.target.value)} 
                       />
-                      <span className="unit">%</span>
+                      <span className="unit">/10</span>
                     </div>
                   </div>
-                  <input type="range" min="0" max="100" value={weights.rating} onChange={(e) => handleWeightChange('rating', e.target.value)} />
+                  <input type="range" min="0" max="10" value={weights.rating} onChange={(e) => handleWeightChange('rating', e.target.value)} />
                   <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means better guest reviews are important.</p>
                 </div>
                 <div className="control-group">
@@ -310,14 +314,14 @@ function App() {
                       <input 
                         type="number" 
                         className="control-input" 
-                        min="0" max="100" 
+                        min="0" max="10" 
                         value={weights.publicTransport} 
                         onChange={(e) => handleWeightChange('publicTransport', e.target.value)} 
                       />
-                      <span className="unit">%</span>
+                      <span className="unit">/10</span>
                     </div>
                   </div>
-                   <input type="range" min="0" max="100" value={weights.publicTransport} onChange={(e) => handleWeightChange('publicTransport', e.target.value)} />
+                   <input type="range" min="0" max="10" value={weights.publicTransport} onChange={(e) => handleWeightChange('publicTransport', e.target.value)} />
                    <p style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>Higher means better transit access is important.</p>
                 </div>
               </div>
@@ -493,7 +497,7 @@ function App() {
                           <span>{hotel.breakdown.normTransport} × {weights.publicTransport} = <strong>{hotel.breakdown.transportPts}</strong></span>
                         </div>
                         <div className="math-total">
-                          <span>Sum: {hotel.breakdown.pricePts + hotel.breakdown.locPts + hotel.breakdown.starsPts + hotel.breakdown.ratingPts + hotel.breakdown.transportPts}</span>
+                          <span>Sum: {(Number(hotel.breakdown.pricePts) + Number(hotel.breakdown.locPts) + Number(hotel.breakdown.starsPts) + Number(hotel.breakdown.ratingPts) + Number(hotel.breakdown.transportPts)).toFixed(1)}</span>
                           <span>Total W: {hotel.breakdown.totalWeight}</span>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '0.5rem', color: 'var(--primary)', fontWeight: 'bold' }}>
@@ -513,3 +517,4 @@ function App() {
 }
 
 export default App;
+
