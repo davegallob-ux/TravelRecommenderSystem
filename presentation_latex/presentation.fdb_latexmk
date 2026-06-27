@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber presentation"] 1782483260.66684 "presentation.bcf" "presentation.bbl" "presentation" 1782483276.20069 0
-  "presentation.bcf" 1782483276.08909 108673 85b43717e0efa7accd01d905c4a3676f "pdflatex"
+["biber presentation"] 1782563536.11942 "presentation.bcf" "presentation.bbl" "presentation" 1782566526.51349 0
+  "presentation.bcf" 1782566526.39858 108970 047b714dbd9e2fece8eb85c28b999181 "pdflatex"
   "resources.bib" 1782483244.30418 3865 3ac7f9aa9914d39872b3fc1d9df75a02 ""
   (generated)
   "presentation.bbl"
   "presentation.blg"
   (rewritten before read)
-["pdflatex"] 1782483273.464 "/Users/davidgallob/Projekte/recommendersystem/presentation_latex/presentation.tex" "presentation.pdf" "presentation" 1782483276.20097 0
-  "/Users/davidgallob/Projekte/recommendersystem/presentation_latex/presentation.tex" 1782483260.01541 20870 ebec58257d8c4a6124e6a605906a433f ""
+["pdflatex"] 1782566523.65506 "/Users/davidgallob/Projekte/recommendersystem/presentation_latex/presentation.tex" "presentation.pdf" "presentation" 1782566526.51381 0
+  "/Users/davidgallob/Projekte/recommendersystem/presentation_latex/presentation.tex" 1782566523.40248 20971 4f1752514e3c806d6a31cb7993530e20 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1772380719 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1772380719 2971 def0b6c1f0b107b3b936def894055589 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1772380719 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -358,11 +358,11 @@
   "Ressourcen/_Bilder/Universitaet_Logo_weiss.pdf" 1781852913.99689 16571 bcd21c95387bec2eb3e35ffff8213f68 ""
   "Ressourcen/_Informationen.tex" 1781852913.99697 545 efaf3ecbb8208fcb89bafebb3ecfa2ad ""
   "_Einstellungen.tex" 1781852913.99898 1414 bdac495352a341e933b8c2c0339ad037 ""
-  "presentation.aux" 1782483276.08412 5664 f2597f0d8ee978293aaf852aa0a1a8f9 "pdflatex"
-  "presentation.bbl" 1782483261.58307 18607 a756a7c4c6f31474b4374deb35e77517 "biber presentation"
-  "presentation.nav" 1782483276.0899 2283 a31d9303dcda62ccc371d70ce856bfcf "pdflatex"
-  "presentation.run.xml" 1782483276.08983 2390 c1d8f982a84b2b83e8f551977cbd6e94 "pdflatex"
-  "presentation.tex" 1782483260.01541 20870 ebec58257d8c4a6124e6a605906a433f ""
+  "presentation.aux" 1782566526.39353 6066 7397d39eec8fcdb6107bb6db946f95fc "pdflatex"
+  "presentation.bbl" 1782563536.81799 20151 fb67e0a6fd4d8409c804560f2418bb15 "biber presentation"
+  "presentation.nav" 1782566526.39939 2283 a31d9303dcda62ccc371d70ce856bfcf "pdflatex"
+  "presentation.run.xml" 1782566526.39933 2390 c1d8f982a84b2b83e8f551977cbd6e94 "pdflatex"
+  "presentation.tex" 1782566523.40248 20971 4f1752514e3c806d6a31cb7993530e20 ""
   "screens/AlgoInfo.png" 1781852914.0013 73460 63cf82158d00a4cb495fade4c1f26c2c ""
   "screens/Calculations.png" 1781852914.00148 37652 305346095c2e8877d149fceb7737870f ""
   "screens/Constraint.png" 1781946605.44863 398003 039865a0cae4e7c0a7da2d33646b0a4f ""

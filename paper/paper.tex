@@ -46,11 +46,11 @@ Modern recommender systems that users encounter in daily life are very often "bl
 \maketitle
 
 \section{Introduction}
-In day-to-day life, recommender systems (RS) are ubiquitous, from online shopping and video streaming to hotel and flight recommendation platforms~\cite{adomavicius2005toward}. Many prominent RS do not let users know how their recommendations are generated and offer no direct means of influencing the outcome~\cite{BORRAS20147370}. Those systems are often built on complex algorithms (mainly neural networks) which process enormous amounts of user data to generate suggestions. They rarely explain their underlying logic to users. This lack of transparency can hinder trust and user satisfaction, leading to frustration and cognitive overhead. The tourism domain, where the financial expenditure and emotional investment are generally high, is particularly affected by this issue~\cite{ricci2011travel}.
+In day-to-day life, recommender systems are ubiquitous, from online shopping and video streaming to hotel and flight recommendation platforms~\cite{adomavicius2005toward}. Many prominent RS do not let users know how their recommendations are generated and offer no direct means of influencing the outcome~\cite{BORRAS20147370}. Those systems are often built on complex algorithms (mainly neural networks) which process enormous amounts of user data to generate suggestions. They rarely explain their underlying logic to users. This lack of transparency can hinder trust and user satisfaction, leading to frustration and cognitive overhead. The tourism domain, where the financial expenditure and emotional investment are generally high, is particularly affected by this issue~\cite{ricci2011travel}.
 
-The Human-Computer Interaction (HCI) field has focused research on user influence and transparency (explainability) to address these shortcomings~\cite{knijnenburg2012explaining, tintarev2012evaluating}. Instead of using automated profiling, interactive recommender systems give users the ability to influence the recommendation process by adjusting sliders representing attribute weights or setting hard constraints for the attributes (e.g., price or distance).
+The Human-Computer Interaction field has focused research on user influence and transparency (explainability) to address these shortcomings~\cite{knijnenburg2012explaining, tintarev2012evaluating}. Instead of using automated profiling, interactive recommender systems give users the ability to influence the recommendation process by adjusting sliders representing attribute weights or setting hard constraints for the attributes (e.g., price or distance).
 
-The demand for transparency is further fueled by the European Union's Digital Services Act (DSA), which governs online platforms and aims to protect users' rights. The DSA mandates that online platforms must provide users with transparent information about the main parameters of their recommender systems in an understandable language in plain text and offer options to influence them (Article 27)~\cite{eudsa2022}. Article 38 further obliges very large online platforms (VLOPs) to provide users with at least one option for their recommender systems that is not based on profiling. These articles require developers to shift from black-box profiling towards transparent and user-controlled platforms.
+The demand for transparency is further fueled by the European Union's Digital Services Act, which governs online platforms and aims to protect users' rights. The DSA mandates that online platforms must provide users with transparent information about the main parameters of their recommender systems in an understandable language in plain text and offer options to influence them (Article 27)~\cite{eudsa2022}. Article 38 further obliges very large online platforms (VLOPs) to provide users with at least one option for their recommender systems that is not based on profiling. These articles require developers to shift from black-box profiling towards transparent and user-controlled platforms.
 
 In this paper, the design decisions, architecture, and implementation of a web-application tourism recommender system prototype which is compliant with the DSA are detailed. It addresses the transparency as well as the user influence goals by implementing two algorithms:
 \begin{enumerate}
@@ -62,12 +62,13 @@ In this paper, the design decisions, architecture, and implementation of a web-a
 
 The prototype features a dynamic strategy selection landing wizard that ensures that transparency panels are not shown prematurely. Once a strategy is chosen, a dynamic banner is displayed explaining the chosen algorithm in clear words, and offers a button which when pressed shows the mathematical formula of the chosen algorithm for enhanced transparency. The calculated results also offer a collapsible mathematical breakdown (only on user intent to not overwhelm uninterested users) showing a step-by-step calculation of how the result's score was computed. This allows users to understand how the results are generated and how their inputs influence the outcome. The calculation breakdown is generated using KaTeX and renders the exact mathematical formulas and normalization equations used in the calculations, allowing users to trace how their inputs directly translate into the presented results.
 
+\section{Remainder Structure}
 The remainder of this paper is structured as follows: In \autoref{sec:related_work}, the related work in current tourism recommender systems, MAUT, and explanation interfaces is presented. \autoref{sec:system_architecture_and_implementation} details the system's architecture and the mock dataset. \autoref{sec:algorithmic_framework} shows the mathematical foundations of the two used algorithms. \autoref{sec:user_interface_design_and_explainability} details the UI design and transparency features. \autoref{sec:future_work} proposes a protocol for a future user study and extensions, and \autoref{sec:conclusion} concludes the paper. In the Appendix, the complete mock database used in the project, followed by the author contribution details and GenAI disclosures are attached.
 
 \section{Related Work}\label{sec:related_work}
 Recommender systems' development faces special challenges which are unique to their domain --- such as recommendations for movies and music~\cite{BORRAS20147370}. In the tourism domain, decisions require a lot of rational resources, are infrequent, and have multiple decision attributes. In contrast to low-cost consumer goods, vacation planning involves a high final risk and high emotional expectations, which also leads to a high time commitment. Users therefore take extensive information and comparisons into account and need to express specific constraints before making a final decision~\cite{ricci2011travel}.
 
-Traditional recommender systems (TRSs) in the tourism domain are mainly divided into three categories~\cite{Sarkar2023, 8308293}:
+Traditional recommender systems  in the tourism domain are mainly divided into three categories~\cite{Sarkar2023, 8308293}:
 \begin{itemize}
   \item \textbf{Collaborative filtering:} Builds on historical information of similar users, but suffers from the Cold Start Problem --- New hotels without reviews and seldom travellers without historical ratings lead to wrong recommendations.
   \item \textbf{Content-based:} These systems match item features with the preference profiles of the user. While they get good results, they are often unable to explain their recommendations and to adapt to rapid changes in user needs (e.g., business travelers in central locations versus family budget accommodations).
@@ -81,7 +82,7 @@ Constraint-based recommender systems are non-compensatory in contrast. They do n
 Earlier research has shown that the success of interactive recommender systems strongly relies on their UIs~\cite{mcnee2006being,swearingen2001beyond}. Therefore, providing explanations in the UI improves user understanding as well as their trust and perceived control over the system~\cite{tintarev2012evaluating}. Knijnenburg et al.~\cite{knijnenburg2012explaining} showed that their proposed framework offering user control paired with high explainability results in higher user satisfaction and acceptance. The integration of sliders for defining weights and mathematical breakdowns along with transparency panels investigated in this paper builds on those findings to build an explainable and transparent UI for user satisfaction and to meet the DSA requirements.
 
 \section{System Architecture and Implementation}\label{sec:system_architecture_and_implementation}
-The prototype is designed as a single-page web application. The technical architecture consists of React, Vite for the build system, and vanilla CSS for layout and styling. Client-side math rendering is powered by KaTeX, a fast LaTeX math rendering library, integrated via a custom React wrapper. The system architecture is structured to support real-time user interaction.
+The prototype is designed as a web application. The technical architecture consists of React, Vite for the build system, and vanilla CSS for layout and styling. Client-side math rendering is powered by KaTeX, a fast LaTeX math rendering library, integrated via a custom React wrapper. The system architecture is structured to support real-time user interaction.
 
 The application state manages:
 \begin{itemize}
@@ -155,10 +156,10 @@ where:
   \item $D_{\max}$ is the maximum distance threshold defined by the user.
   \item $S_{\min}, R_{\min}, T_{\min}$ are the minimum stars, guest review rating, and public transport access scores thresholds defined by the user.
 \end{itemize}
-This represents a non-compensatory filtering logic. A hotel that violates even a single constraint is immediately excluded from the results.
+This filtering logic is non-compensatory --- hotels are not compared to each other and relatively ranked. All hotels are simultaneously checked and excluded form the results if a single constraint is violated.
 
 \subsection{Comparison of Decision Logic}
-The two models represent fundamentally different decision-making styles, as summarized in Table~\ref{tab:comparison}.
+The two models are fundamentally different in their decision-making styles: The biggest difference is that MAUT will (due to its ranking nature) show results to the user that are completely irrelevant to the user, as it is more a sorting approach than a filtering approach. Constraint-filtering on the other hand does not show the aforementioned uninteresting results, but delivers a result set to the user, without giving information of how well an item fit the user's limits. The differences are summarized in Table~\ref{tab:comparison}.
 
 \begin{table}[h]
   \caption{Comparison of the Implemented Algorithmic Paradigms}
@@ -178,37 +179,45 @@ The two models represent fundamentally different decision-making styles, as summ
 \end{table}
 
 \subsection{Quality Assurance and Algorithmic Verification}
-To ensure the mathematical correctness and stability of the recommender engine, the algorithmic logic was decoupled from the React user interface components and modularized into a standalone utility engine (\texttt{src/recommenderEngine.js}). A comprehensive automated unit testing suite (\texttt{run-tests.js}) consisting of exactly 60 distinct test cases (30 for Weighted MAUT and 30 for Constraint-Based Filtering) was developed to verify the engine's behavior under diverse input states and boundary conditions.
+In order to ensure that the prototype is stable and mathematically correct, the code of the algorithm was built in a standalone module (\texttt{src/recommenderEngine.js}). There, for the verification a unit testing suite was appended (\texttt{run-tests.js}) consisting of exactly 60 different test cases (30 for Weighted MAUT and 30 for Constraint-Based Filtering) for edge cases and different input parameters patterns.
 
 \subsubsection{MAUT Logic Verification (30 Cases)}
-The 30 MAUT test cases evaluate normalization and scoring logic:
+The 30 MAUT test cases evaluate the logic of normalization and scoring:
 \begin{itemize}
-  \item \textbf{Weight Boundary Conditions (5 cases)}: Verifies that equal weights generate uniform ranking criteria, zero weights are handled safely without division by zero, positive weights exceeding 10 are clamped to 10, negative weights are clamped to 0, and a single active weight evaluates to a clean $100\%$ match score for the top hotel.
-  \item \textbf{Price relative cost normalization (5 cases)}: Tests that relative cost correctly maps the lowest price to utility 1.0, the highest price to utility 0.0, and intermediate prices proportionally. It checks that division by zero is avoided if all hotels share the same price, and out-of-bound prices are clamped.
-  \item \textbf{Distance relative cost normalization (5 cases)}: Verifies closest hotel maps to utility 1.0, furthest hotel to utility 0.0, and out-of-bound distances are clamped.
-  \item \textbf{Absolute Normalizations (5 cases)}: Asserts correct absolute utility mappings for stars (1-to-5 scale) and guest ratings/public transport scores (1-to-10 scale).
-  \item \textbf{Weight Dominance and Flipped Rankings (5 cases)}: Tests that highly weighted attributes dominate ranking and changing weights correctly flips ranking order.
-  \item \textbf{Robustness and Sorting (5 cases)}: Verifies empty list inputs, null inputs, missing weight keys, strict descending sorting order of match scores, and correct formatting of breakdown scores.
+  \item \textbf{Weight Boundary Conditions (5 cases)}: These tests verify that equal weights result in equal ranking results, zero weights do not result in division by zero and that no negative weights and no positive weights above 10 are possible.
+  \item \textbf{Price relative cost normalization (5 cases)}: Confirms that the Relative Normalization works as expected: correct mapping of the lowest price to utility 1, highest price to utility 0, and values in between are correctly mapped proportionally. Additionally, it is also verified that no division by zero occurs when all items have the same price (algorithm could map them all to 0 as they all are the ``worst'' option). These tests are run for all other attributes:
+  \item \textbf{Distance relative cost normalization (5 cases)}: Verifies that the closest hotel maps to the utility of 1.0, furthest hotel to the utility 0.0, and out-of-bound distances are clamped.
+  \item \textbf{Absolute Normalizations (5 cases)}: Asserts that the absolute utility mappings for stars (1-to-5 scale) and guest ratings/public transport scores (1-to-10 scale) are correct.
+  \item \textbf{Weight Dominance and Flipped Rankings (5 cases)}: These tests test that highly weighted attributes dominate the ranking and changing weights correctly changes the ranking order as expected.
+  \item \textbf{Robustness and Sorting (5 cases)}: Verifies the edge cases for empty list inputs, null inputs, missing weight keys, strict descending sorting order of match scores, and correct formatting of breakdown scores.
 \end{itemize}
 
 \subsubsection{Constraint-Based Filtering Verification (30 Cases)}
-The 30 filtering test cases evaluate the logical conjunction boundaries:
+The 30 filtering test cases check the correctness of the logical conjunction:
 \begin{itemize}
-  \item \textbf{Individual Attribute Constraints (25 cases)}: Tests price, location distance, star ratings, guest review scores, and public transport access scores separately. In each category, 5 tests verify strict exclusions, inclusive boundaries, extremely tight constraints yielding empty sets, extremely loose constraints including all items, and default constraint value fallbacks if omitted.
-  \item \textbf{Conjunctive Combination Rules (5 cases)}: Verifies that multiple active constraints are evaluated as a logical conjunction (non-compensatory logic). Asserts that an excellent score in one attribute (e.g. 5 stars) cannot compensate for a failure in another attribute (e.g. exceeding the maximum price). Tests empty input lists, null inputs, and empty constraint configurations.
+  \item \textbf{Individual Attribute Constraints (25 cases)}: 
+  These test check the price, location, amount of stars, guest review scores, and public transit access scores separately. For each category, there are 5 tests that verify exclusions and inclusions and that constraints may result in empty sets and in sets with all items included. Also, it is checked that null values lead to the usage of fallback values.
 \end{itemize}
-The entire test suite executes synchronously against a representative hotel database mock, confirming that all 60 test cases pass.
+All test cases run with its own mock database and pass.
 
 \section{User Interface Design and Explainability}\label{sec:user_interface_design_and_explainability}
-The prototype interface was designed with a glassmorphism aesthetic (utilizing translucent backdrops, vibrant background gradients, and smooth animations) to create a premium, modern user experience. More importantly, the interface was structured to maximize explainability and user control.
+The prototype frontend interface was developed with the help of Gemini 3.5\footnote{\url{https://deepmind.google/models/gemini/flash/}} in a modern style with smooth animations to create a premium and modern UI. The UI was also designed to feature maximal explainability for the users. 
 
 \subsection{Interactive Wizard for Algorithm Selection}
-To prevent initial cognitive overload and hide transparency panels before the user has chosen an algorithm, the landing page is designed as an interactive selection wizard. Initially, the algorithm selection state is set to \texttt{null}, hiding the recommendation results, importance sliders, constraint inputs, and transparency boards. Instead, a clean strategy selection interface is displayed. This screen presents two prominent selection cards side-by-side:
+Prior iterations showed detailed algorithm explanations before the selection, leading to overloading new users (see the previous cluttered layout in Figure~\ref{fig:old_board}). This issue was tackled by implementing a landing page which explains the available algorithms in simple words and prompts the user to select an algorithm. The user is shown 2 cards to select from:
 \begin{itemize}
   \item \textbf{Weighted MAUT Card}: Focuses on compensatory trade-offs. It explains that the user can rate attributes on a scale of 0 to 10, resulting in a ranked list of hotels with percentage match scores.
   \item \textbf{Constraint-Guided Card}: Focuses on strict non-compensatory boundaries. It explains that the user can set threshold limits to eliminate hotels violating any criteria.
 \end{itemize}
-This wizard forces the user to make an explicit choice, making the algorithmic concept transparent from the very beginning. Once a strategy is chosen, the main interface is loaded. The user can switch the strategy at any time using a persistent "Switch Algorithm" back button or toggle buttons at the top of the dashboard.
+Afterwards, the user may set the weights or constraints depending on their chosen algorithm and is shown a transparency board, which details the algorithm. This landing-page approach makes the prototype more transparent, as it explains the logic to all users in the beginning. The user may always return to the screen and change their choice by clicking on a ``Switch Algorithm'' button or change the algorithm directly via a switch on the main page.
+
+\begin{figure}[htbp]
+  \centering
+  \Description{Dashboard view of the previous cluttered user interface design, which loaded all information panels simultaneously and caused cognitive overload.}
+  \includegraphics[width=0.6\textwidth]{../presentation_latex/screens/OldOverloadedBoard.png}
+  \caption{Previous cluttered transparency board design that led to premature disclosure of complex information.}
+  \label{fig:old_board}
+\end{figure}
 
 \subsection{DSA-Compliant Explanation Interfaces}
 To comply with the requirements of the Digital Services Act, transparency mechanisms are built directly into the primary interaction flow rather than being hidden in auxiliary pages.
@@ -216,14 +225,38 @@ To comply with the requirements of the Digital Services Act, transparency mechan
 \subsubsection{Global Explanation Banners}
 At the top of the interface, a dedicated, colored information card dynamically adapts to the selected algorithm.
 \begin{itemize}
-  \item In \textbf{Weighted MAUT} mode, the banner displays a blue theme, introducing the concept of multi-attribute weighting.
-  \item In \textbf{Constraint-Guided} mode, the banner displays a green theme, introducing the logic of set reduction and non-compensatory filtering.
+  \item In \textbf{Weighted MAUT} mode, the banner displays a blue theme, introducing the concept of multi-attribute weighting (see Figure~\ref{fig:maut_interface}).
+  \item In \textbf{Constraint-Guided} mode, the banner displays a green theme, introducing the logic of set reduction and non-compensatory filtering (see Figure~\ref{fig:constraint_interface}).
 \end{itemize}
 
 Both banners include a "Show Mathematical Details" toggle button. Clicking this button expands a sub-panel that renders the mathematical equations in LaTeX (Equation~\ref{eq:maut} for MAUT, and Equation~\ref{eq:filtering} for Constraint-Guided Filtering) alongside a list of definitions. This design provides a tiered explanation model: novice users receive a brief, plain-language summary of how the parameters are aggregated, while expert users or regulators can inspect the exact mathematical formulas.
 
+\begin{figure}[htbp]
+  \centering
+  \Description{Left panel shows the five horizontal importance weight sliders with 0 to 10 scale bounds. Right panel shows the corresponding blue Weighted MAUT algorithm explanation card.}
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{../presentation_latex/screens/Sliders.png}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{../presentation_latex/screens/newmaut.png}
+  \end{minipage}
+  \caption{Weighted MAUT user controls (left) and the dynamic blue explanation banner showing algorithmic details (right).}
+  \label{fig:maut_interface}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \Description{Constraint-based filtering interface showing threshold range sliders for price, distance, stars, rating, and public transit, alongside the green algorithm explanation banner.}
+  \includegraphics[width=0.7\textwidth]{../presentation_latex/screens/Constraint.png}
+  \caption{Constraint-based filtering interface featuring threshold sliders and the dynamic green explanation banner.}
+  \label{fig:constraint_interface}
+\end{figure}
+
 \subsubsection{On-Demand Collapsible Math Breakdowns}
-For the Weighted MAUT mode, each hotel card features a "Show Mathematical Breakdown" button. Expanding this panel reveals a step-by-step trace of the utility calculation for that specific hotel.
+For the Weighted MAUT mode, each hotel card features a "Show Mathematical Breakdown" button. Expanding this panel reveals a step-by-step trace of the utility calculation for that specific hotel (see Figure~\ref{fig:math_breakdown}).
 The panel displays:
 \begin{itemize}
   \item The general formula.
@@ -233,6 +266,14 @@ The panel displays:
 \end{itemize}
 
 This feature provides absolute transparency, eliminating the perception of the recommender system as a black box. The user can see exactly why a hotel is ranked first or second, and can directly trace the mathematical impact of adjusting a slider.
+
+\begin{figure}[htbp]
+  \centering
+  \Description{Collapsible table showing attribute values, normalized utilities, user weight values, multiplication products, and the final sum normalization to calculate the percentage match score.}
+  \includegraphics[width=0.3\textwidth]{../presentation_latex/screens/Calculations.png}
+  \caption{Collapsible step-by-step mathematical breakdown showing the exact utility calculations for a hotel.}
+  \label{fig:math_breakdown}
+\end{figure}
 
 \section{Future Work}\label{sec:future_work}
 While the current prototype demonstrates the feasibility of user-controlled, transparent tourism recommenders, several research and development paths remain open.

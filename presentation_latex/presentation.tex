@@ -17,7 +17,7 @@
 \renewcommand{\LehrstuhlName}{Chair of Connected Mobility}
 \renewcommand{\FakultaetName}{School of Computation, Information and Technology}
 
-\title{Algorithmic Control and Transparency in Recommender Systems}
+\title{Final Presentation --- A DSA-Compliant Tourism RS}
 \subtitle{Final Presentation --- A DSA-Compliant Tourism Recommender System}
 \author{David Gallob}
 \institute[]{\UniversitaetName \\ \FakultaetName \\ \LehrstuhlName}
@@ -32,8 +32,8 @@
     \begin{itemize}
         \item \textbf{The Recommender "Black Box":}
             \begin{itemize}
-                \item Most modern recommender systems (RS) hide their inner workings (e.g. neural network rankings).
-                \item Causes user distrust, especially in high-stake domains like tourism (travel planning, hotel bookings).
+                \item Most modern recommender systems (RS) hide their inner workings (e.g. neural network rankings)~\cite{adomavicius2005toward, BORRAS20147370}.
+                \item Causes user distrust, especially in high-stake domains like tourism (travel planning, hotel bookings)~\cite{ricci2011travel, knijnenburg2012explaining}.
             \end{itemize}
         \item \textbf{Regulatory Requirements: EU Digital Services Act (DSA)~\cite{eudsa2022}:}
             \begin{itemize}
@@ -109,6 +109,7 @@
 % Slide 5: Initial UI Challenges & User Redesign
 \begin{frame}
     \frametitle{UI Redesign \& User Experience Challenges}
+    \vspace{1em}
     \begin{columns}
         \begin{column}{0.48\textwidth}
             \textbf{Initial Usability Issues:}
@@ -294,7 +295,7 @@
         \end{column}
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \includegraphics[width=\textwidth,keepaspectratio]{screens/Calculations.png}
+                \includegraphics[width=0.7\textwidth,keepaspectratio]{screens/Calculations.png}
                 \begin{figure}
                     \tiny\caption{Step-by-Step Mathematical Breakdown}
                 \end{figure}
@@ -314,9 +315,9 @@
             \end{itemize}
         \item \textbf{Tiered Disclosure (Satisfying Different User Persona):}
             \begin{itemize}
-                \item \textbf{Novice Pathway (Banners):} Brief text explanations focusing on the *meaning* of user controls. Satisfies general transparency.
+                \item \textbf{Novice Pathway (Banners):} Brief text explanations focusing on the meaning of user controls. Satisfies general transparency.
                 \item \textbf{Expert Pathway (KaTeX Formulas):} Raw equations. Satisfies transparency audits and regulators.
-                \item \textbf{Curious Pathway (Math Breakdown):} Step-by-step breakdown. Explains *individual* recommendations, boosting user trust.
+                \item \textbf{Curious Pathway (Math Breakdown):} Step-by-step breakdown. Explains individual recommendations, boosting user trust.
             \end{itemize}
     \end{itemize}
 \end{frame}
