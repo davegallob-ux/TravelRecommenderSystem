@@ -166,22 +166,46 @@ function App() {
               {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
             </button>
             {showFormulas && (
-              <div style={{ background: '#e0e7ff', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'center' }}>
-                <MathFormula formula="U(X) = \frac{\sum_{i=1}^{5} w_i \cdot u_i(x_i)}{\sum_{i=1}^{5} w_i}" displayMode={true} />
+              <div style={{ background: '#e0e7ff', padding: '1rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'left', overflowX: 'auto' }}>
+                <div style={{ fontWeight: '600', marginBottom: '0.5rem', textAlign: 'center' }}>Weighted Aggregation:</div>
+                <MathFormula formula="U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%" displayMode={true} />
+                
+                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Relative Normalization (Price & Distance):</div>
+                <MathFormula formula="u(v) = \frac{v_{\max} - v}{v_{\max} - v_{\min}}" displayMode={true} />
+
+                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Absolute Normalization (Stars & Review/Transport):</div>
+                <MathFormula formula="u_{\text{stars}}(v) = \frac{v - 1}{4} \quad \text{and} \quad u_{\text{rating/transport}}(v) = \frac{v - 1}{9}" displayMode={true} />
               </div>
             )}
             <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
               {showFormulas ? (
-                <li><strong>Normalization (<MathFormula formula="u_i" />):</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
+                <>
+                  <li><strong>Weighted Aggregation:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="U" />: The total utility (match score percentage).</li>
+                      <li><MathFormula formula="w_i" />: The user given weight to the attribute <MathFormula formula="i" /> (where <MathFormula formula="w_i \in [0, 10]" />).</li>
+                      <li><MathFormula formula="u_i" />: The prior calculated normalized utility score of the attribute <MathFormula formula="i" /> for the hotel.</li>
+                    </ul>
+                  </li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Relative Normalization:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="v" />: The raw value of the hotel.</li>
+                      <li><MathFormula formula="v_{\min}" /> and <MathFormula formula="v_{\max}" />: The minimum and maximum values of this attribute across all hotels in the selected city.</li>
+                    </ul>
+                  </li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Absolute Normalization:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="v" />: The raw value of stars (1 to 5) or reviews/transport (1 to 10).</li>
+                    </ul>
+                  </li>
+                </>
               ) : (
-                <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
+                <>
+                  <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
+                  <li><strong>Weighting:</strong> The sliders represent your custom weights (from 0 to 10).</li>
+                  <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
+                </>
               )}
-              {showFormulas ? (
-                <li><strong>Weighting (<MathFormula formula="w_i" />):</strong> The sliders represent your custom weights (from 0 to 10).</li>
-              ) : (
-                <li><strong>Weighting:</strong> The sliders represent your custom weights (from 0 to 10).</li>
-              )}
-              <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
             </ul>
           </div>
         )}
@@ -200,13 +224,31 @@ function App() {
             </button>
             {showFormulas && (
               <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
-                <MathFormula formula="x_{\text{price}} \le P_{\text{max}} \ \land \ x_{\text{dist}} \le D_{\text{max}} \ \land \ x_{\text{stars}} \ge S_{\text{min}} \ \land \ x_{\text{rating}} \ge R_{\text{min}} \ \land \ x_{\text{trans}} \ge T_{\text{min}}" displayMode={true} />
+                <MathFormula formula="\text{Price} \le P_{\max} \ \land \ \text{Distance} \le D_{\max} \ \land \ \text{Stars} \ge S_{\min} \ \land \ \text{Rating} \ge R_{\min} \ \land \ \text{Transport} \ge T_{\min}" displayMode={true} />
               </div>
             )}
             <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
-              <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
-              <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>
-              <li><strong>Complete Predictability:</strong> There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
+              {showFormulas ? (
+                <>
+                  <li><strong>Logical Conjunction:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="P_{\max}" />: The maximum price threshold defined by the user.</li>
+                      <li><MathFormula formula="D_{\max}" />: The maximum distance threshold defined by the user.</li>
+                      <li><MathFormula formula="S_{\min}, R_{\min}, T_{\min}" />: The minimum stars, guest review rating, and public transport access scores thresholds defined by the user.</li>
+                      <li><MathFormula formula="\text{Price}, \text{Distance}, \text{Stars}, \text{Rating}, \text{Transport}" />: The raw values of the hotel.</li>
+                      <li><MathFormula formula="\land" />: The logical AND operator (all constraints must be met simultaneously).</li>
+                    </ul>
+                  </li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Non-Compensatory Logic:</strong> Scoring highly in one category cannot compensate for a single constraint violation.</li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Complete Predictability:</strong> A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
+                </>
+              ) : (
+                <>
+                  <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
+                  <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>
+                  <li><strong>Complete Predictability:</strong> There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
+                </>
+              )}
             </ul>
           </div>
         )}
@@ -474,27 +516,63 @@ function App() {
                     {expandedHotel === hotel.id && hotel.breakdown && (
                       <div className="math-breakdown">
                         <h4 style={{ fontSize: '0.875rem', marginBottom: '0.5rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.25rem', textAlign: 'center' }}>
-                          <MathFormula formula="\text{Score} = \frac{\sum (w_i \cdot \text{norm}_i)}{\sum w_i}" displayMode={true} />
+                          <MathFormula formula="U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%" displayMode={true} />
                         </h4>
+                        
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)', borderBottom: '1px dashed var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem', fontWeight: '600' }}>
+                          <span>Category</span>
+                          <span>Utility <span style={{ color: '#4f46e5' }}>(u_i)</span> × Weight <span style={{ color: '#d97706' }}>(w_i)</span> = Points</span>
+                        </div>
+
                         <div className="math-row">
                           <span>💰 Price:</span>
-                          <span>{hotel.breakdown.normPrice} × {weights.price} = <strong>{hotel.breakdown.pricePts}</strong></span>
+                          <span>
+                            <span style={{ color: '#4f46e5', fontWeight: '600' }} title="Normalized Price Utility">{hotel.breakdown.normPrice}</span>
+                            {" × "}
+                            <span style={{ color: '#d97706', fontWeight: '600' }} title="User Price Weight">{weights.price}</span>
+                            {" = "}
+                            <strong>{hotel.breakdown.pricePts}</strong>
+                          </span>
                         </div>
                         <div className="math-row">
-                          <span>📍 Loc:</span>
-                          <span>{hotel.breakdown.normLoc} × {weights.location} = <strong>{hotel.breakdown.locPts}</strong></span>
+                          <span>📍 Location:</span>
+                          <span>
+                            <span style={{ color: '#4f46e5', fontWeight: '600' }} title="Normalized Location Utility">{hotel.breakdown.normLoc}</span>
+                            {" × "}
+                            <span style={{ color: '#d97706', fontWeight: '600' }} title="User Location Weight">{weights.location}</span>
+                            {" = "}
+                            <strong>{hotel.breakdown.locPts}</strong>
+                          </span>
                         </div>
                         <div className="math-row">
                           <span>⭐ Stars:</span>
-                          <span>{hotel.breakdown.normStars} × {weights.stars} = <strong>{hotel.breakdown.starsPts}</strong></span>
+                          <span>
+                            <span style={{ color: '#4f46e5', fontWeight: '600' }} title="Normalized Stars Utility">{hotel.breakdown.normStars}</span>
+                            {" × "}
+                            <span style={{ color: '#d97706', fontWeight: '600' }} title="User Stars Weight">{weights.stars}</span>
+                            {" = "}
+                            <strong>{hotel.breakdown.starsPts}</strong>
+                          </span>
                         </div>
                         <div className="math-row">
                           <span>👍 Rating:</span>
-                          <span>{hotel.breakdown.normRating} × {weights.rating} = <strong>{hotel.breakdown.ratingPts}</strong></span>
+                          <span>
+                            <span style={{ color: '#4f46e5', fontWeight: '600' }} title="Normalized Rating Utility">{hotel.breakdown.normRating}</span>
+                            {" × "}
+                            <span style={{ color: '#d97706', fontWeight: '600' }} title="User Rating Weight">{weights.rating}</span>
+                            {" = "}
+                            <strong>{hotel.breakdown.ratingPts}</strong>
+                          </span>
                         </div>
                         <div className="math-row">
-                          <span>🚇 Trans:</span>
-                          <span>{hotel.breakdown.normTransport} × {weights.publicTransport} = <strong>{hotel.breakdown.transportPts}</strong></span>
+                          <span>🚇 Transport:</span>
+                          <span>
+                            <span style={{ color: '#4f46e5', fontWeight: '600' }} title="Normalized Transport Utility">{hotel.breakdown.normTransport}</span>
+                            {" × "}
+                            <span style={{ color: '#d97706', fontWeight: '600' }} title="User Transport Weight">{weights.publicTransport}</span>
+                            {" = "}
+                            <strong>{hotel.breakdown.transportPts}</strong>
+                          </span>
                         </div>
                         <div className="math-total">
                           <span>Sum: {(Number(hotel.breakdown.pricePts) + Number(hotel.breakdown.locPts) + Number(hotel.breakdown.starsPts) + Number(hotel.breakdown.ratingPts) + Number(hotel.breakdown.transportPts)).toFixed(1)}</span>

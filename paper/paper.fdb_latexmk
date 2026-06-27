@@ -1,19 +1,19 @@
 # Fdb version 4
-["bibtex paper"] 1782570987.0328 "paper.aux" "paper.bbl" "paper" 1782570988.60594 0
+["bibtex paper"] 1782575030.37456 "paper.aux" "paper.bbl" "paper" 1782576725.47843 0
   "./sample-base.bib" 1781958450.70363 3823 f2b321636c382bdaba126f95730f35e4 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/bibtex/bst/acmart/ACM-Reference-Format.bst" 1772380719 93560 12e0ced1522ea2bfa9b2fb12855c7e9e ""
-  "paper.aux" 1782570988.28885 8972 0780061d71a5b83bc08d2cb6e60ce1af "pdflatex"
+  "paper.aux" 1782576725.19215 8462 2dc9474a0862f6056cc727fb845d83a9 "pdflatex"
   (generated)
   "paper.bbl"
   "paper.blg"
   (rewritten before read)
-["pdflatex"] 1782570987.10881 "/Users/davidgallob/Projekte/recommendersystem/paper/paper.tex" "paper.pdf" "paper" 1782570988.6061 0
-  "../presentation_latex/screens/Calculations.png" 1781852914.00148 37652 305346095c2e8877d149fceb7737870f ""
-  "../presentation_latex/screens/Constraint.png" 1781946605.44863 398003 039865a0cae4e7c0a7da2d33646b0a4f ""
+["pdflatex"] 1782576723.88577 "/Users/davidgallob/Projekte/recommendersystem/paper/paper.tex" "paper.pdf" "paper" 1782576725.47871 0
+  "../presentation_latex/screens/Calculations.png" 1782574955.75314 151049 24cc2e61137471998abb6e9fc45a7805 ""
+  "../presentation_latex/screens/Constraint.png" 1782574411.30095 460114 2a70cfee3436e0a084799acb6576b24c ""
   "../presentation_latex/screens/OldOverloadedBoard.png" 1781852914.0013 73460 63cf82158d00a4cb495fade4c1f26c2c ""
   "../presentation_latex/screens/Sliders.png" 1781852914.00172 57356 e9c8aa068390de0b1e5c0407d6cf65cb ""
-  "../presentation_latex/screens/newmaut.png" 1781946177.31237 423422 c6f5c996fa96fec812ad38ceff5e4306 ""
-  "/Users/davidgallob/Projekte/recommendersystem/paper/paper.tex" 1782570985.21835 36519 0d2092ad2b62997eebc2f8e5ff320b77 ""
+  "../presentation_latex/screens/newmaut.png" 1782574395.13667 536167 398f11e183db690531d201de2b64df60 ""
+  "/Users/davidgallob/Projekte/recommendersystem/paper/paper.tex" 1782576723.63551 35512 2fb4768e8ee3182a26553970aa278936 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-4.enc" 1772380719 7693 0f2dce6d313c82989ec3a67fc24df2a0 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc" 1772380719 2921 8ca0eb0831f9bc5da080d3697cfe67bf ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1772380719 2933 9ad527ce78d7c5fa0a642dead095f172 ""
@@ -209,11 +209,11 @@
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1772380719 5006 d7e899bb5d9717c7f214e9bc0284de7b ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/web2c/texmf.cnf" 1772380719 43633 14bbc273cebd985e64ab1a698333eaf9 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1772380719 3636956 5168b884cb430e6a6336cfea08fa659a ""
-  "comment.cut" 1782570988.20626 235 41c9c5fd5a389a54679d7dda5f9337e3 "pdflatex"
-  "paper.aux" 1782570988.28885 8972 0780061d71a5b83bc08d2cb6e60ce1af "pdflatex"
-  "paper.bbl" 1782570987.10595 8189 52ac818b3f8af2ca736a6a2bdea7ab03 "bibtex paper"
-  "paper.out" 1782570988.28977 4552 dfe3f4cb872bfd6f6696100d1df76904 "pdflatex"
-  "paper.tex" 1782570985.21835 36519 0d2092ad2b62997eebc2f8e5ff320b77 ""
+  "comment.cut" 1782576725.11277 235 41c9c5fd5a389a54679d7dda5f9337e3 "pdflatex"
+  "paper.aux" 1782576725.19215 8462 2dc9474a0862f6056cc727fb845d83a9 "pdflatex"
+  "paper.bbl" 1782575030.44536 8189 52ac818b3f8af2ca736a6a2bdea7ab03 "bibtex paper"
+  "paper.out" 1782576725.19376 4255 839b56919a07f14bb1a89fc9a0e172ea "pdflatex"
+  "paper.tex" 1782576723.63551 35512 2fb4768e8ee3182a26553970aa278936 ""
   (generated)
   "comment.cut"
   "paper.aux"

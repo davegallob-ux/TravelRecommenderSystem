@@ -196,14 +196,15 @@ The 30 MAUT test cases evaluate the logic of normalization and scoring:
 The 30 filtering test cases check the correctness of the logical conjunction:
 \begin{itemize}
   \item \textbf{Individual Attribute Constraints (25 cases)}: 
-  These test check the price, location, amount of stars, guest review scores, and public transit access scores separately. For each category, there are 5 tests that verify exclusions and inclusions and that constraints may result in empty sets and in sets with all items included. Also, it is checked that null values lead to the usage of fallback values.
+  These tests
+   check the price, location, amount of stars, guest review scores, and public transit access scores separately. For each category, there are 5 tests that verify exclusions and inclusions and that constraints may result in empty sets and in sets with all items included. Also, it is checked that null values lead to the usage of fallback values.
 \end{itemize}
 All test cases run with its own mock database and pass.
 
 \section{User Interface Design and Explainability}\label{sec:user_interface_design_and_explainability}
 The prototype frontend interface was developed with the help of Gemini 3.5\footnote{\url{https://deepmind.google/models/gemini/flash/}} in a modern style with smooth animations to create a premium and modern UI. The UI was also designed to feature maximal explainability for the users. 
 
-\subsection{Interactive Wizard for Algorithm Selection}
+\subsection{Landing Page for Algorithm Selection}
 Prior iterations showed detailed algorithm explanations before the selection, leading to overloading new users (see the previous cluttered layout in Figure~\ref{fig:old_board}). This issue was tackled by implementing a landing page which explains the available algorithms in simple words and prompts the user to select an algorithm. The user is shown 2 cards to select from:
 \begin{itemize}
   \item \textbf{Weighted MAUT Card}: Focuses on compensatory trade-offs. It explains that the user can rate attributes on a scale of 0 to 10, resulting in a ranked list of hotels with percentage match scores.
@@ -219,17 +220,14 @@ Afterwards, the user may set the weights or constraints depending on their chose
   \label{fig:old_board}
 \end{figure}
 
-\subsection{DSA-Compliant Explanation Interfaces}
-To comply with the requirements of the Digital Services Act, transparency mechanisms are built directly into the primary interaction flow rather than being hidden in auxiliary pages.
-
 \subsubsection{Global Explanation Banners}
-At the top of the interface, a dedicated, colored information card dynamically adapts to the selected algorithm.
+At the top of the main page, there is a transparency board which changes the color and content based on the selected algorithm:
 \begin{itemize}
-  \item In \textbf{Weighted MAUT} mode, the banner displays a blue theme, introducing the concept of multi-attribute weighting (see Figure~\ref{fig:maut_interface}).
-  \item In \textbf{Constraint-Guided} mode, the banner displays a green theme, introducing the logic of set reduction and non-compensatory filtering (see Figure~\ref{fig:constraint_interface}).
+  \item In the \textbf{Weighted MAUT} mode, the banner has a blue color and explains the logic of the weighted MAUT algorithms and the sliders, see Figure~\ref{fig:maut_interface}.
+  \item The \textbf{Constraint-Guided} mode banner is shown in green, explaining the logic behine the non-compensatory filtering approach, see Figure~\ref{fig:constraint_interface}.
 \end{itemize}
 
-Both banners include a "Show Mathematical Details" toggle button. Clicking this button expands a sub-panel that renders the mathematical equations in LaTeX (Equation~\ref{eq:maut} for MAUT, and Equation~\ref{eq:filtering} for Constraint-Guided Filtering) alongside a list of definitions. This design provides a tiered explanation model: novice users receive a brief, plain-language summary of how the parameters are aggregated, while expert users or regulators can inspect the exact mathematical formulas.
+Both banners use simple language to not overwhelm users with the mathematical details. For interested users, the banners include a ``Show Mathematical Details'' button. When clicked, the banner renders the underlying formulas in LaTeX using KaTeX (Equation~\ref{eq:maut} for MAUT, and Equation~\ref{eq:filtering} for Constraint-Guided Filtering) and the text is appended by an explanation of the variables.
 
 \begin{figure}[htbp]
   \centering
@@ -256,16 +254,9 @@ Both banners include a "Show Mathematical Details" toggle button. Clicking this 
 \end{figure}
 
 \subsubsection{On-Demand Collapsible Math Breakdowns}
-For the Weighted MAUT mode, each hotel card features a "Show Mathematical Breakdown" button. Expanding this panel reveals a step-by-step trace of the utility calculation for that specific hotel (see Figure~\ref{fig:math_breakdown}).
-The panel displays:
-\begin{itemize}
-  \item The general formula.
-  \item A tabular breakdown for each of the five attributes, displaying the normalized utility score, the user-defined weight, and the product.
-  \item The summation step, showing the sum of products divided by the sum of weights.
-  \item The final rounded match percentage.
-\end{itemize}
+In the Weighted MAUT mode, after the user has set the sliders, the user can inspect the calculated results. Each hotel card offers a ``Show Mathematical Breakdown'' button to understand how this particular score (match percentage) was calculated, (see Figure~\ref{fig:math_breakdown}).
 
-This feature provides absolute transparency, eliminating the perception of the recommender system as a black box. The user can see exactly why a hotel is ranked first or second, and can directly trace the mathematical impact of adjusting a slider.
+This feature makes sure that the prototype offers absolute transparency while not overloading not interested users. The user can understand why a hotel is ranked in its current position and can compare it to better or worse ranked hotels. By adjusting the sliders the user can also check the mathematical impact of the slider weights on the results. This eliminates the perception of this recommender system as a black box.
 
 \begin{figure}[htbp]
   \centering
@@ -276,31 +267,24 @@ This feature provides absolute transparency, eliminating the perception of the r
 \end{figure}
 
 \section{Future Work}\label{sec:future_work}
-While the current prototype demonstrates the feasibility of user-controlled, transparent tourism recommenders, several research and development paths remain open.
+While the presented prototype offers many transparency features and shows that they are feasible in the tourism domain, there is still research and further development required.
 
 \subsection{The Hybrid Algorithmic Approach}
-A natural evolution of the two modes is a hybrid algorithm that combines the strengths of both. Currently:
+The used approaches in this prototype have clear strengths and weaknesses:
 \begin{itemize}
-  \item Weighted MAUT is compensatory, which can lead to high cognitive load as users must constantly balance multiple sliders to filter out unacceptable options.
-  \item Constraint-Based Filtering is non-compensatory and does not rank the matching items, which can leave the user with too many options or an empty set.
+  \item The weighted MAUT algorithm compares the different hotels to each other, but does not filter out irrelevant items. For instance, a user only interested in low-budget hotels will also be recommended a high priced hotel (with a low match percentage).
+  \item The Constraint Based mode filters these irrelevant options out, but does not rank them, leading to higher user involvement, as they have to find the best-matching hotel for themself.
 \end{itemize}
-A hybrid recommender would operate as a two-stage pipeline:
+Therefore, a hybrid approach, which combines the clear strengths and eliminates the weaknesses is proposed for future work:
 \begin{enumerate}
-  \item \textbf{Stage 1: Constraint Filtering (Non-Compensatory screening)}: The system applies user-defined constraints to filter out hotels that are completely unacceptable (e.g., price $> \$250$, or distance $> 10$ km). This reduces the candidate pool to a set of feasible options.
-  \item \textbf{Stage 2: Weighted MAUT (Compensatory ranking)}: The system applies the user's preference weights to rank only the hotels that passed Stage 1.
+  \item \textbf{Stage 1: Constraint Filtering (Non-Compensatory screening)}:
+  The system applies Constraint Filtering first to filter out any unacceptable hotels for the user (e.g., price $> \$250$, or distance $> 10$ km). This assures that the candidates for further processing are limited to feasible options.
+  \item \textbf{Stage 2: Weighted MAUT (Compensatory ranking)}: The system applies the user's preference weights to rank the preprocessed hotel candidates. This will ensure that the user will only see hotels in their domain (e.g. the aforementioned low-budget user won't see a luxury 5 star hotel with 8 percent match score).
 \end{enumerate}
-This hybrid approach represents a realistic model of human decision-making, where decision-makers first eliminate unacceptable alternatives and then optimize among the survivors. It maintains full transparency and complies with the DSA, while reducing user cognitive load.
+This hybrid approach maintains full transparency, remains profiling-free and reduces the cognitive load. It represents a rational approach for human decision-making where first the unacceptable alternatives are filtered out and then the best fitting alternative is identified on the reduced set of options.
 
 \subsection{Proposed User Evaluation Protocol}
 To evaluate the user experience (UX) and the effectiveness of the explainability features, a controlled user study protocol is proposed.
-
-\subsubsection{Hypotheses}
-Three primary hypotheses are formulated:
-\begin{itemize}
-  \item \textbf{H1 (Perceived Control)}: Users interacting with the Weighted MAUT or Constraint Filtering interfaces report a higher sense of control over recommendations compared to a baseline "black-box" interface.
-  \item \textbf{H2 (System Trust)}: Exposing the collapsible mathematical breakdown panels increases user trust in the system's recommendations without causing information overload.
-  \item \textbf{H3 (DSA Compliance Impact)}: The presence of the global explanation banner and KaTeX formulas increases user comprehension of the algorithm's inner workings.
-\end{itemize}
 
 \subsubsection{Experimental Design}
 A within-subjects laboratory study with $N=30$ participants is proposed. Each participant will perform travel planning tasks under three experimental conditions:
@@ -370,19 +354,7 @@ Table~\ref{tab:database} presents the complete dataset of 20 hotels used in the 
 \end{table}
 
 \section{Author Information and Contribution Details}
-As a single-author project, Table~\ref{tab:contributions} summarizes the details and contributions of the student.
-
-\begin{table}[h]
-  \caption{Project Contributor Details}
-  \label{tab:contributions}
-  \begin{tabular}{lllp{7cm}}
-    \toprule
-    Name & Email & GitHub Handle & Contributions \\
-    \midrule
-    David Gallob & david.gallob@tum.de & davidgallob & Conceptualized and implemented the entire project, including the React web application, MAUT/filtering algorithms, explainability features, user study protocol, and final documentation. \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+As a single-author project, I David Gallob worked entirely alone on this project. This involves all parts of this Practical Seminar from the development and testing of the prototype, creating and presenting all milestone meetings and final presentation as well as writing this final documentation.
 
 \section{Generative AI Disclosure}
 This project utilized Generative AI tools (specifically Google DeepMind's Gemini 3.5 Flash) during development. The AI was employed as a pair-programming assistant to:
