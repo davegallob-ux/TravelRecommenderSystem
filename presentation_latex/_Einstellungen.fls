@@ -1,5 +1,0 @@
-PWD /Users/davidgallob/Projekte/recommendersystem/presentation_latex
-INPUT /opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/web2c/texmf.cnf
-INPUT /opt/homebrew/Cellar/texlive/20260301/share/texmf-var/web2c/pdftex/latex.fmt
-INPUT _Einstellungen.tex
-OUTPUT _Einstellungen.log
