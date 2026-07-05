@@ -429,4 +429,76 @@
     \frametitle{References}
     \printbibliography
 \end{frame}
+
+\PraesentationMasterWeissBlau
+\begin{frame}
+    \begin{center}
+        \huge Backup Slides
+    \end{center}
+\end{frame}
+\PraesentationMasterStandard
+
+% Slide 3: Traditional Recommendation Strategies (NEW)
+\begin{frame}
+    \frametitle{Traditional Recommender System (RS) Strategies}
+    \begin{itemize}
+        \item \textbf{Collaborative Filtering (CF):}
+            \begin{itemize}
+                \item Predicts preferences based on ratings from similar users.
+                \item \textit{Limitations in Tourism:} Cold start problems (new hotels/infrequent travelers) and lacks explanatory power.
+            \end{itemize}
+        \item \textbf{Content-Based Filtering (CB):}
+            \begin{itemize}
+                \item Recommends items matching a user profile built from historical behavior.
+                \item \textit{Limitations in Tourism:} Poor adaptability to sudden context changes (e.g. business trip vs. family vacation).
+            \end{itemize}
+        \item \textbf{Hybrid Systems~\cite{8308293, Sarkar2023}:}
+            \begin{itemize}
+                \item Combine CF and CB. However, they remain mathematical black boxes to the end-user.
+                \item Hard to explain, violating transparency guidelines.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 4: HCI User Control & Trust (NEW)
+\begin{frame}
+    \frametitle{HCI: The Importance of User Control \& Trust}
+    \begin{itemize}
+        \item \textbf{Being Accurate is Not Enough~\cite{mcnee2006being}:}
+            \begin{itemize}
+                \item Traditional metrics focus solely on algorithmic accuracy (e.g., RMSE).
+                \item Ignores user factors like transparency, control, and serendipity.
+            \end{itemize}
+        \item \textbf{Beyond Algorithms~\cite{swearingen2001beyond}:}
+            \begin{itemize}
+                \item Interactive systems should give users a direct steering wheel.
+                \item Sliders and constraints shift the role of the user from a passive consumer to an active co-creator.
+            \end{itemize}
+        \item \textbf{Explaining the User Experience~\cite{knijnenburg2012explaining}:}
+            \begin{itemize}
+                \item Combining user control with visual explanations leads to significantly higher trust, perceived recommendation quality, and system satisfaction.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 16: Detailed Study Evaluation Metrics (NEW)
+\begin{frame}
+    \frametitle{Proposed User Study Evaluation Metrics}
+    To scientifically test the hypotheses, standardized metrics will be gathered:
+    \begin{itemize}
+        \item \textbf{System Usability Scale (SUS):}
+            \begin{itemize}
+                \item 10-item Likert scale questionnaire to evaluate overall system usability.
+            \end{itemize}
+        \item \textbf{ResQue (Recommender Systems Quality of Experience)~\cite{knijnenburg2012explaining}:}
+            \begin{itemize}
+                \item Focuses on user-centric quality: perceived quality, system trust, transparency, and intent to use.
+            \end{itemize}
+        \item \textbf{NASA Task Load Index (NASA-TLX):}
+            \begin{itemize}
+                \item Focuses on subjective cognitive workload.
+                \item Measures: Mental demand, physical demand, temporal demand, performance, effort, and frustration level. Helps verify if exposing math equations causes overload.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
 \end{document}

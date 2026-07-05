@@ -40,3 +40,5 @@ dist-ssr
 *.xcp
 comment.cut
 
+# Antigravity CLI metadata
+.antigravitycli
