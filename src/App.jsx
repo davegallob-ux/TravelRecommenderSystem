@@ -153,106 +153,6 @@ function App() {
           <p>Choose your destination and adjust the settings below. The recommendation list updates in real-time.</p>
         </header>
 
-        {algorithmMode === 'maut' && (
-          <div className="glass-panel" style={{ background: 'rgba(238, 242, 255, 0.8)', border: '1px solid #c7d2fe' }}>
-            <h3>🔍 Transparency: Multi-Attribute Utility Theory (MAUT)</h3>
-            <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#4338ca' }}>
-              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. {showFormulas ? 'Here is the mathematical foundation of your recommendations:' : 'Here is a simple explanation of how your recommendations are calculated:'}
-            </p>
-            <button 
-              onClick={() => setShowFormulas(!showFormulas)}
-              className="math-toggle-btn math-toggle-btn-maut"
-            >
-              {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
-            </button>
-            {showFormulas && (
-              <div style={{ background: '#e0e7ff', padding: '1rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'left', overflowX: 'auto' }}>
-                <div style={{ fontWeight: '600', marginBottom: '0.5rem', textAlign: 'center' }}>Weighted Aggregation:</div>
-                <MathFormula formula="U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%" displayMode={true} />
-                
-                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Relative Normalization (Price & Distance):</div>
-                <MathFormula formula="u(v) = \frac{v_{\max} - v}{v_{\max} - v_{\min}}" displayMode={true} />
-
-                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Absolute Normalization (Stars & Review/Transport):</div>
-                <MathFormula formula="u_{\text{stars}}(v) = \frac{v - 1}{4} \quad \text{and} \quad u_{\text{rating/transport}}(v) = \frac{v - 1}{9}" displayMode={true} />
-              </div>
-            )}
-            <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
-              {showFormulas ? (
-                <>
-                  <li><strong>Weighted Aggregation:</strong>
-                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
-                      <li><MathFormula formula="U" />: The total utility (match score percentage).</li>
-                      <li><MathFormula formula="w_i" />: The user given weight to the attribute <MathFormula formula="i" /> (where <MathFormula formula="w_i \in [0, 10]" />).</li>
-                      <li><MathFormula formula="u_i" />: The prior calculated normalized utility score of the attribute <MathFormula formula="i" /> for the hotel.</li>
-                    </ul>
-                  </li>
-                  <li style={{ marginTop: '0.5rem' }}><strong>Relative Normalization:</strong>
-                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
-                      <li><MathFormula formula="v" />: The raw value of the hotel.</li>
-                      <li><MathFormula formula="v_{\min}" /> and <MathFormula formula="v_{\max}" />: The minimum and maximum values of this attribute across all hotels in the selected city.</li>
-                    </ul>
-                  </li>
-                  <li style={{ marginTop: '0.5rem' }}><strong>Absolute Normalization:</strong>
-                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
-                      <li><MathFormula formula="v" />: The raw value of stars (1 to 5) or reviews/transport (1 to 10).</li>
-                    </ul>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
-                  <li><strong>Weighting:</strong> The sliders represent your custom weights (from 0 to 10).</li>
-                  <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
-                </>
-              )}
-            </ul>
-          </div>
-        )}
-
-        {algorithmMode === 'filter' && (
-          <div className="glass-panel" style={{ background: 'rgba(240, 253, 244, 0.8)', border: '1px solid #bbf7d0' }}>
-            <h3>🎯 Transparency: Constraint-Guided Filtering</h3>
-            <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#15803d' }}>
-              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. {showFormulas ? 'Here is the logical foundation of your recommendations:' : 'Here is a simple explanation of how your recommendations are filtered:'}
-            </p>
-            <button 
-              onClick={() => setShowFormulas(!showFormulas)}
-              className="math-toggle-btn math-toggle-btn-filter"
-            >
-              {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
-            </button>
-            {showFormulas && (
-              <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
-                <MathFormula formula="\text{Price} \le P_{\max} \ \land \ \text{Distance} \le D_{\max} \ \land \ \text{Stars} \ge S_{\min} \ \land \ \text{Rating} \ge R_{\min} \ \land \ \text{Transport} \ge T_{\min}" displayMode={true} />
-              </div>
-            )}
-            <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
-              {showFormulas ? (
-                <>
-                  <li><strong>Logical Conjunction:</strong>
-                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
-                      <li><MathFormula formula="P_{\max}" />: The maximum price threshold defined by the user.</li>
-                      <li><MathFormula formula="D_{\max}" />: The maximum distance threshold defined by the user.</li>
-                      <li><MathFormula formula="S_{\min}, R_{\min}, T_{\min}" />: The minimum stars, guest review rating, and public transport access scores thresholds defined by the user.</li>
-                      <li><MathFormula formula="\text{Price}, \text{Distance}, \text{Stars}, \text{Rating}, \text{Transport}" />: The raw values of the hotel.</li>
-                      <li><MathFormula formula="\land" />: The logical AND operator (all constraints must be met simultaneously).</li>
-                    </ul>
-                  </li>
-                  <li style={{ marginTop: '0.5rem' }}><strong>Non-Compensatory Logic:</strong> Scoring highly in one category cannot compensate for a single constraint violation.</li>
-                  <li style={{ marginTop: '0.5rem' }}><strong>Complete Predictability:</strong> A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
-                </>
-              ) : (
-                <>
-                  <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
-                  <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>
-                  <li><strong>Complete Predictability:</strong> There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
-                </>
-              )}
-            </ul>
-          </div>
-        )}
-
         <div className="glass-panel">
           <div className="city-selector">
             <button 
@@ -457,6 +357,106 @@ function App() {
             </div>
           )}
         </div>
+
+        {algorithmMode === 'maut' && (
+          <div className="glass-panel" style={{ background: 'rgba(238, 242, 255, 0.8)', border: '1px solid #c7d2fe' }}>
+            <h3>🔍 Transparency: Multi-Attribute Utility Theory (MAUT)</h3>
+            <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#4338ca' }}>
+              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. {showFormulas ? 'Here is the mathematical foundation of your recommendations:' : 'Here is a simple explanation of how your recommendations are calculated:'}
+            </p>
+            <button 
+              onClick={() => setShowFormulas(!showFormulas)}
+              className="math-toggle-btn math-toggle-btn-maut"
+            >
+              {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
+            </button>
+            {showFormulas && (
+              <div style={{ background: '#e0e7ff', padding: '1rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'left', overflowX: 'auto' }}>
+                <div style={{ fontWeight: '600', marginBottom: '0.5rem', textAlign: 'center' }}>Weighted Aggregation:</div>
+                <MathFormula formula="U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%" displayMode={true} />
+                
+                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Relative Normalization (Price & Distance):</div>
+                <MathFormula formula="u(v) = \frac{v_{\max} - v}{v_{\max} - v_{\min}}" displayMode={true} />
+
+                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Absolute Normalization (Stars & Review/Transport):</div>
+                <MathFormula formula="u_{\text{stars}}(v) = \frac{v - 1}{4} \quad \text{and} \quad u_{\text{rating/transport}}(v) = \frac{v - 1}{9}" displayMode={true} />
+              </div>
+            )}
+            <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
+              {showFormulas ? (
+                <>
+                  <li><strong>Weighted Aggregation:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="U" />: The total utility (match score percentage).</li>
+                      <li><MathFormula formula="w_i" />: The user given weight to the attribute <MathFormula formula="i" /> (where <MathFormula formula="w_i \in [0, 10]" />).</li>
+                      <li><MathFormula formula="u_i" />: The prior calculated normalized utility score of the attribute <MathFormula formula="i" /> for the hotel.</li>
+                    </ul>
+                  </li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Relative Normalization:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="v" />: The raw value of the hotel.</li>
+                      <li><MathFormula formula="v_{\min}" /> and <MathFormula formula="v_{\max}" />: The minimum and maximum values of this attribute across all hotels in the selected city.</li>
+                    </ul>
+                  </li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Absolute Normalization:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="v" />: The raw value of stars (1 to 5) or reviews/transport (1 to 10).</li>
+                    </ul>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
+                  <li><strong>Weighting:</strong> The sliders represent your custom weights (from 0 to 10).</li>
+                  <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
+                </>
+              )}
+            </ul>
+          </div>
+        )}
+
+        {algorithmMode === 'filter' && (
+          <div className="glass-panel" style={{ background: 'rgba(240, 253, 244, 0.8)', border: '1px solid #bbf7d0' }}>
+            <h3>🎯 Transparency: Constraint-Guided Filtering</h3>
+            <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#15803d' }}>
+              In accordance with the EU Digital Services Act (DSA), we believe in transparent algorithms. {showFormulas ? 'Here is the logical foundation of your recommendations:' : 'Here is a simple explanation of how your recommendations are filtered:'}
+            </p>
+            <button 
+              onClick={() => setShowFormulas(!showFormulas)}
+              className="math-toggle-btn math-toggle-btn-filter"
+            >
+              {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
+            </button>
+            {showFormulas && (
+              <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
+                <MathFormula formula="\text{Price} \le P_{\max} \ \land \ \text{Distance} \le D_{\max} \ \land \ \text{Stars} \ge S_{\min} \ \land \ \text{Rating} \ge R_{\min} \ \land \ \text{Transport} \ge T_{\min}" displayMode={true} />
+              </div>
+            )}
+            <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
+              {showFormulas ? (
+                <>
+                  <li><strong>Logical Conjunction:</strong>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
+                      <li><MathFormula formula="P_{\max}" />: The maximum price threshold defined by the user.</li>
+                      <li><MathFormula formula="D_{\max}" />: The maximum distance threshold defined by the user.</li>
+                      <li><MathFormula formula="S_{\min}, R_{\min}, T_{\min}" />: The minimum stars, guest review rating, and public transport access scores thresholds defined by the user.</li>
+                      <li><MathFormula formula="\text{Price}, \text{Distance}, \text{Stars}, \text{Rating}, \text{Transport}" />: The raw values of the hotel.</li>
+                      <li><MathFormula formula="\land" />: The logical AND operator (all constraints must be met simultaneously).</li>
+                    </ul>
+                  </li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Non-Compensatory Logic:</strong> Scoring highly in one category cannot compensate for a single constraint violation.</li>
+                  <li style={{ marginTop: '0.5rem' }}><strong>Complete Predictability:</strong> A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
+                </>
+              ) : (
+                <>
+                  <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
+                  <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>
+                  <li><strong>Complete Predictability:</strong> There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
+                </>
+              )}
+            </ul>
+          </div>
+        )}
 
         <h2>Recommended Hotels</h2>
         
