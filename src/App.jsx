@@ -370,21 +370,19 @@ function App() {
             >
               {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
             </button>
-            {showFormulas && (
-              <div style={{ background: '#e0e7ff', padding: '1rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'left', overflowX: 'auto' }}>
-                <div style={{ fontWeight: '600', marginBottom: '0.5rem', textAlign: 'center' }}>Weighted Aggregation:</div>
-                <MathFormula formula="U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%" displayMode={true} />
-                
-                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Relative Normalization (Price & Distance):</div>
-                <MathFormula formula="u(v) = \frac{v_{\max} - v}{v_{\max} - v_{\min}}" displayMode={true} />
+            {showFormulas ? (
+              <>
+                <div style={{ background: '#e0e7ff', padding: '1rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#3730a3', textAlign: 'left', overflowX: 'auto' }}>
+                  <div style={{ fontWeight: '600', marginBottom: '0.5rem', textAlign: 'center' }}>Weighted Aggregation:</div>
+                  <MathFormula formula="U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%" displayMode={true} />
+                  
+                  <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Relative Normalization (Price & Distance):</div>
+                  <MathFormula formula="u(v) = \frac{v_{\max} - v}{v_{\max} - v_{\min}}" displayMode={true} />
 
-                <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Absolute Normalization (Stars & Review/Transport):</div>
-                <MathFormula formula="u_{\text{stars}}(v) = \frac{v - 1}{4} \quad \text{and} \quad u_{\text{rating/transport}}(v) = \frac{v - 1}{9}" displayMode={true} />
-              </div>
-            )}
-            <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
-              {showFormulas ? (
-                <>
+                  <div style={{ fontWeight: '600', marginTop: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>Absolute Normalization (Stars & Review/Transport):</div>
+                  <MathFormula formula="u_{\text{stars}}(v) = \frac{v - 1}{4} \quad \text{and} \quad u_{\text{rating/transport}}(v) = \frac{v - 1}{9}" displayMode={true} />
+                </div>
+                <ul style={{ fontSize: '0.85rem', color: '#4f46e5', paddingLeft: '1.5rem', marginBottom: '0' }}>
                   <li><strong>Weighted Aggregation:</strong>
                     <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
                       <li><MathFormula formula="U" />: The total utility (match score percentage).</li>
@@ -403,15 +401,27 @@ function App() {
                       <li><MathFormula formula="v" />: The raw value of stars (1 to 5) or reviews/transport (1 to 10).</li>
                     </ul>
                   </li>
-                </>
-              ) : (
-                <>
-                  <li><strong>Normalization:</strong> We map the worst option to <strong>0</strong> and the best option to <strong>1</strong>.</li>
-                  <li><strong>Weighting:</strong> The sliders represent your custom weights (from 0 to 10).</li>
-                  <li><strong>Calculation:</strong> We multiply the normalized score by your weight for each category. We sum these up and divide by the total sum of weights to get your exact "Percentage Match".</li>
-                </>
-              )}
-            </ul>
+                </ul>
+              </>
+            ) : (
+              <div className="steps-container">
+                <div className="step-card">
+                  <span className="step-badge step-badge-maut">Step 1</span>
+                  <div className="step-title">Set Importance (0-10)</div>
+                  <p className="step-desc">Rate how much you care about each feature. Higher weights give that feature more influence on the final score.</p>
+                </div>
+                <div className="step-card">
+                  <span className="step-badge step-badge-maut">Step 2</span>
+                  <div className="step-title">Score Features (0-100%)</div>
+                  <p className="step-desc">We convert hotel details (like price or rating) into a score from 0% (worst in city) to 100% (best in city).</p>
+                </div>
+                <div className="step-card">
+                  <span className="step-badge step-badge-maut">Step 3</span>
+                  <div className="step-title">Calculate Match %</div>
+                  <p className="step-desc">We multiply each score by your weight, sum them up, and divide by the total weight to get the final match percentage.</p>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -427,14 +437,12 @@ function App() {
             >
               {showFormulas ? 'Hide Mathematical Details ✖' : 'Show Mathematical Details 🧮'}
             </button>
-            {showFormulas && (
-              <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
-                <MathFormula formula="\text{Price} \le P_{\max} \ \land \ \text{Distance} \le D_{\max} \ \land \ \text{Stars} \ge S_{\min} \ \land \ \text{Rating} \ge R_{\min} \ \land \ \text{Transport} \ge T_{\min}" displayMode={true} />
-              </div>
-            )}
-            <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
-              {showFormulas ? (
-                <>
+            {showFormulas ? (
+              <>
+                <div style={{ background: '#dcfce7', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.75rem', color: '#166534', textAlign: 'center', overflowX: 'auto' }}>
+                  <MathFormula formula="\text{Price} \le P_{\max} \ \land \ \text{Distance} \le D_{\max} \ \land \ \text{Stars} \ge S_{\min} \ \land \ \text{Rating} \ge R_{\min} \ \land \ \text{Transport} \ge T_{\min}" displayMode={true} />
+                </div>
+                <ul style={{ fontSize: '0.85rem', color: '#16a34a', paddingLeft: '1.5rem', marginBottom: '0' }}>
                   <li><strong>Logical Conjunction:</strong>
                     <ul style={{ paddingLeft: '1.2rem', marginTop: '0.25rem', listStyleType: 'circle' }}>
                       <li><MathFormula formula="P_{\max}" />: The maximum price threshold defined by the user.</li>
@@ -446,15 +454,27 @@ function App() {
                   </li>
                   <li style={{ marginTop: '0.5rem' }}><strong>Non-Compensatory Logic:</strong> Scoring highly in one category cannot compensate for a single constraint violation.</li>
                   <li style={{ marginTop: '0.5rem' }}><strong>Complete Predictability:</strong> A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
-                </>
-              ) : (
-                <>
-                  <li><strong>Non-Compensatory Logic:</strong> A hotel must satisfy <strong>all</strong> active limits simultaneously. Scoring highly in one category cannot compensate for failing another.</li>
-                  <li><strong>Set Reduction:</strong> We start with the full list of hotels for your selected city and filter out any hotel that violates even one of your chosen bounds.</li>
-                  <li><strong>Complete Predictability:</strong> There are no weighted matching scores or complex utility functions. A hotel is either included in the final results or excluded entirely based on your exact constraints.</li>
-                </>
-              )}
-            </ul>
+                </ul>
+              </>
+            ) : (
+              <div className="steps-container">
+                <div className="step-card">
+                  <span className="step-badge step-badge-filter">Step 1</span>
+                  <div className="step-title">Set Strict Limits</div>
+                  <p className="step-desc">Define your maximum price, distance, or minimum ratings using the control sliders.</p>
+                </div>
+                <div className="step-card">
+                  <span className="step-badge step-badge-filter">Step 2</span>
+                  <div className="step-title">Apply Pass/Fail Check</div>
+                  <p className="step-desc">Every hotel is checked against your limits. A single violation disqualifies the hotel immediately.</p>
+                </div>
+                <div className="step-card">
+                  <span className="step-badge step-badge-filter">Step 3</span>
+                  <div className="step-title">Show Perfect Matches</div>
+                  <p className="step-desc">We display only the hotels that pass 100% of your rules. No match percentages, just matching results.</p>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

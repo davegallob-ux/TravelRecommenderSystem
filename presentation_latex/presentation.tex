@@ -26,25 +26,6 @@
 \PraesentationMasterStandard
 \PraesentationTitelseite
 
-% Slide 1: Introduction & Motivation
-\begin{frame}
-    \frametitle{Introduction \& Motivation}
-    \begin{itemize}
-        \item \textbf{The Recommender "Black Box":}
-            \begin{itemize}
-                \item Most modern recommender systems (RS) hide their inner workings (e.g. neural network rankings)~\cite{adomavicius2005toward, BORRAS20147370}.
-                \item Causes user distrust, especially in high-stake domains like tourism (travel planning, hotel bookings)~\cite{ricci2011travel, knijnenburg2012explaining}.
-            \end{itemize}
-        \item \textbf{Regulatory Requirements: EU Digital Services Act (DSA)~\cite{eudsa2022}:}
-            \begin{itemize}
-                \item \textbf{Article 27:} Mandates that platforms explain the main parameters of their RS in plain, understandable language.
-                \item \textbf{Article 38:} Mandates that Very Large Online Platforms (VLOPs) offer at least one profiling-free recommendation alternative.
-            \end{itemize}
-        \item \textbf{Project Goal:} Design and build an interactive, transparent, and DSA-compliant tourism recommender system prototype.
-    \end{itemize}
-\end{frame}
-
-% Slide 2: Background: Recommender Systems in Tourism (NEW)
 \begin{frame}
     \frametitle{Background: Recommender Systems in Tourism}
     \begin{itemize}
@@ -63,6 +44,27 @@
     \end{itemize}
 \end{frame}
 
+% Slide 1: Introduction & Motivation
+\begin{frame}
+    \frametitle{Motivation}
+    \begin{itemize}
+        \item \textbf{The Recommender "Black Box":}
+            \begin{itemize}
+                \item Most modern recommender systems (RS) hide their logic (e.g. neural network rankings)~\cite{adomavicius2005toward, BORRAS20147370}.
+                \item Causes user distrust, especially in high-stake domains like tourism (travel planning, hotel bookings)~\cite{ricci2011travel, knijnenburg2012explaining}.
+            \end{itemize}
+        \item \textbf{Regulatory Requirements: EU Digital Services Act (DSA)~\cite{eudsa2022}:}
+            \begin{itemize}
+                \item \textbf{Article 27:} Mandates that platforms explain the main parameters of their RS in plain, understandable language.
+                \item \textbf{Article 38:} Mandates that Very Large Online Platforms (VLOPs) offer at least one profiling-free recommendation alternative.
+            \end{itemize}
+        \item \textbf{Project Goal:} Build an interactive, transparent \& DSA-compliant tourism recommender system prototype.
+    \end{itemize}
+\end{frame}
+
+% Slide 2: Background: Recommender Systems in Tourism (NEW)
+
+
 % Slide 14: Demonstration
 \PraesentationMasterWeissBlau
 \begin{frame}
@@ -74,8 +76,32 @@
 \end{frame}
 \PraesentationMasterStandard
 % Slide 13: Detailed System Architecture & Implementation (NEW)
+
 \begin{frame}
-    \frametitle{Two Algorithms with user defined weights/limits}
+    \frametitle{System Architecture \& Technical Stack}
+    \begin{itemize}
+        \item \textbf{Technology Stack:}
+            \begin{itemize}
+                \item React\footnote{\url{https://react.dev/}} for component-based reactive state rendering.
+                \item Vite\footnote{\url{https://vite.dev/}} as a fast bundler and build system.
+                \item Client-side KaTeX\footnote{\url{https://katex.org/}} rendering for mathematical formulas.
+            \end{itemize}
+        \item \textbf{Real-Time Computation Flow:}
+            \begin{itemize}
+                \item Eliminates the latency of database queries. Real-time updates occur client-side as users drag the sliders.
+                \item Caches the hotel calculations, avoiding unnecessary re-renders.
+                \item Normalization boundaries recalculate dynamically upon city changes.
+            \end{itemize}
+        \item \textbf{Quality Assurance \& Verification:}
+            \begin{itemize}
+                \item Standalone recommender engine (\texttt{src/recommenderEngine.js}).
+                \item 60 automated unit tests (\texttt{run-tests.js}) verifying edge cases, boundary conditions, and preventing division-by-zero errors.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Two Algorithms with User Defined Weights/Limits}
     \begin{columns}
         \begin{column}{0.53\textwidth}
     \begin{itemize}
@@ -101,94 +127,6 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}
-    \frametitle{System Architecture \& Technical Stack}
-    \begin{itemize}
-        \item \textbf{Technology Stack:}
-            \begin{itemize}
-                \item React\footnote{\url{https://react.dev/}} for component-based reactive state rendering.
-                \item Vite\footnote{\url{https://vite.dev/}} as a fast bundler and build system.
-                \item Vanilla CSS for a custom, glassmorphic design language.
-                \item Client-side KaTeX\footnote{\url{https://katex.org/}} rendering for mathematical formulas.
-            \end{itemize}
-        \item \textbf{Real-Time Computation Flow:}
-            \begin{itemize}
-                \item Eliminates the latency of database queries. Real-time updates occur client-side as users drag the sliders.
-                \item Caches the hotel calculations, avoiding unnecessary re-renders.
-                \item Normalization boundaries recalculate dynamically upon city changes.
-            \end{itemize}
-        \item \textbf{Quality Assurance \& Verification:}
-            \begin{itemize}
-                \item Standalone recommender engine (\texttt{src/recommenderEngine.js}).
-                \item 60 automated unit tests (\texttt{run-tests.js}) verifying edge cases, boundary conditions, and preventing division-by-zero errors.
-            \end{itemize}
-    \end{itemize}
-\end{frame}
-
-% Slide 6: Interactive Selection Wizard
-\begin{frame}
-    \frametitle{Interactive Landing Page for Algorithm Selection}
-    \begin{columns}
-        \begin{column}{0.53\textwidth}
-    \begin{itemize}
-        \item \textbf{Algorithmic State Initialization:}
-            \begin{itemize}
-                \item Recommendations, transparency boards, and controls are hidden initially to prevent cognitive overload.
-            \end{itemize}
-        \item \textbf{Two Strategy Selection Cards:}
-            \begin{itemize}
-                \item \textbf{Weighted MAUT Card:} Focused on relative importance weighting and compensatory trade-offs.
-                \item \textbf{Constraint-Guided Card:} Focused on hard limit rules and non-compensatory filtering.
-            \end{itemize}
-        \item \textbf{Strategy Switching:}
-            \begin{itemize}
-                \item Simple back button ("← Switch Algorithm") to return to the landing page.
-                \item Fast toggle tabs in the dashboard header for seamless switching.
-            \end{itemize}
-    \end{itemize}
-\end{column}
-\begin{column}{0.43\textwidth}
-            \begin{center}
-                \includegraphics[width=0.9\textwidth,keepaspectratio]{screens/landing-page.png}
-                \begin{figure}
-                    \tiny\caption{User Weight Sliders (0-10 scale)}
-                \end{figure}
-            \end{center}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Tiered Explainability \& Transparency Panels}
-    \begin{columns}
-        \begin{column}{0.48\textwidth}
-            \begin{itemize}
-                \item \textbf{Tier 1: Dynamic Banners (Plain Text)}
-                    \begin{itemize}
-                        \item Dynamic color schemes (Blue for MAUT, Green for Filtering).
-                        \item Brief, plain-language summaries explaining how weights/limits are aggregated.
-                    \end{itemize}
-                \item \textbf{Tier 2: Algorithmic Details (TeX)}
-                    \begin{itemize}
-                        \item Expandable KaTeX mathematical formulas for expert review and full algorithmic disclosure.
-                    \end{itemize}
-                \item \textbf{Tier 3: Step-by-Step Breakdown}
-                    \begin{itemize}
-                        \item On-demand card expansions showing exact computations (Normalization $\times$ Weight).
-                    \end{itemize}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \includegraphics[width=0.7\textwidth,keepaspectratio]{screens/Calculations.png}
-                \begin{figure}
-                    \tiny\caption{Step-by-Step Mathematical Breakdown}
-                \end{figure}
-            \end{center}
-        \end{column}
-    \end{columns}
-\end{frame}
-
 % Slide 14: Demonstration
 \PraesentationMasterWeissBlau
 \begin{frame}
@@ -208,12 +146,12 @@
             \begin{itemize}
                 \item \textbf{Compensatory Utility Scoring~\cite{schmitt2002maut}:}
                     \begin{itemize}
-                        \item Attributes: Price, Location, Stars, Guest Review, Transport.
-                        \item Allows high performance in one attribute (e.g. location) to compensate for low performance in another (e.g. price).
+                        \item High score in one attribute (e.g. location) can compensate for low performance in another (e.g. price).
+                        \item Profiling-free (DSA-compliant)
                     \end{itemize}
                 \item \textbf{Weights on a 0-10 Scale:}
                     \begin{itemize}
-                        \item Range: $0$ (completely unimportant) to $10$ (most important).
+                        \item Range: $0$ (completely unimportant) to $10$ (most important), changed after feedback in Milestone 3.
                         \item Mathematically normalized by the total sum of user-specified weights:
                     \end{itemize}
             \end{itemize}
@@ -228,7 +166,7 @@
             \begin{center}
                 \includegraphics[width=0.9\textwidth,keepaspectratio]{screens/math.png}
                 \begin{figure}
-                    \tiny\caption{User Weight Sliders (0-10 scale)}
+                    \tiny\caption{Transparency Board Info}
                 \end{figure}
             \end{center}
         \end{column}
@@ -250,7 +188,7 @@
             \item Normalizing cost relatively maximizes the contrast between the local hotel options.
         \item \textbf{Absolute Normalization (Benefit attributes: Stars, Rating, Transit):}
             \begin{itemize}
-                \item Normalizes value $v$ on fixed scale bounds to prevent artificial distortion:
+                \item Normalizes value $v$ on fixed scale bounds as they are known:
             \end{itemize}
             \begin{equation*}
               u_{\text{stars}}(v) = \frac{v - 1}{4} \quad \text{and} \quad u_{\text{rating/transport}}(v) = \frac{v - 1}{9}
@@ -266,14 +204,12 @@
             \begin{itemize}
                 \item \textbf{Non-Compensatory Logic~\cite{ricci2011travel}:}
                     \begin{itemize}
-                        \item User defines absolute thresholds (e.g. maximum price, minimum stars).
-                        \item A hotel must satisfy all active limits simultaneously to be recommended.
+                        \item User defines absolute thresholds (e.g. maximum price, minimum stars) $\Rightarrow$ Hotel must satisfy all constraints.
                         \item Over-performing in one area cannot compensate for a single constraint violation.
                     \end{itemize}
-                \item \textbf{DSA-Compliant Simplicity:}
+                \item \textbf{DSA-Compliance:}
                     \begin{itemize}
-                        \item Unordered subset of matching hotels.
-                        \item Easy-to-understand inclusion/exclusion criteria.
+                        \item Transparent: Easy-to-understand inclusion/exclusion criteria.
                         \item Complete profiling-free predictability.
                     \end{itemize}
             \end{itemize}
@@ -311,14 +247,14 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{UI Redesign \& User Experience Challenges}
+    \frametitle{Improvement upon Milestone Feedback}
     \vspace{1em}
     \begin{columns}
         \begin{column}{0.48\textwidth}
             \textbf{Initial Usability Issues:}
             \begin{itemize}
                 \item Implicit strategy selection (no clear entry point).
-                \item Cluttered landing state with premature disclosure of complex DSA transparency panels.
+                \item Entering Point showed overloaded transparency board before seeing the sliders.
                 \item Sliders scaled from $0-100\%$, confusing users into thinking weights must sum to $100\%$.
             \end{itemize}
             \vspace{0.5em}
@@ -348,11 +284,11 @@
                 \item Giving too little explanation makes the system look like a black box.
                 \item Giving too much explanation causes cognitive overload and user fatigue.
             \end{itemize}
-        \item \textbf{Tiered Disclosure (Satisfying Different User Persona):}
+        \item \textbf{Tiered Disclosure Features:}
             \begin{itemize}
-                \item \textbf{Novice Pathway (Banners):} Brief text explanations focusing on the meaning of user controls. Satisfies general transparency.
-                \item \textbf{Expert Pathway (KaTeX Formulas):} Raw equations. Satisfies transparency audits and regulators.
-                \item \textbf{Curious Pathway (Math Breakdown):} Step-by-step breakdown. Explains individual recommendations, boosting user trust.
+                \item \textbf{Novices:} Brief text explanations focusing on the meaning of user controls. Satisfies general transparency.
+                \item \textbf{Experts (KaTeX Formulas):} Button shows raw equations, especially good for transparency audits and regulators.
+                \item \textbf{Interested Users:} Collapsible Step-by-step breakdown $\Rightarrow$ Explains individual recommendations, boosting user trust.
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -364,13 +300,11 @@
         \item \textbf{Limitation of Weighted MAUT:} Compiles complete lists; does not filter out completely irrelevant options (e.g. extremely expensive hotels).
         \item \textbf{Limitation of Constraint Filtering:} Screens items but does not rank remaining candidates (higher cognitive effort).
     \end{itemize}
-    \vspace{0.5em}
     \textbf{Proposed Two-Stage Hybrid Approach:}
     \begin{enumerate}
         \item \textbf{Stage 1: Constraint Filtering (Non-Compensatory screening):} Filter out hotels violating basic requirements (e.g. price $> \$250$).
         \item \textbf{Stage 2: Weighted MAUT (Compensatory ranking):} Apply preference weights to rank remaining candidates.
     \end{enumerate}
-    \vspace{0.5em}
     $\Rightarrow$ Maintains complete mathematical transparency, remains profiling-free, and mimics realistic human decision-making.
 \end{frame}
 
@@ -381,9 +315,9 @@
     \begin{itemize}
         \item \textbf{Hypotheses:}
             \begin{itemize}
-                \item \textbf{H1 (Perceived Control):} Users interacting with the Weighted MAUT or Constraint Filtering interfaces report a higher sense of control over recommendations compared to a baseline "black-box" interface.
-                \item \textbf{H2 (System Trust):} Exposing the collapsible mathematical breakdown panels increases user trust in the system's recommendations without causing information overload.
-                \item \textbf{H3 (DSA Compliance Impact):} The presence of the global explanation banner and KaTeX formulas increases user comprehension of the algorithm's inner workings.
+                \item \textbf{H1 (Perceived Control)}
+                \item \textbf{H2 (System Trust)}
+                \item \textbf{H3 (DSA Compliance Impact)}
             \end{itemize}
         \item \textbf{Within-Subjects Laboratory Study ($N=30$):}
             \begin{itemize}

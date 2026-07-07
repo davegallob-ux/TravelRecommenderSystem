@@ -9,6 +9,7 @@
     Bib\TeX}}}
 
 \usepackage{graphicx}
+\graphicspath{{../presentation_latex/screens/}{presentation_latex/screens/}{./screens/}}
 \usepackage{float}
 
 %% Rights management information.
@@ -38,7 +39,7 @@
 \renewcommand{\shortauthors}{Gallob}
 
 \begin{abstract}
-Modern recommender systems that users encounter in daily life are very often ``black boxes,'' meaning that users rarely know how their recommendations are generated and have no control over which items are recommended. In tourism, this leads to a lack of trust and user satisfaction, as users can never be sure if their recommendations are truly optimal or influenced by the profit-maximization goals of the platform. The EU has therefore introduced the Digital Services Act (DSA), a framework that requires platforms to explain their algorithms in plain, understandable language and offer users a profiling-free alternative. In this paper, a web-based tourism recommender system prototype is presented that addresses these issues by implementing two algorithms. The application offers detailed explanations of the underlying decision algorithms and shows, for each result, how the recommendation was computed. The two algorithms implemented are Weighted Multi-Attribute Utility Theory (MAUT), which lets users set weights on the different attributes (e.g., star rating, distance to the center, price) on a scale from 0 to 10, and Constraint-Based Filtering, where the user sets hard limits on the attributes (e.g., price must be below 100 USD per night). This paper details the system architecture, the mathematical foundations of the implemented algorithms, and the UI features designed to explain these algorithms to the user.
+Modern recommender systems that users encounter in daily life are very often "black boxes", which means that users rarely know how their recommendations are generated and they have no control over which items are recommended. In tourism, this leads to a lack of trust and user satisfaction, as users can never be sure if their recommendation is really optimal or influenced by profit maximization goals of the platform. The EU has therefore introduced the Digital Services Act (DSA), a framework which requires platforms to explain their algorithms in an understandable way and offer users a profiling-free alternative. In this paper, a web-based prototype for hotel recommendations which addresses these issues by implementing two algorithms is presented. The web-app offers detailed explanations of the underlying decision algorithms and shows, for each result, how the recommendation was computed. The two algorithms implemented are Weighted Multi-Attribute Utility Theory (MAUT), which lets users set weights on the different attributes (e.g. stars, distance to center, price) on a scale from 0 to 10, and Constraint Filtering, where the user sets hard limits to the attributes (e.g. price must be below 100 Euro per night). This paper details the system architecture as well as the mathematical foundations of the used algorithms along with the UI features explaining the algorithms to the user.
 \end{abstract}
 
 \keywords{Recommender Systems, User Control, Multi-Attribute Utility Theory, Constraint Filtering, Digital Services Act, Explainable AI, E-Tourism}
@@ -46,107 +47,107 @@ Modern recommender systems that users encounter in daily life are very often ``b
 \maketitle
 
 \section{Introduction}
-In day-to-day life, recommender systems are ubiquitous, ranging from online shopping and video streaming to hotel and flight recommendation platforms~\cite{adomavicius2005toward}. Many prominent recommender systems (RS) do not let users know how their recommendations are generated and offer no direct means of influencing the outcome~\cite{BORRAS20147370}. These systems are often built on complex algorithms (mainly neural networks) that process enormous amounts of user data to generate suggestions. They rarely explain their underlying logic to users. This lack of transparency can hinder trust and user satisfaction, leading to frustration and cognitive overhead. The tourism domain, where financial expenditure and emotional investment are generally high, is particularly affected by this issue~\cite{ricci2011travel}.
+In day-to-day life, recommender systems are ubiquitous, from online shopping and video streaming to hotel and flight recommendation platforms~\cite{adomavicius2005toward}. Many prominent RS do not let users know how their recommendations are generated and offer no direct means of influencing the outcome~\cite{BORRAS20147370}. Those systems are often built on complex algorithms (mainly neural networks) which process enormous amounts of user data to generate suggestions. They rarely explain their underlying logic to users. This lack of transparency can hinder trust and user satisfaction, leading to frustration and cognitive overhead. The tourism domain, where the financial expenditure and emotional investment are generally high, is particularly affected by this issue~\cite{ricci2011travel}.
 
-The field of Human-Computer Interaction (HCI) has focused research on user influence and transparency (explainability) to address these shortcomings~\cite{knijnenburg2012explaining, tintarev2012evaluating}. Instead of using automated profiling, interactive recommender systems give users the ability to influence the recommendation process by adjusting sliders representing attribute weights or setting hard constraints on the attributes (e.g., price or distance).
+The Human-Computer Interaction field has focused research on user influence and transparency (explainability) to address these shortcomings~\cite{knijnenburg2012explaining, tintarev2012evaluating}. Instead of using automated profiling, interactive recommender systems give users the ability to influence the recommendation process by adjusting sliders representing attribute weights or setting hard constraints for the attributes (e.g., price or distance).
 
-The demand for transparency is further fueled by the European Union's Digital Services Act (DSA), which governs online platforms and aims to protect users' rights. The DSA mandates that online platforms must provide users with transparent information about the main parameters of their recommender systems in plain, understandable language and offer options to influence them (Article 27)~\cite{eudsa2022}. Article 38 further obliges very large online platforms (VLOPs) to provide users with at least one option for their recommender systems that is not based on profiling. These articles require developers to shift from black-box profiling towards transparent and user-controlled platforms.
+The demand for transparency is further fueled by the European Union's Digital Services Act, which governs online platforms and aims to protect users' rights. The DSA mandates that online platforms must provide users with transparent information about the main parameters of their recommender systems in an understandable language in plain text and offer options to influence them (Article 27)~\cite{eudsa2022}. Article 38 further obliges very large online platforms (VLOPs) to provide users with at least one option for their recommender systems that is not based on profiling. These articles require developers to shift from black-box profiling towards transparent and user-controlled platforms.
 
-In this paper, the design decisions, architecture, and implementation of a web-based tourism recommender system prototype that is compliant with the DSA are detailed. It addresses both transparency and user-influence goals by implementing two algorithms:
+In this paper, the design decisions, architecture, and implementation of a web-application tourism recommender system prototype which is compliant with the DSA are detailed. It addresses the transparency as well as the user influence goals by implementing two algorithms:
 \begin{enumerate}
     \item \textbf{Algorithm A: Weighted Multi-Attribute Utility Theory (MAUT)}:
-    This algorithm uses sliders to determine weights for hotel attributes (price, distance to center, star rating, guest review score, and public transport access). To prevent user confusion regarding percentages summing up to 100\%, the importance weights are defined on a 0 to 10 scale (where 0 represents completely unimportant and 10 represents the most important). The algorithm normalizes the attributes and computes a weighted utility score for each hotel. Finally, the hotels are ranked according to their utility score (percentage match).
+    This algorithm uses sliders to determine weights for hotel attributes (price, location, star rating, customer rating, and public transit access). To prevent user confusion regarding percentages summing up to 100\%, the importance weights are defined on a 0 to 10 scale (where 0 means completely unimportant and 10 is the most important). The algorithm performs a normalization of the attributes and computes a weighted utility score for each hotel. Finally, the hotels are ranked according to their utility score (percentage match).
     \item \textbf{Algorithm B: Constraint-Based Filtering}: 
-    In Constraint-Based Filtering, the user defines hard limits for each attribute (e.g., maximum price or minimum rating). All hotels that do not meet the constraints are filtered out. This allows users to specify their preferences in a clear and understandable way without the need for complex mathematical calculations.
+    In Constraint-Based Filtering, the user defines hard limits for each attribute (e.g., maximum price or minimum rating). All hotels which do not meet the constraints are filtered out. This allows users to specify their preferences in a clear and understandable way without the need for complex mathematical calculations.
 \end{enumerate}
 
-The prototype features a dynamic strategy selection landing wizard that ensures transparency panels are not shown prematurely. Once a strategy is chosen, a dynamic banner is displayed that explains the chosen algorithm in plain language and offers a button that, when pressed, shows the mathematical formula of the chosen algorithm for enhanced transparency. The calculated results also offer a collapsible mathematical breakdown (displayed only upon user intent to avoid overwhelming uninterested users) showing a step-by-step calculation of how the hotel's score was computed. This allows users to understand how the results are generated and how their inputs influence the outcome. The calculation breakdown is generated using KaTeX and renders the exact mathematical formulas and normalization equations used in the calculations, allowing users to trace how their inputs directly translate into the presented results.
+The prototype features a dynamic strategy selection landing wizard that ensures that transparency panels are not shown prematurely. Once a strategy is chosen, a dynamic banner is displayed explaining the chosen algorithm in clear words, and offers a button which when pressed shows the mathematical formula of the chosen algorithm for enhanced transparency. The calculated results also offer a collapsible mathematical breakdown (only on user intent to not overwhelm uninterested users) showing a step-by-step calculation of how the result's score was computed. This allows users to understand how the results are generated and how their inputs influence the outcome. The calculation breakdown is generated using KaTeX and renders the exact mathematical formulas and normalization equations used in the calculations, allowing users to trace how their inputs directly translate into the presented results.
 
-\subsection{Paper Structure}
-The remainder of this paper is structured as follows: In \autoref{sec:related_work}, related work in current tourism recommender systems, MAUT, and explanation interfaces is presented. \autoref{sec:system_architecture_and_implementation} details the system's architecture and the mock dataset. \autoref{sec:algorithmic_framework} describes the mathematical foundations of the two implemented algorithms. \autoref{sec:user_interface_design_and_explainability} details the UI design and transparency features. \autoref{sec:future_work} proposes a protocol for a future user study and extensions, and \autoref{sec:conclusion} concludes the paper. The Appendix contains the complete hotel database, author information and contribution details, and Generative AI disclosures.
+\section{Remainder Structure}
+The remainder of this paper is structured as follows: In \autoref{sec:related_work}, the related work in current tourism recommender systems, MAUT, and explanation interfaces is presented. \autoref{sec:system_architecture_and_implementation} details the system's architecture and the mock dataset. \autoref{sec:algorithmic_framework} shows the mathematical foundations of the two used algorithms. \autoref{sec:user_interface_design_and_explainability} details the UI design and transparency features. \autoref{sec:future_work} proposes a protocol for a future user study and extensions, and \autoref{sec:conclusion} concludes the paper. In the Appendix, the complete mock database used in the project, followed by the author contribution details and GenAI disclosures are attached.
 
 \section{Related Work}\label{sec:related_work}
-Unlike recommendations for low-cost consumer goods like movies and music, the development of recommender systems in the tourism domain faces unique challenges~\cite{BORRAS20147370}. In tourism, decisions require significant rational resources, are infrequent, and involve multiple decision attributes. In contrast to low-cost consumer goods, vacation planning involves high financial risk and high emotional expectations, leading to a significant time commitment. Users therefore gather extensive information and compare multiple options, and they need to express specific constraints before making a final decision~\cite{ricci2011travel}.
+Recommender systems' development faces special challenges which are unique to their domain --- such as recommendations for movies and music~\cite{BORRAS20147370}. In the tourism domain, decisions require a lot of rational resources, are infrequent, and have multiple decision attributes. In contrast to low-cost consumer goods, vacation planning involves a high final risk and high emotional expectations, which also leads to a high time commitment. Users therefore take extensive information and comparisons into account and need to express specific constraints before making a final decision~\cite{ricci2011travel}.
 
-Traditional recommender systems in the tourism domain are primarily categorized into three classes~\cite{Sarkar2023, 8308293}:
+Traditional recommender systems  in the tourism domain are mainly divided into three categories~\cite{Sarkar2023, 8308293}:
 \begin{itemize}
-  \item \textbf{Collaborative filtering:} Builds on the historical preferences of similar users but suffers from the cold-start problem. Specifically, new hotels without reviews and infrequent travelers without historical ratings lead to poor recommendations.
-  \item \textbf{Content-based:} These systems match item features with the preference profiles of the user. While they can perform well, they are often unable to explain their recommendations or adapt to rapid changes in user needs (e.g., business travelers seeking central locations versus families seeking budget accommodations).
+  \item \textbf{Collaborative filtering:} Builds on historical information of similar users, but suffers from the Cold Start Problem --- New hotels without reviews and seldom travellers without historical ratings lead to wrong recommendations.
+  \item \textbf{Content-based:} These systems match item features with the preference profiles of the user. While they get good results, they are often unable to explain their recommendations and to adapt to rapid changes in user needs (e.g., business travelers in central locations versus family budget accommodations).
   \item \textbf{Hybrid:} These recommender systems combine multiple approaches.
 \end{itemize}
 
-To address these limitations, multi-attribute frameworks, such as Multi-Attribute Utility Theory (MAUT) for decision-making, have increasingly been used in interactive recommender systems~\cite{schmitt2002maut}. MAUT is a mathematical framework that enables the evaluation of alternatives with potentially conflicting attributes~\cite{keeney1993decisions}. The algorithm defines a utility function for every attribute (e.g., mapping location to a utility between 0 and 1) and calculates a weighted sum. MAUT, as shown by Schmitt et al. in 2002~\cite{schmitt2002maut}, is particularly useful in interactive recommender systems, as it takes human decision-making processes into account (i.e., user-defined weights). It allows for deficiencies (e.g., a high price) to be compensated for by a high utility in another attribute (e.g., an excellent location).
+In order to tackle these limitations, multi-attribute frameworks, i.e., Multi-Attribute Utility Theory (MAUT) for decision making, have been coming to use in interactive recommender systems~\cite{schmitt2002maut}. MAUT is a mathematical algorithm which allows to evaluate alternatives with potentially conflicting attributes~\cite{keeney1993decisions}. The algorithm defines a utility function for every attribute (e.g., mapping location to a utility between 0 and 1) and calculates a weighted sum. MAUT, as shown by Schmitt et al. in 2002~\cite{schmitt2002maut}, is particularly useful in interactive recommender systems, as it takes human decision making processes into account (i.e., user-defined weights). It allows for deficiencies (e.g., high price) to be evened out by a high value in another attribute (e.g., excellent location).
 
-Constraint-based recommender systems are, in contrast, non-compensatory. They do not calculate a score, but filter out items that violate user-defined limits based on explicit knowledge about the items~\cite{ricci2011travel}. This approach is easy to understand and does not require user profiling, perfectly aligning with the EU's DSA~\cite{eudsa2022}.
+Constraint-based recommender systems are non-compensatory in contrast. They do not calculate a score, but filter out items violating user-defined limits based on explicit knowledge about the items~\cite{ricci2011travel}. This approach is easy to understand and does not require user profiling, perfectly aligning with the EU's DSA~\cite{eudsa2022}.
 
-Earlier research has shown that the success of interactive recommender systems heavily relies on their UIs~\cite{mcnee2006being,swearingen2001beyond}. Therefore, providing explanations in the UI improves user understanding, trust, and perceived control over the system~\cite{tintarev2012evaluating}. Knijnenburg et al.~\cite{knijnenburg2012explaining} showed that their proposed framework, which offers user control paired with high explainability, leads to higher user satisfaction and acceptance. The integration of sliders for defining weights, mathematical breakdowns, and transparency panels investigated in this paper builds on these findings to construct an explainable and transparent UI that enhances user satisfaction and meets the DSA requirements.
+Earlier research has shown that the success of interactive recommender systems strongly relies on their UIs~\cite{mcnee2006being,swearingen2001beyond}. Therefore, providing explanations in the UI improves user understanding as well as their trust and perceived control over the system~\cite{tintarev2012evaluating}. Knijnenburg et al.~\cite{knijnenburg2012explaining} showed that their proposed framework offering user control paired with high explainability results in higher user satisfaction and acceptance. The integration of sliders for defining weights and mathematical breakdowns along with transparency panels investigated in this paper builds on those findings to build an explainable and transparent UI for user satisfaction and to meet the DSA requirements.
 
 \section{System Architecture and Implementation}\label{sec:system_architecture_and_implementation}
 The prototype is designed as a web application. The technical architecture consists of React, Vite for the build system, and vanilla CSS for layout and styling. Client-side math rendering is powered by KaTeX, a fast LaTeX math rendering library, integrated via a custom React wrapper. The system architecture is structured to support real-time user interaction.
 
 The application state manages:
 \begin{itemize}
-  \item The selected city (Munich or Vienna).
-  \item The selected recommendation algorithm (Weighted MAUT or Constraint-Based Filtering).
-  \item The five attribute weights ($w_i \in [0, 10]$) for the Weighted MAUT mode.
-  \item The five attribute thresholds for the Constraint-Based Filtering mode.
-  \item The global formula toggle, which controls the display of the explanation board and mathematical formulas.
+  \item The selected city (Munich vs. Vienna).
+  \item The selected algorithm (MAUT vs. Constraint-based).
+  \item The five attribute weights ($w_i \in [0, 10]$) for the MAUT mode.
+  \item The five attribute limits for the Constraint Filtering mode.
+  \item The global formula toggle (including a switch for the explanation board, showing the matching explanations).
 \end{itemize}
 
-The dataset, stored in a static module (\texttt{src/data.js}), contains 20 hotels (10 for each city). These accommodations represent a realistic and diverse range, spanning from low-budget hostels to luxury five-star hotels. Each hotel is uniquely defined by an identifier, name, city, image, description, and five attributes:
+In the dataset, which is stored in a static module ``data.js'', 20 hotels (10 for each city) are stored. The hotels represent a realistic and diverse range of accommodations, which range from low-budget hostels to luxury five-star hotels. Each hotel is uniquely defined by an identifier, name, city description, and five attributes:
 \begin{enumerate}
   \item \textbf{Price per Night}: Ranging from \$35 (Hostel Vienna West) to \$550 (Mandarin Oriental Munich).
-  \item \textbf{Distance to Center}: Distance from the historical city center (Stephansplatz in Vienna, Marienplatz in Munich), ranging from 0.1 km (Stephansplatz) to 28.0 km (Airport Express Inn Munich).
+  \item \textbf{Distance to Center}: Distance from the historical city center (Stephansplatz in Vienna, Marienplatz in Munich). Ranging from 0.1 km (Stephansplatz) to 28.0 km (Airport Express Inn Munich).
   \item \textbf{Star Rating}: Ranging from 1 (basic tourist class) to 5 stars (luxury class).
   \item \textbf{Guest Review Score}: A continuous rating between 1.0 (worst) and 10.0 (excellent), representing aggregated guest satisfaction.
   \item \textbf{Public Transport Access Score}: A rating between 1.0 (poor) and 10.0 (excellent), representing proximity to subway stations, tram lines, and frequency of transit services.
 \end{enumerate}
-The application calculates and updates the recommendations in real-time as the user modifies the sliders or switches the algorithm. This renders a ``calculate'' button unnecessary, improving user friendliness. This is made possible by performing the calculations on the fixed dataset entirely client-side.
+The application calculates and updates the recommendations in real-time if a user modifies the slider weights or switches the algorithm. This renders a ``calculate'' button useless, improving user-friendliness. This is possible as the calculations on the fixed dataset are performed client-side.
 
 \section{Algorithmic Framework}\label{sec:algorithmic_framework}
-To support the user-controlled interaction model, this section explains the mathematical models behind the algorithms in the recommendation engine.
+To support the user-controlled interaction model, this section expains the mathematical models behind the algorithms in the recommendation engine.
 
 \subsection{Algorithm A: Weighted Multi-Attribute Utility Theory (MAUT)}
-This algorithm evaluates each hotel in the chosen city by mapping the hotel's attribute values to normalized utility scores and computing a weighted average. The process is performed in three steps:
+This algorithm evaluates each hotel in the chosen city by mapping the hotels attribute values to normalized utility scores and computing a weighted average. The process is performed in three steps:
 
 \subsubsection{Normalization of Attributes}
 As the attributes use incomparable units (e.g., USD, kilometers, stars), they must first be normalized to a standard scale $u(v) \in [0, 1]$, where $0$ represents the worst possible utility and $1$ represents the best possible utility.
 
 The hotel attributes are split into cost metrics (where lower values are better, like price and distance) and benefit metrics (where higher values are better, like star ratings, guest review scores, and public transport access). The prototype implements two normalization strategies:
 
-\textbf{Relative Normalization}: Used for cost metrics, as these values do not have clear upper and lower bounds. Therefore, the items are compared to one another to define the thresholds. The normalized utility score $u(v)$ for an attribute value $v$ of an item is calculated as:
+\textbf{Relative Normalization}: Used for cost metrics, as these values do not have clear upper and lower bounds. Therefore the items are compared to each other to define the thresholds. The normalized utility score $u(v)$ for an attribute value $v$ of an item is calculated as:
 \begin{equation}\label{eq:norm_relative}
   u(v) = \frac{v_{\max} - v}{v_{\max} - v_{\min}}
 \end{equation}
 where:
 \begin{itemize}
-  \item $v$ is the value of the hotel.
-  \item $v_{\min}$ and $v_{\max}$ are the minimum and maximum values of this attribute of all hotels in the selected city.
+  \item $v$ is the value of the hotel
+  \item $v_{\min}$ and $v_{\max}$ are the minimum/maximum value of this attribute of all hotels in the selected city.
 \end{itemize}
 
-\textbf{Absolute Normalization}: This is used for benefit attributes (stars, rating, and public transport access) because these values have clear intrinsic bounds for the best and worst options (e.g., stars or guest review ratings). In addition, normalizing these scores relatively could artificially exaggerate small differences (e.g., mapping a hotel with a guest rating of 8.5 to a utility of 0 simply because it is the lowest score in that city).
 
-For stars (on a 1 to 5 scale), the utility is calculated as follows:
+\textbf{Absolute Normalization}: This is used for benefit attributes (stars, rating, and public transport access) because these values have clear intrinsic values for the best and worst option (e.g. stars, guest review rating). In addition, normalizing these scores relatively could artificially exaggerate small differences (e.g. ranking a hotel with 8.5 rating as 0 utility if it is the lowest in the city).
+For stars (on a 1 to 5 scale), the utility is calculated as following:
 \begin{equation}\label{eq:norm_stars}
   u_{\text{stars}}(v) = \frac{v - 1}{4}
 \end{equation}
-where $v$ is the number of stars of the hotel (from 1 to 5).
+where $v$ is the amount of stars of the hotel (from 1 to 5).
 
-For the guest review rating scores and the public transport access score (both ranging from 1 to 10), the utility is calculated as follows:
+For the guest review rating scores and the public transport access score (both ranging on a 1 to 10 scale), the utility is calculated as following:
 \begin{equation}\label{eq:norm_rating_transit}
   u_{\text{rating/transport}}(v) = \frac{v - 1}{9}
 \end{equation}
 where $v$ is the guest review score or public transport access score of the hotel (from 1 to 10).
 
 \subsubsection{Weighted Aggregation}
-After the initial normalized attribute scores are calculated, the utility scores are weighted and summed. Let $w_i$ be the user-defined weight for attribute $i$ (where $w_i \in [0, 10]$), and $u_i$ be the previously calculated normalized utility score of attribute $i$ for the hotel. The total utility $U$ is calculated as:
+After the initial normalized attribute scores are calculated, the utility scores are weighted and summed up. Let $w_i$ be the user given weight to the attribute $i$ (where $w_i \in [0, 10]$), and $u_i$ be the prior calculated normalized utility score of the attribute $i$ for the hotel item. The total utility $U$ is calculated as:
 \begin{equation}\label{eq:maut}
   U = \frac{\sum_{i=1}^{5} w_i \cdot u_i}{\sum_{i=1}^{5} w_i} \times 100\%
 \end{equation}
 The calculated hotels are sorted and shown to the user in descending order.
 
 \subsection{Algorithm B: Constraint-Based Filtering}
-The Constraint-Based Filtering algorithm does not calculate a mathematical match score or rank the hotels. Instead, it checks if the set of hotels in the selected city complies with the user-defined constraints. A hotel is in the result set (i.e., shown to the user) if and only if it satisfies the logical conjunction:
+The Constraint-Based Filtering algorithm does not calculate a mathematical match score or rank the hotels. Instead, it checks if the set of hotels in the selected city comply to user set constraints. A hotel is in the result set (i.e. shown to the user) if and only if it satisfies the logical conjunction:
 \begin{equation}\label{eq:filtering}
   \text{Price} \le P_{\max} \ \land \ \text{Distance} \le D_{\max} \ \land \ \text{Stars} \ge S_{\min} \ \land \ \text{Rating} \ge R_{\min} \ \land \ \text{Transport} \ge T_{\min}
 \end{equation}
@@ -156,10 +157,10 @@ where:
   \item $D_{\max}$ is the maximum distance threshold defined by the user.
   \item $S_{\min}, R_{\min}, T_{\min}$ are the minimum stars, guest review rating, and public transport access scores thresholds defined by the user.
 \end{itemize}
-This filtering logic is non-compensatory --- hotels are not compared to each other or ranked relatively. All hotels are simultaneously checked and excluded from the results if a single constraint is violated.
+This filtering logic is non-compensatory --- hotels are not compared to each other and relatively ranked. All hotels are simultaneously checked and excluded form the results if a single constraint is violated.
 
 \subsection{Comparison of Decision Logic}
-The two models are fundamentally different in their decision-making styles. The primary difference is that Weighted MAUT, due to its ranking nature, compiles a complete, ordered list of all hotels, meaning that even lower-matching options are displayed. In contrast, Constraint-Based Filtering, which is non-compensatory, excludes non-matching hotels to deliver a focused result set, though it does not indicate how well each remaining hotel satisfies the user's preferences. The differences are summarized in Table~\ref{tab:comparison}.
+The two models are fundamentally different in their decision-making styles: The biggest difference is that MAUT will (due to its ranking nature) show results to the user that are completely irrelevant to the user, as it is more a sorting approach than a filtering approach. Constraint-filtering on the other hand does not show the aforementioned uninteresting results, but delivers a result set to the user, without giving information of how well an item fit the user's limits. The differences are summarized in Table~\ref{tab:comparison}.
 
 \begin{table}[h]
   \caption{Comparison of the Implemented Algorithmic Paradigms}
@@ -179,66 +180,67 @@ The two models are fundamentally different in their decision-making styles. The 
 \end{table}
 
 \subsection{Quality Assurance and Algorithmic Verification}
-To ensure that the prototype is stable and mathematically correct, the recommendation engine was implemented in a standalone module (\texttt{src/recommenderEngine.js}). A unit testing suite (\texttt{run-tests.js}) was created to verify the module, consisting of exactly 60 test cases (30 for Weighted MAUT and 30 for Constraint-Based Filtering) that test edge cases and various input parameter patterns.
+In order to ensure that the prototype is stable and mathematically correct, the code of the algorithm was built in a standalone module (\texttt{src/recommenderEngine.js}). There, for the verification a unit testing suite was appended (\texttt{run-tests.js}) consisting of exactly 60 different test cases (30 for Weighted MAUT and 30 for Constraint-Based Filtering) for edge cases and different input parameters patterns.
 
 \subsubsection{MAUT Logic Verification (30 Cases)}
 The 30 MAUT test cases evaluate the logic of normalization and scoring:
 \begin{itemize}
-  \item \textbf{Weight Boundary Conditions (5 cases)}: These tests verify that equal weights result in identical rankings, all-zero weights do not cause a division-by-zero error, and input weights are strictly bounded within $[0, 10]$.
-  \item \textbf{Price Relative Cost Normalization (5 cases)}: Confirms that Relative Normalization works as expected by mapping the lowest price to a utility of 1.0, the highest price to a utility of 0.0, and intermediate prices proportionally. They also verify that no division by zero occurs when all items have the same price.
-  \item \textbf{Distance Relative Cost Normalization (5 cases)}: Verifies that the closest hotel maps to a utility of 1.0, the furthest hotel to a utility of 0.0, and out-of-bound distances are clamped.
-  \item \textbf{Absolute Normalizations (5 cases)}: Asserts that absolute utility mappings for stars (1-to-5 scale) and guest ratings/public transport scores (1-to-10 scale) are correct.
-  \item \textbf{Weight Dominance and Flipped Rankings (5 cases)}: These cases verify that highly weighted attributes dominate the ranking and that adjusting weights dynamically updates the ranking order.
-  \item \textbf{Robustness and Sorting (5 cases)}: This suite verifies edge cases such as empty list inputs, null inputs, missing weight keys, strict descending sorting order of match scores, and correct formatting of breakdown scores.
+  \item \textbf{Weight Boundary Conditions (5 cases)}: These tests verify that equal weights result in equal ranking results, zero weights do not result in division by zero and that no negative weights and no positive weights above 10 are possible.
+  \item \textbf{Price relative cost normalization (5 cases)}: Confirms that the Relative Normalization works as expected: correct mapping of the lowest price to utility 1, highest price to utility 0, and values in between are correctly mapped proportionally. Additionally, it is also verified that no division by zero occurs when all items have the same price (algorithm could map them all to 0 as they all are the ``worst'' option). These tests are run for all other attributes:
+  \item \textbf{Distance relative cost normalization (5 cases)}: Verifies that the closest hotel maps to the utility of 1.0, furthest hotel to the utility 0.0, and out-of-bound distances are clamped.
+  \item \textbf{Absolute Normalizations (5 cases)}: Asserts that the absolute utility mappings for stars (1-to-5 scale) and guest ratings/public transport scores (1-to-10 scale) are correct.
+  \item \textbf{Weight Dominance and Flipped Rankings (5 cases)}: These tests test that highly weighted attributes dominate the ranking and changing weights correctly changes the ranking order as expected.
+  \item \textbf{Robustness and Sorting (5 cases)}: Verifies the edge cases for empty list inputs, null inputs, missing weight keys, strict descending sorting order of match scores, and correct formatting of breakdown scores.
 \end{itemize}
 
 \subsubsection{Constraint-Based Filtering Verification (30 Cases)}
 The 30 filtering test cases check the correctness of the logical conjunction:
 \begin{itemize}
-  \item \textbf{Individual Attribute Constraints (25 cases)}: These tests check the price, distance, star rating, guest review scores, and public transport access scores separately (5 tests per attribute). They verify inclusion and exclusion boundaries, including scenarios where constraints yield an empty set or include all items, and check that missing values fallback to default thresholds.
-  \item \textbf{Conjunction and Robustness (5 cases)}: These tests verify that combined constraints filter conjunctively, that high scores in one attribute cannot compensate for violations in another (non-compensatory property), and that empty/null datasets are handled gracefully.
+  \item \textbf{Individual Attribute Constraints (25 cases)}: 
+  These tests
+   check the price, location, amount of stars, guest review scores, and public transit access scores separately. For each category, there are 5 tests that verify exclusions and inclusions and that constraints may result in empty sets and in sets with all items included. Also, it is checked that null values lead to the usage of fallback values.
 \end{itemize}
-All test cases run against the test suite successfully and pass.
+All test cases run with its own mock database and pass.
 
 \section{User Interface Design and Explainability}\label{sec:user_interface_design_and_explainability}
-The prototype's frontend interface was developed with the assistance of Gemini 3.5\footnote{\url{https://deepmind.google/models/gemini/flash/}} in a modern style with smooth animations to create a premium, modern experience. The UI was designed to feature maximum explainability for users.
+The prototype frontend interface was developed with the help of Gemini 3.5\footnote{\url{https://deepmind.google/models/gemini/flash/}} in a modern style with smooth animations to create a premium and modern UI. The UI was also designed to feature maximal explainability for the users. 
 
 \subsection{Landing Page for Algorithm Selection}
-Prior iterations showed detailed algorithm explanations before selection, leading to overwhelming new users (see the previous cluttered layout in Figure~\ref{fig:old_board}). This issue was tackled by implementing a landing page that explains the available algorithms in plain language and prompts the user to select an algorithm. The user is shown two cards to select from:
+Prior iterations showed detailed algorithm explanations before the selection, leading to overloading new users (see the previous cluttered layout in Figure~\ref{fig:old_board}). This issue was tackled by implementing a landing page which explains the available algorithms in simple words and prompts the user to select an algorithm. The user is shown 2 cards to select from:
 \begin{itemize}
-  \item \textbf{Weighted MAUT Card}: Focuses on compensatory trade-offs. It explains that the user can rate the importance of attributes on a scale of 0 to 10, resulting in a ranked list of hotels with percentage match scores.
-  \item \textbf{Constraint-Guided Card}: Focuses on strict non-compensatory boundaries. It explains that the user can set threshold limits to eliminate hotels violating any of the criteria.
+  \item \textbf{Weighted MAUT Card}: Focuses on compensatory trade-offs. It explains that the user can rate attributes on a scale of 0 to 10, resulting in a ranked list of hotels with percentage match scores.
+  \item \textbf{Constraint-Guided Card}: Focuses on strict non-compensatory boundaries. It explains that the user can set threshold limits to eliminate hotels violating any criteria.
 \end{itemize}
-Afterwards, the user may set the weights or constraints depending on their chosen algorithm and is shown a transparency board that details the chosen algorithm. This landing-page approach makes the prototype more transparent, as it explains the logic to all users from the outset. The user may always return to this screen and change their choice by clicking on a ``Switch Algorithm'' button or change the algorithm directly using the controls on the main page.
+Afterwards, the user may set the weights or constraints depending on their chosen algorithm and is shown a transparency board, which details the algorithm. This landing-page approach makes the prototype more transparent, as it explains the logic to all users in the beginning. The user may always return to the screen and change their choice by clicking on a ``Switch Algorithm'' button or change the algorithm directly via a switch on the main page.
 
 \begin{figure}[htbp]
   \centering
   \Description{Dashboard view of the previous cluttered user interface design, which loaded all information panels simultaneously and caused cognitive overload.}
-  \includegraphics[width=0.6\textwidth]{../presentation_latex/screens/OldOverloadedBoard.png}
+  \includegraphics[width=0.6\textwidth]{OldOverloadedBoard.png}
   \caption{Previous cluttered transparency board design that led to premature disclosure of complex information.}
   \label{fig:old_board}
 \end{figure}
 
-\subsection{Global Explanation Banners}
-Below the controls on the main page, there is a transparency board that changes color and content based on the selected algorithm:
+\subsubsection{Global Explanation Banners}
+Below the controls on the main page, there is a transparency board which changes the color and content based on the selected algorithm:
 \begin{itemize}
-  \item In the \textbf{Weighted MAUT} mode, the banner is blue and explains the logic of the Weighted MAUT algorithm and the sliders (see Figure~\ref{fig:maut_interface}).
-  \item In the \textbf{Constraint-Guided} mode, the banner is green, explaining the logic behind the non-compensatory filtering approach (see Figure~\ref{fig:constraint_interface}).
+  \item In the \textbf{Weighted MAUT} mode, the banner has a blue color and explains the logic of the weighted MAUT algorithms and the sliders, see Figure~\ref{fig:maut_interface}.
+  \item The \textbf{Constraint-Guided} mode banner is shown in green, explaining the logic behine the non-compensatory filtering approach, see Figure~\ref{fig:constraint_interface}.
 \end{itemize}
 
-Both banners use simple language to avoid overwhelming users with mathematical details. For interested users, the banners include a ``Show Mathematical Details'' button. When clicked, the banner renders the underlying formulas in LaTeX using KaTeX (Equation~\ref{eq:maut} for MAUT, and Equation~\ref{eq:filtering} for Constraint-Guided Filtering) and the panel displays an explanation of the variables.
+To maintain transparency while preventing user fatigue, the banners show a step-by-step explanation of the used algorithm in simple language. The three steps cards show the workflow (e.g. 1st step: defining weights/thresholds, 2nd step: checking against constraints or scoring, etc.). Advanced users or regulators who want to understand the underlying mechanism in detail, can click on a ``Show Mathematical Details'' button above the step cards (shown in \autoref{fig:maut_interface}). There, these users will see the used formulas Equation~\ref{eq:maut} for MAUT, and Equation~\ref{eq:filtering} for Constraint-Guided Filtering along with an explanation for every variable. These Formulas are rendered on click using KaTeX.
 
 \begin{figure}[htbp]
   \centering
   \Description{Left panel shows the five horizontal importance weight sliders with 0 to 10 scale bounds. Right panel shows the corresponding blue Weighted MAUT algorithm explanation card.}
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{../presentation_latex/screens/Sliders.png}
+    \includegraphics[width=\textwidth]{Sliders.png}
   \end{minipage}
   \hfill
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{../presentation_latex/screens/newmaut.png}
+    \includegraphics[width=\textwidth]{newmaut.png}
   \end{minipage}
   \caption{Weighted MAUT user controls (left) and the dynamic blue explanation banner showing algorithmic details (right).}
   \label{fig:maut_interface}
@@ -247,51 +249,54 @@ Both banners use simple language to avoid overwhelming users with mathematical d
 \begin{figure}[htbp]
   \centering
   \Description{Constraint-based filtering interface showing threshold range sliders for price, distance, stars, rating, and public transit, alongside the green algorithm explanation banner.}
-  \includegraphics[width=0.7\textwidth]{../presentation_latex/screens/Constraint.png}
+  \includegraphics[width=0.7\textwidth]{Constraint.png}
   \caption{Constraint-based filtering interface featuring threshold sliders and the dynamic green explanation banner.}
   \label{fig:constraint_interface}
 \end{figure}
 
-\subsection{On-Demand Collapsible Math Breakdowns}
-In Weighted MAUT mode, after the user has set the sliders, the user can inspect the calculated results. Each hotel card offers a ``Show Mathematical Breakdown'' button to explain how this particular score (match percentage) was calculated (see Figure~\ref{fig:math_breakdown}).
+\subsubsection{On-Demand Collapsible Math Breakdowns}
+In the Weighted MAUT mode, after the user has set the sliders, the user can inspect the calculated results. Each hotel card offers a ``Show Mathematical Breakdown'' button to understand how this particular score (match percentage) was calculated, (see Figure~\ref{fig:math_breakdown}).
 
-This feature ensures that the prototype offers absolute transparency while avoiding cognitive overload for uninterested users. The user can understand why a hotel is ranked in its current position and can compare it to higher- or lower-ranked hotels. By adjusting the sliders, the user can also check the mathematical impact of the slider weights on the results. This eliminates the perception of the recommender system as a black box.
+This feature makes sure that the prototype offers absolute transparency while not overloading not interested users. The user can understand why a hotel is ranked in its current position and can compare it to better or worse ranked hotels. By adjusting the sliders the user can also check the mathematical impact of the slider weights on the results. This eliminates the perception of this recommender system as a black box.
 
 \begin{figure}[htbp]
   \centering
   \Description{Collapsible table showing attribute values, normalized utilities, user weight values, multiplication products, and the final sum normalization to calculate the percentage match score.}
-  \includegraphics[width=0.3\textwidth]{../presentation_latex/screens/Calculations.png}
+  \includegraphics[width=0.3\textwidth]{Calculations.png}
   \caption{Collapsible step-by-step mathematical breakdown showing the exact utility calculations for a hotel.}
   \label{fig:math_breakdown}
 \end{figure}
 
 \section{Future Work}\label{sec:future_work}
-While the presented prototype offers many transparency features and demonstrates their feasibility in the tourism domain, research and further development are still required.
+While the presented prototype offers many transparency features and shows that they are feasible in the tourism domain, there is still research and further development required.
 
 \subsection{The Hybrid Algorithmic Approach}
-The approaches used in this prototype have clear strengths and weaknesses:
+The used approaches in this prototype have clear strengths and weaknesses:
 \begin{itemize}
-  \item The Weighted MAUT algorithm compares hotels with one another but does not filter out irrelevant items. For instance, a user interested only in low-budget hotels will still be recommended a high-priced hotel (albeit with a low match percentage).
-  \item The Constraint-Based mode filters out these irrelevant options but does not rank the remaining hotels, leading to higher user involvement as they must find the best-matching hotel themselves.
+  \item The weighted MAUT algorithm compares the different hotels to each other, but does not filter out irrelevant items. For instance, a user only interested in low-budget hotels will also be recommended a high priced hotel (with a low match percentage).
+  \item The Constraint Based mode filters these irrelevant options out, but does not rank them, leading to higher user involvement, as they have to find the best-matching hotel for themself.
 \end{itemize}
-Therefore, a hybrid approach, which combines their respective strengths and eliminates their weaknesses, is proposed for future work:
+Therefore, a hybrid approach, which combines the clear strengths and eliminates the weaknesses is proposed for future work:
 \begin{enumerate}
-  \item \textbf{Stage 1: Constraint Filtering (Non-Compensatory screening)}: The system applies Constraint-Based Filtering first to filter out hotels that do not meet the user's basic requirements (e.g., price $> \$250$ or distance $> 10$ km). This ensures that the candidates for further processing are limited to feasible options.
-  \item \textbf{Stage 2: Weighted MAUT (Compensatory ranking)}: The system applies the user's preference weights to rank the preprocessed hotel candidates. This ensures that users only see hotels relevant to their needs (e.g., the aforementioned low-budget traveler will not see a luxury five-star hotel with a low match score of 8\%).
+  \item \textbf{Stage 1: Constraint Filtering (Non-Compensatory screening)}:
+  The system applies Constraint Filtering first to filter out any unacceptable hotels for the user (e.g., price $> \$250$, or distance $> 10$ km). This assures that the candidates for further processing are limited to feasible options.
+  \item \textbf{Stage 2: Weighted MAUT (Compensatory ranking)}: The system applies the user's preference weights to rank the preprocessed hotel candidates. This will ensure that the user will only see hotels in their domain (e.g. the aforementioned low-budget user won't see a luxury 5 star hotel with 8 percent match score).
 \end{enumerate}
-This hybrid approach maintains full transparency, remains profiling-free, and reduces cognitive load. It represents a rational approach for human decision-making where unacceptable alternatives are filtered out first, and the best-fitting alternative is then identified from the remaining options.
+This hybrid approach maintains full transparency, remains profiling-free and reduces the cognitive load. It represents a rational approach for human decision-making where first the unacceptable alternatives are filtered out and then the best fitting alternative is identified on the reduced set of options.
 
 \subsection{User Study}
-To evaluate the effectiveness of the applied transparency features in this prototype, a user study is proposed for future work. A fitting experimental design would be a within-subjects study with $N=30$ participants, where each participant performs travel planning tasks in each of the following three recommender system environments:
+To evaluate the effectiveness of the applied transparency features in this prototype, a user study is proposed for future work. A fitting experimental design could be a within-subjects study with $N=30$ participants, where each participant will forego travel planning in each of the 3 following recommender system environments:
 \begin{enumerate}
-    \item \textbf{Environment 1 (Traditional Black Box)}: A recommender system that displays hotel cards with the ranking logic completely hidden from the user.
-    \item \textbf{Environment 2 (Weighted MAUT with On-Demand Explanations)}: A recommender system that uses the slider-based UI with collapsible math breakdown panels.
-    \item \textbf{Environment 3 (Constraint Filtering with Explanations)}: A constraint-based filtering recommender system using thresholds.
+    \item \textbf{Environment 1 (Traditional Black Box)}: A recommender system which shows hotel cards where the ranking logic is completely hidden to the user.
+    \item \textbf{Environment 2 (Weighted MAUT with On-Demand Explanations)}: a recommender system which uses the sliders UI with collapsible math breakdown panels.
+    \item \textbf{Environment 3 (Constraint Filtering with Explanations)}: The constraint-based filtering recommender system using the thresholds.
 \end{enumerate}
-The ordering of conditions will be counterbalanced, and participants will answer a questionnaire after experiencing each recommender system environment to track their impressions immediately and avoid confusion between the different systems. The results of this study will aid in enhancing the UI, helping to strike a balance between ease of use and mathematical transparency.
+The ordering of conditions will be counterbalanced and participants will answer a questionnaire after each recommender system environment to track impressions quickly and to avoid confusion between the different systems. The results of this study will aid to further enhance the UI, helping to strike a balance between ease of use and mathematical transparency.
 
 \section{Conclusion}\label{sec:conclusion}
-The DSA and modern user-experience expectations pose challenges for traditional black-box recommender systems. In this work, a transparent yet user-friendly recommender system prototype was implemented to comply with the EU's DSA. The prototype offers two distinct algorithms: a compensatory Multi-Attribute Utility Theory (MAUT) algorithm, which uses user-defined weights to rank hotels, and a non-compensatory Constraint-Based Filtering algorithm, which checks hotels against user-defined thresholds and excludes those that violate them. The prototype implements transparency features that explain the logic behind the algorithms step-by-step and, for the Weighted MAUT algorithm, detail how each hotel's score is computed. These features allow interested users or regulators to dive deep into the mathematical foundations of the results or the recommendation engine itself. This prototype architecture serves as a blueprint for developers seeking to combine modern design, intuitive user controls, and complete transparency in compliance with the DSA in recommender system design.
+The DSA and the user-experience impose challenges to traditional black-box recommender systems. In this work a transparent but still easy-to use recommender system prototype was implemented to comply with the EU's DSA. The prototype offers two distinct algorithms --- a compensatory Multi-Attribute Utility Theory (MAUT) algorithm, which uses user defined weights to rank the hotels and a non-compensatory Constraint-Based Filtering algorithm, checking hotels against user-defined thresholds and excluding hotels which violate the constraints. The prototype implements transparency features, that explain the logic behind the algorithms step-by-step and (for the MAUT algorithm) details on every result item how its score was calculated. These features allow interested users or regulators to deep-dive into mathematical foundations of the results or the recommendation engine itself. This prototype architecture servers as a blueprint for developers who seek to combine modern design,  easy-to-use elements and complete transparency in compliance with the DSA in recommender system design.
+
+This architecture serves as a blueprint for developers seeking to combine rich user control, modern web aesthetics, and strict regulatory compliance in recommender system design.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{sample-base}
@@ -338,7 +343,7 @@ Table~\ref{tab:database} presents the complete dataset of 20 hotels used in the 
 \end{table}
 
 \section{Author Information and Contribution Details}
-As a single-author project, I, David Gallob, worked entirely alone on this project. This involved all aspects of the lab course, including the development and testing of the prototype, the creation and delivery of all milestone and final presentations, and the writing of this report.
+As a single-author project, I David Gallob worked entirely alone on this project. This involves all parts of this Practical Seminar from the development and testing of the prototype, creating and presenting all milestone meetings and final presentation as well as writing this final documentation.
 
 \section{Generative AI Disclosure}
 This project utilized Generative AI tools (specifically Google DeepMind's Gemini 3.5 Flash) during development. The AI was employed as a pair-programming assistant to:
